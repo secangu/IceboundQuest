@@ -3,43 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 public class ImagePerspective_sc : MonoBehaviour
 {
+    
     [SerializeField] Transform _ray1;
+    [SerializeField] LayerMask image1;
     [SerializeField] Transform _ray2;
+    [SerializeField] LayerMask image2;
     [SerializeField] Transform _ray3;
-
-    [Header("CameraSetting")]
-
-    [SerializeField] float _speedX;
-    [SerializeField] float _speedY;
-
-    [SerializeField] float _maxRotationX;
-    [SerializeField] float _maxRotationY;
-
-    [SerializeField] float _maxPositionX;
-    [SerializeField] float _maxPositionY;
-    [SerializeField] float _minPositionY;
-
-    float _initialPositionX;
-    float _initialPositionY;
-    float _initialPositionZ;
-
-    float currentPositionX;
-    float currentPositionY;
-
-    Vector3 _rotationX;
-    Vector3 _rotationY;
+    [SerializeField] LayerMask image3;
+    
     void Start()
     {
-        _initialPositionX = transform.position.x;
-        _initialPositionY = transform.position.y;
-        _initialPositionZ = transform.position.z;
-        currentPositionX = _initialPositionX;
-        currentPositionY = _initialPositionY;
+
     }
 
     void Update()
     {
-        TransformCamera();
         HitImage();
     }
     public void HitImage()
@@ -53,73 +31,35 @@ public class ImagePerspective_sc : MonoBehaviour
         RaycastHit hitImage3;
         Ray rayImage3 = new Ray(_ray3.position, _ray3.forward);
 
-        if (Physics.Raycast(rayImage1, out hitImage1))
+        if (Physics.Raycast(rayImage1, out hitImage1,30f,image1))
         {
             if (hitImage1.collider.tag == "Image1")
             {
+                hitImage1.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                 Debug.Log("Imagen1");
-                Debug.DrawRay(rayImage1.origin, rayImage1.direction * 30f, Color.red);
             }
-        }
-        if (Physics.Raycast(rayImage2, out hitImage2))
-        {
+        }else if(Physics.Raycast(rayImage1, out hitImage1, 30f, image1)) hitImage1.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
+
+        if (Physics.Raycast(rayImage2, out hitImage2,30f,image2))
+        {          
             if (hitImage2.collider.tag == "Image2")
             {
+                hitImage2.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                 Debug.Log("Imagen2");
-                Debug.DrawRay(rayImage2.origin, rayImage2.direction * 30f, Color.red);
             }
+            else hitImage2.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
         }
-        if (Physics.Raycast(rayImage3, out hitImage3))
+        if (Physics.Raycast(rayImage3, out hitImage3, 30f, image3))
         {
             if (hitImage3.collider.tag == "Image3")
             {
+                hitImage3.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
                 Debug.Log("Imagen3");
-                Debug.DrawRay(rayImage3.origin, rayImage3.direction * 30f, Color.red);
             }
+            else hitImage3.transform.gameObject.GetComponent<MeshRenderer>().material.color = Color.white;
         }
     }
-    public void TransformCamera()
-    {
-        /* Movimiento Camara*/
-
-        float moveX = 0.03f * Input.GetAxis("Horizontal");
-        float moveY = 0.03f * Input.GetAxis("Vertical");
-
-        transform.position = new Vector3(currentPositionX, currentPositionY, _initialPositionZ);
-
-        transform.Translate(new Vector3(moveX, moveY, 0) * Time.deltaTime); //No borrar si se borra la camara se pega al limite establecido
-
-        currentPositionX += moveX;
-
-        /* establece el limite de movimiento en X*/
-        if (transform.position.x >= _initialPositionX + _maxPositionX) 
-            currentPositionX = _initialPositionX + _maxPositionX;
-
-        else if (transform.position.x <= _initialPositionX - _maxPositionX)        
-            currentPositionX = _initialPositionX - _maxPositionX;        
-        currentPositionY += moveY;
-        
-        /* establece el limite de movimiento en Y*/
-        if (transform.position.y >= _initialPositionY + _maxPositionY)        
-            currentPositionY = _initialPositionY + _maxPositionY;
-        
-        else if (transform.position.y <= _initialPositionY + _minPositionY)        
-            currentPositionY = _initialPositionY + _minPositionY;
-
-        /* Rotacion de la camara*/
-
-        float X = _speedX * Input.GetAxis("Mouse X");
-        float Y = _speedY * Input.GetAxis("Mouse Y");
-
-        transform.localEulerAngles = new Vector3(_rotationX.x, _rotationY.y, 0);
-        
-        /* Establece un limite de rotacion*/
-        _rotationX.x -= Y;
-        if (_rotationX.x >= _maxRotationY) _rotationX.x = _maxRotationY; else if (_rotationX.x <= -_maxRotationY) _rotationX.x = -_maxRotationY;
-
-        _rotationY.y += X;
-        if (_rotationY.y >= _maxRotationX) _rotationY.y = _maxRotationX; else if (_rotationY.y <= -_maxRotationX) _rotationY.y = -_maxRotationX;
-    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
