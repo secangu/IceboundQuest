@@ -185,8 +185,8 @@ MonoBehaviour:
   freezed: 1
   melted: 0
   heightBack: 0
-  _meltHeight: 2.568
-  _freezedHeight: 0.436
+  _meltHeight: 0
+  _freezedHeight: 0
 --- !u!135 &2838495912680306005
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -210,6 +210,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7074578982067006850}
   - component: {fileID: 8506188989241411923}
+  - component: {fileID: 919132149098041489}
+  - component: {fileID: 919132149098041490}
   m_Layer: 0
   m_Name: MeltingWall
   m_TagString: Untagged
@@ -226,8 +228,8 @@ Transform:
   m_GameObject: {fileID: 7594798183079491384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.24, y: 3.17, z: -3.24}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3368220203562489276}
   - {fileID: 5892212114669642955}
@@ -245,5 +247,31 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.65, y: 3.57, z: 1.3}
+  m_Center: {x: -1.7, y: 0, z: 0}
+--- !u!65 &919132149098041489
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594798183079491384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.31, y: 0.42, z: 1.3}
+  m_Center: {x: 0, y: 1.58, z: 0}
+--- !u!65 &919132149098041490
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594798183079491384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.65, y: 3.57, z: 1.3}
+  m_Center: {x: 1.7, y: 0, z: 0}
