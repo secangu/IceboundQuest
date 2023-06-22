@@ -25,7 +25,7 @@ public class EnemyChaseState_sc : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        agent.SetDestination(player.position);
+        if(player!=null)agent.SetDestination(player.position);
 
         distance = Vector3.Distance(player.position, animator.transform.position);
 

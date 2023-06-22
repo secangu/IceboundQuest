@@ -19,7 +19,7 @@ public class EnemyAttackState_sc : StateMachineBehaviour
     {
         animator.transform.LookAt(player);
 
-        distance = Vector3.Distance(player.position, animator.transform.position);
+        if(player!=null)distance = Vector3.Distance(player.position, animator.transform.position);
         if (distance > maxAttackDistance) animator.SetBool("IsAttacking", false); //si se aleja cancela el ataque 
     }
 
