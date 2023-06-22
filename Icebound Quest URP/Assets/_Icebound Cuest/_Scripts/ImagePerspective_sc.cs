@@ -1,125 +1,81 @@
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 public class ImagePerspective_sc : MonoBehaviour
 {
+
     [SerializeField] Transform _ray1;
+    [SerializeField] Renderer _rendererTarget1;
+    [SerializeField] LayerMask _layerTarget1;
+    [SerializeField] bool _checkImage1;
+
     [SerializeField] Transform _ray2;
+    [SerializeField] Renderer _rendererTarget2;
+    [SerializeField] LayerMask _layerTarget2;
+    [SerializeField] bool _checkImage2;
+
     [SerializeField] Transform _ray3;
+    [SerializeField] Renderer _rendererTarget3;
+    [SerializeField] LayerMask _layerTarget3;
+    [SerializeField] bool _checkImage3;
 
-    [Header("CameraSetting")]
-
-    [SerializeField] float _speedX;
-    [SerializeField] float _speedY;
-
-    [SerializeField] float _maxRotationX;
-    [SerializeField] float _maxRotationY;
-
-    [SerializeField] float _maxPositionX;
-    [SerializeField] float _maxPositionY;
-    [SerializeField] float _minPositionY;
-
-    float _initialPositionX;
-    float _initialPositionY;
-    float _initialPositionZ;
-
-    float currentPositionX;
-    float currentPositionY;
-
-    Vector3 _rotationX;
-    Vector3 _rotationY;
     void Start()
     {
-        _initialPositionX = transform.position.x;
-        _initialPositionY = transform.position.y;
-        _initialPositionZ = transform.position.z;
-        currentPositionX = _initialPositionX;
-        currentPositionY = _initialPositionY;
+
     }
 
     void Update()
     {
-        TransformCamera();
         HitImage();
+        ChangeColor();
     }
     public void HitImage()
     {
+        _checkImage1 = false; _checkImage2 = false; _checkImage3 = false;
+
+        //Ray Target1
         RaycastHit hitImage1;
         Ray rayImage1 = new Ray(_ray1.position, _ray1.forward);
 
-        RaycastHit hitImage2;
-        Ray rayImage2 = new Ray(_ray2.position, _ray2.forward);
-
-        RaycastHit hitImage3;
-        Ray rayImage3 = new Ray(_ray3.position, _ray3.forward);
-
-        if (Physics.Raycast(rayImage1, out hitImage1))
+        if (_checkImage1 = Physics.Raycast(rayImage1, out hitImage1, 30f, _layerTarget1))
         {
             if (hitImage1.collider.tag == "Image1")
             {
-                Debug.Log("Imagen1");
-                Debug.DrawRay(rayImage1.origin, rayImage1.direction * 30f, Color.red);
+                _checkImage1 = true;
             }
         }
-        if (Physics.Raycast(rayImage2, out hitImage2))
+        //Ray Target2
+        RaycastHit hitImage2;
+        Ray rayImage2 = new Ray(_ray2.position, _ray2.forward);
+
+        if (Physics.Raycast(rayImage2, out hitImage2, 30f, _layerTarget2))
         {
             if (hitImage2.collider.tag == "Image2")
             {
-                Debug.Log("Imagen2");
-                Debug.DrawRay(rayImage2.origin, rayImage2.direction * 30f, Color.red);
+                _checkImage2 = true;
             }
         }
-        if (Physics.Raycast(rayImage3, out hitImage3))
+
+        //Ray Target3
+        RaycastHit hitImage3;
+        Ray rayImage3 = new Ray(_ray3.position, _ray3.forward);
+
+        if (Physics.Raycast(rayImage3, out hitImage3, 30f, _layerTarget3))
         {
             if (hitImage3.collider.tag == "Image3")
             {
-                Debug.Log("Imagen3");
-                Debug.DrawRay(rayImage3.origin, rayImage3.direction * 30f, Color.red);
+                _checkImage3 = true;
             }
         }
     }
-    public void TransformCamera()
+    public void ChangeColor()
     {
-        /* Movimiento Camara*/
 
-        float moveX = 0.03f * Input.GetAxis("Horizontal");
-        float moveY = 0.03f * Input.GetAxis("Vertical");
+        if (_checkImage1) _rendererTarget1.material.color = Color.red; else _rendererTarget1.material.color = Color.white;
+        if (_checkImage2) _rendererTarget2.material.color = Color.red; else _rendererTarget2.material.color = Color.white;
+        if (_checkImage3) _rendererTarget3.material.color = Color.red; else _rendererTarget3.material.color = Color.white;
 
-        transform.position = new Vector3(currentPositionX, currentPositionY, _initialPositionZ);
 
-        transform.Translate(new Vector3(moveX, moveY, 0) * Time.deltaTime); //No borrar si se borra la camara se pega al limite establecido
-
-        currentPositionX += moveX;
-
-        /* establece el limite de movimiento en X*/
-        if (transform.position.x >= _initialPositionX + _maxPositionX) 
-            currentPositionX = _initialPositionX + _maxPositionX;
-
-        else if (transform.position.x <= _initialPositionX - _maxPositionX)        
-            currentPositionX = _initialPositionX - _maxPositionX;        
-        currentPositionY += moveY;
-        
-        /* establece el limite de movimiento en Y*/
-        if (transform.position.y >= _initialPositionY + _maxPositionY)        
-            currentPositionY = _initialPositionY + _maxPositionY;
-        
-        else if (transform.position.y <= _initialPositionY + _minPositionY)        
-            currentPositionY = _initialPositionY + _minPositionY;
-
-        /* Rotacion de la camara*/
-
-        float X = _speedX * Input.GetAxis("Mouse X");
-        float Y = _speedY * Input.GetAxis("Mouse Y");
-
-        transform.localEulerAngles = new Vector3(_rotationX.x, _rotationY.y, 0);
-        
-        /* Establece un limite de rotacion*/
-        _rotationX.x -= Y;
-        if (_rotationX.x >= _maxRotationY) _rotationX.x = _maxRotationY; else if (_rotationX.x <= -_maxRotationY) _rotationX.x = -_maxRotationY;
-
-        _rotationY.y += X;
-        if (_rotationY.y >= _maxRotationX) _rotationY.y = _maxRotationX; else if (_rotationY.y <= -_maxRotationX) _rotationY.y = -_maxRotationX;
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

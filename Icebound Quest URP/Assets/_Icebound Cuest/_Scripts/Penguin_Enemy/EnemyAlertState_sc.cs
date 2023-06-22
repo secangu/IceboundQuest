@@ -8,7 +8,7 @@ public class EnemyAlertState_sc : StateMachineBehaviour
     float timer;
     [SerializeField] float distance; // distancia a la que esta del jugador
     [SerializeField] float alertDistance; // distancia para salir de la alerta
-
+    int random;
     Transform player;
     EnemyDetectedPlayer_sc enemy;
 
@@ -17,6 +17,7 @@ public class EnemyAlertState_sc : StateMachineBehaviour
         timer = 0;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemy = animator.GetComponent<EnemyDetectedPlayer_sc>();
+        enemy.Color = Color.yellow;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -32,6 +33,7 @@ public class EnemyAlertState_sc : StateMachineBehaviour
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        random=Random.Range(0, 2);
+        animator.SetFloat("Idle", random);
     }
 }

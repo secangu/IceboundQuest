@@ -6,26 +6,38 @@ using UnityEngine.UI;
 
 public class EnemyDetectedPlayer_sc : MonoBehaviour
 {
+    [SerializeField] LayerMask player;
+    [Header("DetectorVista")]
+    //Detector Vista
     [SerializeField] Transform frontCheckPlayer;
     [SerializeField] Vector3 sizeFrontBox;
     [SerializeField] float distanceFrontBox;
     RaycastHit hitFront;
     bool front;
 
-
+    [Header("DetectorEspalda")]
+    //Detector Espalda
     [SerializeField] Transform backCheckPlayer;
     [SerializeField] float distanceBackBox;
     [SerializeField] Vector3 sizeBackBox;
     RaycastHit hitBack;
     bool back;
 
+    [Header("SignoExclamacion")]
+    //Cambiar color de signo
+    [SerializeField] GameObject exclamationMark;
+    Material material;
+    Color color;
     [SerializeField] bool playerDetected;
 
     public bool PlayerDetected { get => playerDetected; set => playerDetected = value; }
+    public Color Color { get => color; set => color = value; }
 
     void Start()
     {
-        
+        material = exclamationMark.GetComponent<Renderer>().material;
+        Color = material.color;
+        Color = Color.green;
     }
 
     void Update()
@@ -33,27 +45,30 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         PlayerDetected = false;
         front = false;
         back = false;
+        material.color = color;
+        /*No borrar el layer mask del physics porque por alguna razon detecta al player a 
+         traves de algunas paredes*/
 
         //Rayo detecta al jugador con la "Vista"
         if (frontCheckPlayer != null)
         {
-            if(Physics.BoxCast(frontCheckPlayer.position, sizeFrontBox, frontCheckPlayer.forward, out hitFront,
-                frontCheckPlayer.rotation, distanceFrontBox))
+            if (Physics.BoxCast(frontCheckPlayer.position, sizeFrontBox, frontCheckPlayer.forward, out hitFront,
+                frontCheckPlayer.rotation, distanceFrontBox,player))
             {
                 if (hitFront.collider.tag == "Player")
                 {
-                    PlayerDetected= true;
+                    PlayerDetected = true;
                     front = true;
                 }
             }
 
-            
+
         }
         //Caja que detecta al jugador por la espalda
         if (backCheckPlayer != null)
         {
             if (Physics.BoxCast(backCheckPlayer.position, sizeBackBox, backCheckPlayer.forward, out hitBack,
-                backCheckPlayer.rotation, distanceBackBox))
+                backCheckPlayer.rotation, distanceBackBox,player))
             {
                 if (hitBack.collider.tag == "Player")
                 {
@@ -61,9 +76,9 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
                     back = true;
                 }
             }
-            }
         }
-#if UNITY_EDITOR
+
+    }
     private void OnDrawGizmos()
     {
         if (playerDetected && front)
@@ -90,5 +105,4 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         }
 
     }
-#endif
 }
