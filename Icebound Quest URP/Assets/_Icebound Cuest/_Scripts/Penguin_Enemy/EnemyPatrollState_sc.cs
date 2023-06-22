@@ -10,9 +10,8 @@ public class EnemyPatrollState_sc : StateMachineBehaviour
 
     [SerializeField] float distance; // distancia a la que esta del jugador
     [SerializeField] float alertDistance; // distancia minima para detectar al player y entrar en alerta
-    
+    int random;
     Transform player;
-
     List<Transform> wayPoints = new List<Transform>();
     NavMeshAgent agent;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -25,7 +24,7 @@ public class EnemyPatrollState_sc : StateMachineBehaviour
         
         GameObject go = GameObject.FindGameObjectWithTag("WayPoints");
         foreach (Transform t in go.transform) wayPoints.Add(t); // recorre los elementos hijos del objeto con tag WayPoints
-        agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position); //define su primer destino
+        agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position); //define su primer destino        
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -43,5 +42,7 @@ public class EnemyPatrollState_sc : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(agent.transform.position); // Deja de patrullar y se queda en esa posicion
-    }    
+        random = Random.Range(0, 2);
+        animator.SetFloat("Idle", random);        
+    }
 }

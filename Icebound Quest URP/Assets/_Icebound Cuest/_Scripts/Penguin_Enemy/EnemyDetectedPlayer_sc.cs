@@ -6,26 +6,37 @@ using UnityEngine.UI;
 
 public class EnemyDetectedPlayer_sc : MonoBehaviour
 {
+    [Header("DetectorVista")]
+    //Detector Vista
     [SerializeField] Transform frontCheckPlayer;
     [SerializeField] Vector3 sizeFrontBox;
     [SerializeField] float distanceFrontBox;
     RaycastHit hitFront;
     bool front;
 
-
+    [Header("DetectorEspalda")]
+    //Detector Espalda
     [SerializeField] Transform backCheckPlayer;
     [SerializeField] float distanceBackBox;
     [SerializeField] Vector3 sizeBackBox;
     RaycastHit hitBack;
     bool back;
 
+    [Header("DetectorVista")]
+    //Cambiar color de signo
+    [SerializeField] GameObject exclamationMark;
+    Material material;
+    Color color;
     [SerializeField] bool playerDetected;
 
     public bool PlayerDetected { get => playerDetected; set => playerDetected = value; }
+    public Color Color { get => color; set => color = value; }
 
     void Start()
     {
-        
+        material = exclamationMark.GetComponent<Renderer>().material;
+        Color = material.color;
+        Color = Color.green;
     }
 
     void Update()
@@ -33,21 +44,22 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         PlayerDetected = false;
         front = false;
         back = false;
+        material.color = color;
 
         //Rayo detecta al jugador con la "Vista"
         if (frontCheckPlayer != null)
         {
-            if(Physics.BoxCast(frontCheckPlayer.position, sizeFrontBox, frontCheckPlayer.forward, out hitFront,
+            if (Physics.BoxCast(frontCheckPlayer.position, sizeFrontBox, frontCheckPlayer.forward, out hitFront,
                 frontCheckPlayer.rotation, distanceFrontBox))
             {
                 if (hitFront.collider.tag == "Player")
                 {
-                    PlayerDetected= true;
+                    PlayerDetected = true;
                     front = true;
                 }
             }
 
-            
+
         }
         //Caja que detecta al jugador por la espalda
         if (backCheckPlayer != null)
@@ -61,9 +73,9 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
                     back = true;
                 }
             }
-            }
         }
-#if UNITY_EDITOR
+
+    }
     private void OnDrawGizmos()
     {
         if (playerDetected && front)
@@ -90,5 +102,4 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         }
 
     }
-#endif
 }

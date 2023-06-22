@@ -13,7 +13,6 @@ public class EnemyChaseState_sc : StateMachineBehaviour
     [SerializeField] float distance; // distancia a la que esta del jugador
     [SerializeField] float maxChasingDistance; // distancia maxima para dejar de perseguir al player
     [SerializeField] float attackDistance; // distancia atacar al player
-
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent = animator.GetComponent<NavMeshAgent>();
@@ -21,6 +20,7 @@ public class EnemyChaseState_sc : StateMachineBehaviour
         agent.speed = 2f;
         enemy = animator.GetComponent<EnemyDetectedPlayer_sc>();
         timer= 0;
+        enemy.Color = Color.red;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
