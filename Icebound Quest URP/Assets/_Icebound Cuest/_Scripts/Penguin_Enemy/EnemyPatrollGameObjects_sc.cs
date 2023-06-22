@@ -1,7 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,15 +7,15 @@ public class EnemyPatrollGameObjects_sc : MonoBehaviour
     EnemyPatrollState_sc patrollState;
 
     NavMeshAgent agent;
-    GameObject go;
+    [SerializeField] GameObject go;
     [SerializeField] List<Transform> wayPoints = new List<Transform>();
 
     private void Start()
     {
         Animator animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        
-        //foreach (Transform t in go.transform) wayPoints.Add(t); // recorre los elementos hijos del objeto con tag WayPoints
+
+        foreach (Transform t in go.transform) wayPoints.Add(t); // recorre los elementos hijos del objeto
 
         // Obtener todos los estados del Animator
         StateMachineBehaviour[] stateMachineBehaviours = animator.GetBehaviours<StateMachineBehaviour>();
@@ -30,7 +27,7 @@ public class EnemyPatrollGameObjects_sc : MonoBehaviour
             {
                 patrollState = stateMachineBehaviour as EnemyPatrollState_sc;
 
-                
+
                 agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position); //define su primer destino        
                 break;
             }
