@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class EnemyDetectedPlayer_sc : MonoBehaviour
 {
+    [SerializeField] LayerMask player;
     [Header("DetectorVista")]
     //Detector Vista
     [SerializeField] Transform frontCheckPlayer;
@@ -22,7 +23,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
     RaycastHit hitBack;
     bool back;
 
-    [Header("DetectorVista")]
+    [Header("SignoExclamacion")]
     //Cambiar color de signo
     [SerializeField] GameObject exclamationMark;
     Material material;
@@ -45,12 +46,14 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         front = false;
         back = false;
         material.color = color;
+        /*No borrar el layer mask del physics porque por alguna razon detecta al player a 
+         traves de algunas paredes*/
 
         //Rayo detecta al jugador con la "Vista"
         if (frontCheckPlayer != null)
         {
             if (Physics.BoxCast(frontCheckPlayer.position, sizeFrontBox, frontCheckPlayer.forward, out hitFront,
-                frontCheckPlayer.rotation, distanceFrontBox))
+                frontCheckPlayer.rotation, distanceFrontBox,player))
             {
                 if (hitFront.collider.tag == "Player")
                 {
@@ -65,7 +68,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         if (backCheckPlayer != null)
         {
             if (Physics.BoxCast(backCheckPlayer.position, sizeBackBox, backCheckPlayer.forward, out hitBack,
-                backCheckPlayer.rotation, distanceBackBox))
+                backCheckPlayer.rotation, distanceBackBox,player))
             {
                 if (hitBack.collider.tag == "Player")
                 {
