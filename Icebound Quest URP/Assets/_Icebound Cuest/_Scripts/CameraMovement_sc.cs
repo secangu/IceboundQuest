@@ -24,11 +24,11 @@ public class CameraMovement_sc : MonoBehaviour
     Vector3 _initiaRotation;
     void Start()
     {
-        _initialPosition = transform.position;
+        _initialPosition = transform.localPosition;
         currentPosition = _initialPosition;
 
 
-        _initiaRotation = transform.eulerAngles;
+        _initiaRotation = transform.localEulerAngles;
     }
 
     void Update()
@@ -43,21 +43,21 @@ public class CameraMovement_sc : MonoBehaviour
         float moveX = 0.03f * Input.GetAxis("Horizontal");
         float moveY = 0.03f * Input.GetAxis("Vertical");
 
-        transform.position = new Vector3(currentPosition.x, currentPosition.y, _initialPosition.z);
+        transform.localPosition = new Vector3(currentPosition.x, currentPosition.y, _initialPosition.z);
         transform.Translate(new Vector3(moveX, moveY, 0) * Time.deltaTime); //No borrar si se borra la camara se pega al limite establecido
         currentPosition.x += moveX;
 
         /* establece el limite de movimiento en X*/
-        if (transform.position.x >= _initialPosition.x + _maxPositionX)
+        if (transform.localPosition.x >= _initialPosition.x + _maxPositionX)
             currentPosition.x = _initialPosition.x + _maxPositionX;
-        else if (transform.position.x <= _initialPosition.x - _maxPositionX)
+        else if (transform.localPosition.x <= _initialPosition.x - _maxPositionX)
             currentPosition.x = _initialPosition.x - _maxPositionX;
 
         currentPosition.y += moveY;
         /* establece el limite de movimiento en Y*/
-        if (transform.position.y >= _initialPosition.y + _maxPositionY)
+        if (transform.localPosition.y >= _initialPosition.y + _maxPositionY)
             currentPosition.y = _initialPosition.y + _maxPositionY;
-        else if (transform.position.y <= _initialPosition.y + _minPositionY)
+        else if (transform.localPosition.y <= _initialPosition.y + _minPositionY)
             currentPosition.y = _initialPosition.y + _minPositionY;
 
         /* Rotacion de la camara*/
