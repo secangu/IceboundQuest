@@ -35,13 +35,13 @@ public class PlayerMovement_sc : MonoBehaviour
     void Update()
     {
         Movement();
-        isGrounded = Physics.CheckSphere(transform.position, _groundCheckRadius, _groundLayer); //Comprueba si el jugador esta en el suelo
     }
     public void Movement()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized; //Recibe input horizontal y vertical
+        isGrounded = Physics.CheckSphere(transform.position, _groundCheckRadius, _groundLayer); //Comprueba si el jugador esta en el suelo
 
         //Detecta si esta caminando o corriendo
         currentSpeed = horizontal != 0 || vertical != 0 ? (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed) : 0;        
@@ -63,16 +63,18 @@ public class PlayerMovement_sc : MonoBehaviour
         {
             _animator.SetFloat("IdleNumber", random);
         }
+
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))        
+            _rbPlayer.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+        
+
         _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetFloat("Speed", speed);
 
     }
     private void FixedUpdate()
     {
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
-        {
-            _rbPlayer.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
-        }
+        
     }   
     private void OnDrawGizmos()
     {
