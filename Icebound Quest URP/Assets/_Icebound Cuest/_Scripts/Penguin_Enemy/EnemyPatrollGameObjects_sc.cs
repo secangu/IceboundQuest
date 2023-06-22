@@ -8,7 +8,7 @@ public class EnemyPatrollGameObjects_sc : MonoBehaviour
 
     NavMeshAgent agent;
     [SerializeField] GameObject go;
-    [SerializeField] List<Transform> wayPoints = new List<Transform>();
+    List<Transform> wayPoints = new List<Transform>();
 
     private void Start()
     {
