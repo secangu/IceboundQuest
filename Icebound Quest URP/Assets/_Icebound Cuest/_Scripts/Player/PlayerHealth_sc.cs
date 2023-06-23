@@ -6,9 +6,12 @@ public class PlayerHealth_sc : MonoBehaviour
 {
     Animator animator;
     [SerializeField]MonoBehaviour[] scripts;
-    [SerializeField] float _health;
+    [SerializeField] float health;
     Collider _collider;
     Rigidbody rb;
+
+    public float Health { get => health; set => health = value; }
+
     void Start()
     {
         animator=GetComponent<Animator>();
@@ -21,9 +24,9 @@ public class PlayerHealth_sc : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
-        _health -= damage;
+        Health -= damage;
         
-        if (_health <= 0)
+        if (Health <= 0)
         {            
             StartCoroutine(CorroutineDeath());
             _collider.enabled = false;
