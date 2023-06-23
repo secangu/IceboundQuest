@@ -10,12 +10,14 @@ public class EnemyPatrollGameObjects_sc : MonoBehaviour
     [SerializeField] GameObject go;
     List<Transform> wayPoints = new List<Transform>();
 
+    public GameObject Go { get => go; set => go = value; }
+
     private void Start()
     {
         Animator animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
 
-        foreach (Transform t in go.transform) wayPoints.Add(t); // recorre los elementos hijos del objeto
+        foreach (Transform t in Go.transform) wayPoints.Add(t); // recorre los elementos hijos del objeto
 
         // Obtener todos los estados del Animator
         StateMachineBehaviour[] stateMachineBehaviours = animator.GetBehaviours<StateMachineBehaviour>();

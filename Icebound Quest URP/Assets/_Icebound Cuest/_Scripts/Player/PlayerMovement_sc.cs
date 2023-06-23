@@ -57,7 +57,7 @@ public class PlayerMovement_sc : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler(0, targetAngle, 0) * Vector3.forward;//detecta en que rotacion debe caminar
             _rbPlayer.MovePosition(_rbPlayer.position + moveDirection * speed * Time.deltaTime);//mueve al player
 
-            random = Random.Range(0, 2);//Genera un random entre las animaciones idle
+            random = Random.Range(0, 3);//Genera un random entre las animaciones idle
         }
         else
         {
