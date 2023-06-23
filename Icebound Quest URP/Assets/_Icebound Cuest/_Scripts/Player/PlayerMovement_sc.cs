@@ -23,6 +23,8 @@ public class PlayerMovement_sc : MonoBehaviour
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] bool isGrounded;
 
+    [Header("Sounds")]
+    [SerializeField] AudioSource walkingSound;
 
     [Header("Gizmos")]
     [SerializeField] Transform _groundCheck;
@@ -85,10 +87,11 @@ public class PlayerMovement_sc : MonoBehaviour
         _animator.SetFloat("Speed", speed);
 
     }
-    private void FixedUpdate()
+    public void Walk()
     {
-        
-    }   
+        walkingSound.Play();
+    }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

@@ -11,13 +11,15 @@ public class EnemyAlertState_sc : StateMachineBehaviour
     int random;
     Transform player;
     EnemyDetectedPlayer_sc enemy;
-
+    EnemySounds_sc enemySounds;
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer = 0;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemy = animator.GetComponent<EnemyDetectedPlayer_sc>();
         enemy.Color = Color.yellow;
+        enemySounds = animator.GetComponent<EnemySounds_sc>();
+        enemySounds.Alert();
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

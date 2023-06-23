@@ -17,10 +17,14 @@ public class EnemyAttackState_sc : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.LookAt(player.position);
-        animator.transform.rotation = Quaternion.Euler(0, animator.transform.rotation.eulerAngles.y, 0);
+        if (player!=null)
+        {
+            animator.transform.LookAt(player.position);
+            animator.transform.rotation = Quaternion.Euler(0, animator.transform.rotation.eulerAngles.y, 0);
 
-        if (player!=null)distance = Vector3.Distance(player.position, animator.transform.position);
+            if (player != null) distance = Vector3.Distance(player.position, animator.transform.position);
+        }
+       
         if (distance > maxAttackDistance) animator.SetBool("IsAttacking", false); //si se aleja cancela el ataque 
     }
 

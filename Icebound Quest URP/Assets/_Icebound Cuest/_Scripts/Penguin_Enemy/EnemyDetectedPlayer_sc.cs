@@ -30,6 +30,8 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
     Color color;
     [SerializeField] bool playerDetected;
 
+    EnemySounds_sc enemySounds;
+
     public bool PlayerDetected { get => playerDetected; set => playerDetected = value; }
     public Color Color { get => color; set => color = value; }
 
@@ -38,6 +40,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         material = exclamationMark.GetComponent<Renderer>().material;
         Color = material.color;
         Color = Color.green;
+        enemySounds=GetComponent<EnemySounds_sc>();
     }
 
     void Update()
@@ -77,6 +80,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
                 }
             }
         }
+        if(PlayerDetected) enemySounds.SeenSound(); 
 
     }
     private void OnDrawGizmos()
