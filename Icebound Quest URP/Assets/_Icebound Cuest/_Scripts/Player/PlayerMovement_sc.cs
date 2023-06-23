@@ -72,6 +72,10 @@ public class PlayerMovement_sc : MonoBehaviour
         _animator.SetFloat("Speed", speed);
 
     }
+    private void FixedUpdate()
+    {
+        
+    }   
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
