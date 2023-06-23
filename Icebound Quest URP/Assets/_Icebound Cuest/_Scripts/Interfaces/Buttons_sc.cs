@@ -9,7 +9,7 @@ public class Buttons_sc : MonoBehaviour
 {
     [SerializeField]  AudioMixer _audioMixer;
     MouseLock_sc mouseLock;
-    [SerializeField] Slider _sliderGeneralValue;
+   
     [SerializeField] Slider _sliderMusicValue;
     [SerializeField] Slider _sliderEffectsValue;
 
@@ -20,52 +20,40 @@ public class Buttons_sc : MonoBehaviour
     void Start()
     {
         mouseLock=FindObjectOfType<MouseLock_sc>();
-        if (PlayerPrefs.HasKey("VolumenGeneral") == false) PlayerPrefs.SetFloat("VolumenGeneral", 1.5f);
+        
         if (PlayerPrefs.HasKey("VolumenMusica") == false) PlayerPrefs.SetFloat("VolumenMusica", 1.5f);
         if (PlayerPrefs.HasKey("VolumenEfectos") == false) PlayerPrefs.SetFloat("VolumenEfectos", 5f);
 
-        _generalVolume = PlayerPrefs.GetFloat("VolumenGeneral");
+        
         _musicVolume = PlayerPrefs.GetFloat("VolumenMusica");
         _effectsVolume = PlayerPrefs.GetFloat("VolumenEfectos");
 
-        _sliderGeneralValue.value = _generalVolume;
+        
         _sliderMusicValue.value = _musicVolume;
         _sliderEffectsValue.value = _effectsVolume;
 
-        CambiarVolumenGeneral(_generalVolume);
+        
         CambiarVolumenMusica(_musicVolume);
         CambiarVolumenEfectos(_effectsVolume);
     }
-    public void CambiarVolumenGeneral(float volumen)
-    {
-        _audioMixer.SetFloat("VolumenGeneral", Mathf.Log10(volumen) * 20);
-
-        PlayerPrefs.SetFloat("VolumenGeneral", volumen);
-    }
+  
     public void CambiarVolumenMusica(float volumen)
     {
-        _audioMixer.SetFloat("VolumenMusica", Mathf.Log10(volumen) * 20);
+        _audioMixer.SetFloat("MusicVolume", Mathf.Log10(volumen) * 20);
 
-        PlayerPrefs.SetFloat("VolumenMusica", volumen);
+        PlayerPrefs.SetFloat("MusicVolume", volumen);
     }
     public void CambiarVolumenEfectos(float volumen)
     {
-        _audioMixer.SetFloat("VolumenEfectos", Mathf.Log10(volumen) * 20);
+        _audioMixer.SetFloat("EffectVolume", Mathf.Log10(volumen) * 20);
 
-        PlayerPrefs.SetFloat("VolumenEfectos", volumen);
+        PlayerPrefs.SetFloat("EffectVolume", volumen);
     }
     public void GameScene(string Scene)
     {
         SceneManager.LoadScene(Scene);
     }
-    public void ChangeVolume(float volume)
-    {
-        _audioMixer.SetFloat("Volume",volume);
-    }
-    public void ChangeVolumeSFX(float volumeSfx)
-    {
-        _audioMixer.SetFloat("Effects", volumeSfx);
-    }
+   
     public void Select(AudioSource audioSource)
     {
         audioSource.Play();
