@@ -4,13 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 
-public class Buttons : MonoBehaviour
+public class Buttons_sc : MonoBehaviour
 {
     [SerializeField]  AudioMixer audioMixer;
-    // Start is called before the first frame update
+    MouseLock_sc mouseLock;
+
+
     void Start()
     {
-        
+        mouseLock=FindObjectOfType<MouseLock_sc>();
     }
     public void GameScene(string Scene)
     {
@@ -30,6 +32,9 @@ public class Buttons : MonoBehaviour
     }
     public void Pause()
     {
+        if(mouseLock!=null) mouseLock.enabled=false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Time.timeScale = 0f;
     }
     public void Restart(string Restart)
@@ -40,6 +45,9 @@ public class Buttons : MonoBehaviour
     }
     public void Unpause()
     {
+        if (mouseLock != null) mouseLock.enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         Time.timeScale = 1f;
     }
     public void Exit()

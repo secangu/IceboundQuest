@@ -36,7 +36,6 @@ public class EnemyPatrollGameObjects_sc : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(patrollState);
         if (patrollState != null)
         {
             if (patrollState.Patrolling)
@@ -45,8 +44,6 @@ public class EnemyPatrollGameObjects_sc : MonoBehaviour
                     agent.SetDestination(wayPoints[Random.Range(0, wayPoints.Count)].position);
             }
             else agent.SetDestination(agent.transform.position); // Deja de patrullar y se queda en esa posicion
-
-            Debug.Log("patr");
         }
     }
 }
