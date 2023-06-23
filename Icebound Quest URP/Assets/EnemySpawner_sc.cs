@@ -23,7 +23,7 @@ public class EnemySpawner_sc : MonoBehaviour
     {
         foreach (Transform t in this.transform) spawnPoints.Add(t); // recorre los elementos hijos del objeto
         SpawnEnemy();
-        colliderDissolve.enabled = false;
+        colliderDissolve.enabled = true;
         playerHealth=FindObjectOfType<PlayerHealth_sc>();
     }
 
@@ -38,7 +38,7 @@ public class EnemySpawner_sc : MonoBehaviour
         }
         if(defeatCount >= numEnemy)
         {
-            colliderDissolve.enabled = true;
+            colliderDissolve.enabled = false;
             text.text = "Now you can go to the wall you can melt";
         }
     }

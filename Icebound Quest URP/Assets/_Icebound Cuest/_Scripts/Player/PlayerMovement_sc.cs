@@ -74,7 +74,7 @@ public class PlayerMovement_sc : MonoBehaviour
         }
         else
         {
-            if (timer > 0.5f) _animator.SetFloat("IdleNumber", random); else timer += Time.deltaTime;
+            if (timer > 1.5f) _animator.SetFloat("IdleNumber", random); else timer += Time.deltaTime;
         }
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))        

@@ -25,11 +25,12 @@ public class PlayerHealth_sc : MonoBehaviour
 
     void Update()
     {
+        _healthBar.value = Health;
+
     }
     public void TakeDamage(float damage)
     {
         Health -= damage;
-        _healthBar.value = Health;
 
         if (Health <= 0)
         {            
