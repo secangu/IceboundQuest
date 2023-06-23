@@ -20,6 +20,10 @@ public class Buttons : MonoBehaviour
     {
         audioMixer.SetFloat("Volume",volume);
     }
+    public void ChangeVolumeSFX(float volumeSfx)
+    {
+        audioMixer.SetFloat("Effects", volumeSfx);
+    }
     public void Select(AudioSource audioSource)
     {
         audioSource.Play();
