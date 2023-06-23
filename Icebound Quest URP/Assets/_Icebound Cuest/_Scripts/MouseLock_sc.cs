@@ -4,24 +4,17 @@ using UnityEngine;
 
 public class MouseLock_sc : MonoBehaviour
 {
-    private bool isMouseLocked = true;
-
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            isMouseLocked = !isMouseLocked;
-        }
-
-        if (isMouseLocked)
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-        }
-        else
+        if (Input.GetKey(KeyCode.LeftAlt))
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;        
         }
     }
 }

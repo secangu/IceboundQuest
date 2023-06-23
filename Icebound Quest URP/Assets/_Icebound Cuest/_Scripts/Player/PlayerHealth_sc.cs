@@ -7,6 +7,7 @@ public class PlayerHealth_sc : MonoBehaviour
     Animator animator;
     [SerializeField]MonoBehaviour[] scripts;
     [SerializeField] float _health;
+    Collider _collider;
     
     void Start()
     {
@@ -24,8 +25,8 @@ public class PlayerHealth_sc : MonoBehaviour
         {
             for (int i = 0; i < scripts.Length; i++)
             {
+                _collider.enabled = false;
                 scripts[i].enabled = false;
-
             }
             StartCoroutine(CorroutineDeath());
         }

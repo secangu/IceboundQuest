@@ -59,11 +59,11 @@ public class DissolveIce_sc : MonoBehaviour
                 if (heightBack < height + _freezedHeight)
                 {
                     heightBack += Time.deltaTime;
+                    _collider.isTrigger = false; //activa el collider desde el inicio para evitar que se meta dentro del modelo
                 }
                 else
                 {
                     CancelDissolved(false, true);
-                    _collider.isTrigger = false;
                 }
             }
         }
