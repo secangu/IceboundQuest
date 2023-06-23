@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 public class ImagePerspective_sc : MonoBehaviour
 {
@@ -18,17 +19,24 @@ public class ImagePerspective_sc : MonoBehaviour
     [SerializeField] bool _checkImage3;
 
     [SerializeField] bool arrived;
+    [SerializeField] AudioSource alignImageSound;
 
-
+    Buttons_sc button;
     void Start()
     {
-
+        button=FindObjectOfType<Buttons_sc>();
     }
 
     void Update()
     {
         HitImage();
         ChangeColor();
+        if (_checkImage1 && _checkImage2 && _checkImage3)
+        {
+            alignImageSound.Play();
+            StartCoroutine(changeScene());
+        }
+
     }
     public void HitImage()
     {
@@ -74,10 +82,14 @@ public class ImagePerspective_sc : MonoBehaviour
     }
     public void ChangeColor()
     {
-
         if (_checkImage1) _rendererTarget1.material.color = Color.red; else _rendererTarget1.material.color = Color.white;
         if (_checkImage2) _rendererTarget2.material.color = Color.red; else _rendererTarget2.material.color = Color.white;
         if (_checkImage3) _rendererTarget3.material.color = Color.red; else _rendererTarget3.material.color = Color.white;
+    }
+    IEnumerator changeScene()
+    {
+        yield return new WaitForSeconds(2.9f);
+        button.GameScene("MainMenu");
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -87,6 +99,7 @@ public class ImagePerspective_sc : MonoBehaviour
     {
         if (other.CompareTag("AlignCamera")) arrived = false;
     }
+    
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
