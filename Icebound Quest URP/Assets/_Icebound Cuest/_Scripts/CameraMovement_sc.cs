@@ -27,14 +27,12 @@ public class CameraMovement_sc : MonoBehaviour
         _initialPosition = transform.localPosition;
         currentPosition = _initialPosition;
 
-
         _initiaRotation = transform.localEulerAngles;
     }
 
     void Update()
     {
         TransformCamera();
-
     }
     public void TransformCamera()
     {
@@ -75,5 +73,5 @@ public class CameraMovement_sc : MonoBehaviour
         _rotationY.y += X;
         if (_rotationY.y >= _initiaRotation.y + _maxRotationX) _rotationY.y = _initiaRotation.y + _maxRotationX;
         else if (_rotationY.y <= _initiaRotation.y - _maxRotationX) _rotationY.y = _initiaRotation.y - _maxRotationX;
-    }
+    }    
 }
