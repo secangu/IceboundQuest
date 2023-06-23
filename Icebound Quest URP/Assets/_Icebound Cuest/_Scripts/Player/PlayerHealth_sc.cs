@@ -11,6 +11,7 @@ public class PlayerHealth_sc : MonoBehaviour
     Collider _collider;
     Rigidbody rb;
     [SerializeField]Slider _healthBar;
+    [SerializeField] GameObject _death;
     public float Health { get => health; set => health = value; }
 
     void Start()
@@ -51,7 +52,7 @@ public class PlayerHealth_sc : MonoBehaviour
     {
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(2.5f);
-        //llamar game over;
+        _death.SetActive(true);
         Destroy(gameObject,0.2f);        
     }
 }
