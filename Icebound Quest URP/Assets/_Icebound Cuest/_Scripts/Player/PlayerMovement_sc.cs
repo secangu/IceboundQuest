@@ -9,7 +9,7 @@ public class PlayerMovement_sc : MonoBehaviour
     Rigidbody _rbPlayer;
     Animator _animator;
     [SerializeField] int random;
-
+    float timer;
     [Header("Movement")]
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
@@ -61,7 +61,7 @@ public class PlayerMovement_sc : MonoBehaviour
         }
         else
         {
-            _animator.SetFloat("IdleNumber", random);
+            if (timer > 0.5f) _animator.SetFloat("IdleNumber", random); else timer += Time.deltaTime;
         }
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))        

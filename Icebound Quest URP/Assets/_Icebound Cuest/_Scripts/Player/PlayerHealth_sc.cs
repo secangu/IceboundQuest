@@ -8,10 +8,12 @@ public class PlayerHealth_sc : MonoBehaviour
     [SerializeField]MonoBehaviour[] scripts;
     [SerializeField] float _health;
     Collider _collider;
-    
+    Rigidbody rb;
     void Start()
     {
         animator=GetComponent<Animator>();
+        _collider = GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -22,21 +24,25 @@ public class PlayerHealth_sc : MonoBehaviour
         _health -= damage;
         
         if (_health <= 0)
-        {
+        {            
+            StartCoroutine(CorroutineDeath());
+            _collider.enabled = false;
+            rb.isKinematic = true;
             for (int i = 0; i < scripts.Length; i++)
             {
-                _collider.enabled = false;
-                scripts[i].enabled = false;
+                if(scripts!=null) scripts[i].enabled = false;
             }
-            StartCoroutine(CorroutineDeath());
         }
-        animator.SetTrigger("Damage");
+        else
+        {
+            animator.SetTrigger("Damage");
+        }
     }
     IEnumerator CorroutineDeath() 
     {
         animator.SetTrigger("Die");
-        yield return new WaitForSeconds(1.42f);
-        //Activar game over
-        Destroy(gameObject);
+        yield return new WaitForSeconds(2.5f);
+        //llamar game over;
+        Destroy(gameObject,0.2f);        
     }
 }
