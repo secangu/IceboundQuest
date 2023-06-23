@@ -20,6 +20,10 @@ public class Buttons : MonoBehaviour
     {
         audioMixer.SetFloat("Volume",volume);
     }
+    public void Select(AudioSource audioSource)
+    {
+        audioSource.Play();
+    }
     public void Pause()
     {
         Time.timeScale = 0f;
