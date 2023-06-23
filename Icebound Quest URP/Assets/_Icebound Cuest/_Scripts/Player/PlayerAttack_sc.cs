@@ -29,20 +29,19 @@ public class PlayerAttack_sc : MonoBehaviour
 
             }
             time -= Time.deltaTime;
-        }
-        if (Input.GetMouseButtonDown(0) && time <= 0)
-        {
-            animator.SetTrigger("Attack");
-            time = attackTime;
-            //sonidoAtaque.Play();
-        }
+        }        
         if (time <= 0)
         {
             for (int i = 0; i < scripts.Length; i++)
             {
                 scripts[i].enabled = true;
-
             }
+        }
+        if (Input.GetMouseButtonDown(0) && time <= 0)
+        {
+            time = attackTime;
+            animator.SetTrigger("Attack");
+            //sonidoAtaque.Play();
         }
     }
     public void Attack()

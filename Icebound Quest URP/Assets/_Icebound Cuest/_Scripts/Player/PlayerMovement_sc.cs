@@ -5,6 +5,7 @@ using System.Timers;
 
 public class PlayerMovement_sc : MonoBehaviour
 {
+    godmode_sc god;
     [SerializeField] Transform _camera; //camara que sigue al jugador
     Rigidbody _rbPlayer;
     Animator _animator;
@@ -30,10 +31,22 @@ public class PlayerMovement_sc : MonoBehaviour
     {
         _rbPlayer = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
+
+        god = GetComponent<godmode_sc>();
+        god.enabled = false;
+        _rbPlayer.isKinematic = false;
     }
 
     void Update()
     {
+        god.enabled = false;
+
+        if (Input.GetKey(KeyCode.O))
+        {
+            god.enabled = true;
+            _rbPlayer.isKinematic = true;
+            this.enabled = false;
+        }
         Movement();
     }
     public void Movement()

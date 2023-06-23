@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth_sc : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class PlayerHealth_sc : MonoBehaviour
     [SerializeField] float health;
     Collider _collider;
     Rigidbody rb;
-
+    [SerializeField]Slider _healthBar;
     public float Health { get => health; set => health = value; }
 
     void Start()
@@ -17,6 +18,9 @@ public class PlayerHealth_sc : MonoBehaviour
         animator=GetComponent<Animator>();
         _collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+
+        _healthBar.maxValue = Health;
+        _healthBar.value = Health;
     }
 
     void Update()
@@ -25,7 +29,8 @@ public class PlayerHealth_sc : MonoBehaviour
     public void TakeDamage(float damage)
     {
         Health -= damage;
-        
+        _healthBar.value = Health;
+
         if (Health <= 0)
         {            
             StartCoroutine(CorroutineDeath());

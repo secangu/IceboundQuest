@@ -8,7 +8,7 @@ public class EnemySpawner_sc : MonoBehaviour
 {
     [SerializeField] GameObject enemyPrefab;
     GameObject activeEnemy;
-
+    PlayerHealth_sc playerHealth;
     List<Transform> spawnPoints = new List<Transform>();
     [SerializeField] GameObject patrollPoints;//pasa el patrullaje al enemigo
 
@@ -24,6 +24,7 @@ public class EnemySpawner_sc : MonoBehaviour
         foreach (Transform t in this.transform) spawnPoints.Add(t); // recorre los elementos hijos del objeto
         SpawnEnemy();
         colliderDissolve.enabled = false;
+        playerHealth=FindObjectOfType<PlayerHealth_sc>();
     }
 
     private void Update()
@@ -31,6 +32,7 @@ public class EnemySpawner_sc : MonoBehaviour
         text.text = "Enemies left: " + (numEnemy - defeatCount).ToString();
         if (activeEnemy == null)
         {
+            playerHealth.Health += 10;
             defeatCount++;
             SpawnEnemy();
         }
