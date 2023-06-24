@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1138,7 +1138,7 @@ MonoBehaviour:
         m_MethodName: Select
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1490629140}
+          m_ObjectArgument: {fileID: 1581011779}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -2690,7 +2690,7 @@ MonoBehaviour:
         m_MethodName: Select
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1490629140}
+          m_ObjectArgument: {fileID: 1581011779}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3015,7 +3015,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 9ab3c8c45c39ea44ca73d85cb7361393, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3489,7 +3489,7 @@ MonoBehaviour:
         m_MethodName: Select
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1490629140}
+          m_ObjectArgument: {fileID: 1581011779}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -3559,6 +3559,7 @@ GameObject:
   - component: {fileID: 1609438499}
   - component: {fileID: 1609438498}
   - component: {fileID: 1609438502}
+  - component: {fileID: 1609438503}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3666,6 +3667,18 @@ MonoBehaviour:
   _audioMixer: {fileID: 24100000, guid: 9b739f5c564bbf649a89de8b1e281d0e, type: 2}
   _sliderMusicValue: {fileID: 385415766}
   _sliderEffectsValue: {fileID: 177909271}
+--- !u!114 &1609438503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609438497}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c1657e7a2bda34ba0b490c84aa94c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1671242953
 GameObject:
   m_ObjectHideFlags: 0
@@ -4372,7 +4385,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Maze
+          m_StringArgument: Cinematic
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1609438502}

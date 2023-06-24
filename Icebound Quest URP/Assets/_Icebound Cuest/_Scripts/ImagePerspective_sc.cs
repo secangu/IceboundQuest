@@ -20,23 +20,30 @@ public class ImagePerspective_sc : MonoBehaviour
 
     [SerializeField] bool arrived;
     [SerializeField] AudioSource alignImageSound;
-
+    [SerializeField] private CameraMovement_sc cameraMove;
+    bool bol;
     Buttons_sc button;
     void Start()
     {
         button=FindObjectOfType<Buttons_sc>();
+        cameraMove=GetComponent<CameraMovement_sc>();
     }
 
     void Update()
     {
         HitImage();
         ChangeColor();
-        if (_checkImage1 && _checkImage2 && _checkImage3)
+        if (_checkImage1 && _checkImage2 && _checkImage3&&!bol)
         {
-            alignImageSound.Play();
+            bol = true;
+            sound();
+            cameraMove.enabled = false;
             StartCoroutine(changeScene());
-        }
-
+        } 
+    }
+    public void sound()
+    {
+        alignImageSound.Play();
     }
     public void HitImage()
     {

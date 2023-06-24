@@ -23,9 +23,6 @@ public class PlayerMovement_sc : MonoBehaviour
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] bool isGrounded;
 
-    [Header("Sounds")]
-    [SerializeField] AudioSource walkingSound;
-
     [Header("Gizmos")]
     [SerializeField] Transform _groundCheck;
     [SerializeField] float _groundCheckRadius;
@@ -86,10 +83,6 @@ public class PlayerMovement_sc : MonoBehaviour
         _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetFloat("Speed", speed);
 
-    }
-    public void Walk()
-    {
-        walkingSound.Play();
     }
     
     private void OnDrawGizmos()

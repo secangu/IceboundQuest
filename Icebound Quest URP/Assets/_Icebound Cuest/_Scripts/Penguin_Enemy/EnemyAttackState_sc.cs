@@ -24,6 +24,10 @@ public class EnemyAttackState_sc : StateMachineBehaviour
 
             if (player != null) distance = Vector3.Distance(player.position, animator.transform.position);
         }
+        else
+        {
+            animator.SetBool("IsAttacking", false);
+        }
        
         if (distance > maxAttackDistance) animator.SetBool("IsAttacking", false); //si se aleja cancela el ataque 
     }
