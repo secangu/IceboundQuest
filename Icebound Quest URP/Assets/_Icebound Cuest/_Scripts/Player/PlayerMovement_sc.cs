@@ -5,7 +5,6 @@ using System.Timers;
 
 public class PlayerMovement_sc : MonoBehaviour
 {
-    godmode_sc god;
     [SerializeField] Transform _camera; //camara que sigue al jugador
     Rigidbody _rbPlayer;
     Animator _animator;
@@ -15,7 +14,7 @@ public class PlayerMovement_sc : MonoBehaviour
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float speed, currentSpeed, transitionTime;
-    [SerializeField] float _jumpForce;
+    [SerializeField] float jumpForce;
     [SerializeField] float _timeSmoothRotation; //Establece el tiempo de la rotacion al momento de caminar en diferentes direcciones
     float _velocitySmoothRotation; //ajusta la velocidad la rotacion al momento de caminar en diferentes direcciones 
 
@@ -26,26 +25,19 @@ public class PlayerMovement_sc : MonoBehaviour
     [Header("Gizmos")]
     [SerializeField] Transform _groundCheck;
     [SerializeField] float _groundCheckRadius;
+
+    public float JumpForce { get => jumpForce; set => jumpForce = value; }
+
     void Start()
     {
         _rbPlayer = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
 
-        god = GetComponent<godmode_sc>();
-        god.enabled = false;
         _rbPlayer.isKinematic = false;
     }
 
     void Update()
     {
-        god.enabled = false;
-
-        if (Input.GetKey(KeyCode.O))
-        {
-            god.enabled = true;
-            _rbPlayer.isKinematic = true;
-            this.enabled = false;
-        }
         Movement();
     }
     public void Movement()
@@ -77,7 +69,7 @@ public class PlayerMovement_sc : MonoBehaviour
         }
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))        
-            _rbPlayer.AddForce(Vector3.up * _jumpForce, ForceMode.Impulse);
+            _rbPlayer.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
         
 
         _animator.SetBool("IsGrounded", isGrounded);

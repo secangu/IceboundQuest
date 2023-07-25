@@ -22,10 +22,10 @@ public class ImagePerspective_sc : MonoBehaviour
     [SerializeField] AudioSource alignImageSound;
     [SerializeField] private CameraMovement_sc cameraMove;
     bool bol;
-    Buttons_sc button;
+    InterfaceController_sc interfaceController;
     void Start()
     {
-        button=FindObjectOfType<Buttons_sc>();
+        interfaceController=FindObjectOfType<InterfaceController_sc>();
         cameraMove=GetComponent<CameraMovement_sc>();
     }
 
@@ -36,12 +36,12 @@ public class ImagePerspective_sc : MonoBehaviour
         if (_checkImage1 && _checkImage2 && _checkImage3&&!bol)
         {
             bol = true;
-            sound();
+            Sound();
             cameraMove.enabled = false;
-            StartCoroutine(changeScene());
+            StartCoroutine(ChangeScene());
         } 
     }
-    public void sound()
+    public void Sound()
     {
         alignImageSound.Play();
     }
@@ -93,10 +93,10 @@ public class ImagePerspective_sc : MonoBehaviour
         if (_checkImage2) _rendererTarget2.material.color = Color.red; else _rendererTarget2.material.color = Color.white;
         if (_checkImage3) _rendererTarget3.material.color = Color.red; else _rendererTarget3.material.color = Color.white;
     }
-    IEnumerator changeScene()
+    IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(2.9f);
-        button.GameScene("MainMenu");
+        interfaceController.ChangeScene(0);
     }
     private void OnTriggerEnter(Collider other)
     {

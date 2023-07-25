@@ -41,7 +41,7 @@ public class PlayerHealth_sc : MonoBehaviour
             for (int i = 0; i < scripts.Length; i++)
             {
                 if(scripts!=null) scripts[i].enabled = false;
-            }
+            }            
         }
         else
         {
@@ -52,7 +52,7 @@ public class PlayerHealth_sc : MonoBehaviour
     {
         animator.SetTrigger("Die");
         yield return new WaitForSeconds(2.5f);
+        Time.timeScale = 0;
         _death.SetActive(true);
-        Destroy(gameObject,0.2f);        
     }
 }

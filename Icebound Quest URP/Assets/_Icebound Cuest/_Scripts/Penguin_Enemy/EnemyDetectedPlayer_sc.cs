@@ -10,7 +10,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
     [Header("DetectorVista")]
     //Detector Vista
     [SerializeField] Transform frontCheckPlayer;
-    [SerializeField] Vector3 sizeFrontBox;
+    [SerializeField] float radiusFront;
     [SerializeField] float distanceFrontBox;
     RaycastHit hitFront;
     bool front;
@@ -19,7 +19,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
     //Detector Espalda
     [SerializeField] Transform backCheckPlayer;
     [SerializeField] float distanceBackBox;
-    [SerializeField] Vector3 sizeBackBox;
+    [SerializeField] float radiusBackBox;
     RaycastHit hitBack;
     bool back;
 
@@ -55,8 +55,8 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         //Rayo detecta al jugador con la "Vista"
         if (frontCheckPlayer != null)
         {
-            if (Physics.BoxCast(frontCheckPlayer.position, sizeFrontBox, frontCheckPlayer.forward, out hitFront,
-                frontCheckPlayer.rotation, distanceFrontBox,player))
+            if (Physics.SphereCast(frontCheckPlayer.position, radiusFront, frontCheckPlayer.forward, out hitFront,
+                distanceFrontBox))
             {
                 if (hitFront.collider.tag == "Player")
                 {
@@ -70,8 +70,8 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         //Caja que detecta al jugador por la espalda
         if (backCheckPlayer != null)
         {
-            if (Physics.BoxCast(backCheckPlayer.position, sizeBackBox, backCheckPlayer.forward, out hitBack,
-                backCheckPlayer.rotation, distanceBackBox,player))
+            if (Physics.SphereCast(backCheckPlayer.position, radiusBackBox, backCheckPlayer.forward, out hitBack,
+               distanceBackBox))
             {
                 if (hitBack.collider.tag == "Player")
                 {
@@ -89,23 +89,26 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(frontCheckPlayer.position, frontCheckPlayer.forward * hitFront.distance);
-            Gizmos.DrawWireCube(frontCheckPlayer.position + frontCheckPlayer.forward * hitFront.distance, sizeFrontBox);
+            Gizmos.DrawWireSphere(frontCheckPlayer.position + frontCheckPlayer.forward * hitFront.distance, radiusFront);
         }
         else
         {
             Gizmos.color = Color.green;
             Gizmos.DrawRay(frontCheckPlayer.position, frontCheckPlayer.forward * distanceFrontBox);
+            Gizmos.DrawWireSphere(frontCheckPlayer.position + frontCheckPlayer.forward * hitFront.distance, radiusFront);
+
         }
         if (playerDetected && back)
         {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(backCheckPlayer.position, backCheckPlayer.forward * hitBack.distance);
-            Gizmos.DrawWireCube(backCheckPlayer.position + backCheckPlayer.forward * hitBack.distance, sizeBackBox);
+            Gizmos.DrawWireSphere(backCheckPlayer.position + backCheckPlayer.forward * hitBack.distance, radiusBackBox);
         }
         else
         {
             Gizmos.color = Color.green;
             Gizmos.DrawRay(backCheckPlayer.position, backCheckPlayer.forward * distanceBackBox);
+            Gizmos.DrawWireSphere(backCheckPlayer.position + backCheckPlayer.forward * hitBack.distance, radiusBackBox);
         }
 
     }

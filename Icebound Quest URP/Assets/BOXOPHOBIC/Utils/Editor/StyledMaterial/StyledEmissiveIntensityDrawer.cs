@@ -56,21 +56,16 @@ public class StyledEmissiveIntensityDrawer : MaterialPropertyDrawer
 
         GUILayout.BeginHorizontal();
         GUILayout.Space(-1);
-        GUILayout.Label(label, GUILayout.Width(EditorGUIUtility.labelWidth - 1));
-
-        GUILayout.BeginVertical();
-        GUILayout.Space(3);
+        GUILayout.Label(label, GUILayout.Width(EditorGUIUtility.labelWidth));
 
         if (propVector.w == 0)
         {
-            propVector.y = EditorGUILayout.FloatField(propVector.y, GUILayout.Height(17));
+            propVector.y = EditorGUILayout.FloatField(propVector.y);
         }
         else if (propVector.w == 1)
         {
-            propVector.z = EditorGUILayout.FloatField(propVector.z, GUILayout.Height(17));
+            propVector.z = EditorGUILayout.FloatField(propVector.z);
         }
-
-        GUILayout.EndVertical();
 
         GUILayout.Space(2);
 

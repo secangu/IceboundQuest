@@ -25,10 +25,12 @@ public class EnemyChaseState_sc : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(player!=null)agent.SetDestination(player.position);
-
-        distance = Vector3.Distance(player.position, animator.transform.position);
-
+        if (player != null)
+        {
+            agent.SetDestination(player.position);
+            distance = Vector3.Distance(player.position, animator.transform.position);
+        }
+       
         if (distance >= maxChasingDistance && !enemy.PlayerDetected && timer > 1.2f) // si se aleja o deja de ver al jugador durante 1.2 segundo deja de seguirlo
         {
             animator.SetBool("IsChanging", false); 
