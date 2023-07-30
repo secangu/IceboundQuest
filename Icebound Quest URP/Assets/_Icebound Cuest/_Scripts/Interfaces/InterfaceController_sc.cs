@@ -29,8 +29,9 @@ public class InterfaceController_sc : MonoBehaviour
     public void ChangeScene(int Scene)
     {
         SceneManager.LoadScene(Scene);
-    }   
-    
+        Time.timeScale = 1;
+    }
+
     public void Pause()
     {
         _isPaused = true;

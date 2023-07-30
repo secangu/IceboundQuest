@@ -29,7 +29,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
     Material material;
     Color color;
     [SerializeField] bool playerDetected;
-
+    [SerializeField] float intensityEmission;
     EnemySounds_sc enemySounds;
 
     public bool PlayerDetected { get => playerDetected; set => playerDetected = value; }
@@ -49,9 +49,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         front = false;
         back = false;
         material.color = color;
-        /*No borrar el layer mask del physics porque por alguna razon detecta al player a 
-         traves de algunas paredes*/
-
+        material.SetColor("_EmissionColor", color*2);
         //Rayo detecta al jugador con la "Vista"
         if (frontCheckPlayer != null)
         {

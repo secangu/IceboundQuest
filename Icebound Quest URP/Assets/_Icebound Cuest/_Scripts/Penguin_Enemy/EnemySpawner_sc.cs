@@ -22,7 +22,7 @@ public class EnemySpawner_sc : MonoBehaviour
     private void Start()
     {
         foreach (Transform t in this.transform) spawnPoints.Add(t); // recorre los elementos hijos del objeto
-        SpawnEnemy();
+        SpawnEnemy(true);
         colliderDissolve.enabled = true;
         playerHealth=FindObjectOfType<PlayerHealth_sc>();
     }
@@ -30,24 +30,28 @@ public class EnemySpawner_sc : MonoBehaviour
     private void Update()
     {
         text.text = "Enemies left: " + (numEnemy - defeatCount).ToString();
-        if (activeEnemy == null)
-        {
-            playerHealth.Health += 10;
-            defeatCount++;
-            SpawnEnemy();
-        }
+        
         if(defeatCount >= numEnemy)
         {
+            SpawnEnemy(false);
             colliderDissolve.enabled = false;
-            text.text = "Now you can go to the wall you can melt";
+            text.text = "Now you can go to the shiny wall you can melt pressing (Q)";
         }
-    }
+        else if (activeEnemy == null)
+        {
+            playerHealth.Health += 5;
+            defeatCount++;
+            if(defeatCount<numEnemy) SpawnEnemy(true);
+        }
+    } 
 
-    private void SpawnEnemy()
+    private void SpawnEnemy(bool spawn)
     {
-        
-        activeEnemy = Instantiate(enemyPrefab, GetRandomSpawnPoint(), Quaternion.identity);
-        activeEnemy.GetComponent<EnemyPatrollGameObjects_sc>().Go = patrollPoints;
+        if (spawn)
+        {
+            activeEnemy = Instantiate(enemyPrefab, GetRandomSpawnPoint(), Quaternion.identity);
+            activeEnemy.GetComponent<EnemyPatrollGameObjects_sc>().Go = patrollPoints;
+        }                        
     }
 
     private Vector3 GetRandomSpawnPoint()

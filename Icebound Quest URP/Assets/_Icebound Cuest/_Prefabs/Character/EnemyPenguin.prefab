@@ -356,7 +356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1893055983
 RectTransform:
   m_ObjectHideFlags: 0
@@ -410,7 +410,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 654251531
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &1893055985
@@ -2286,6 +2286,7 @@ MonoBehaviour:
   radiusBackBox: 0.6
   exclamationMark: {fileID: 8985494049857963953}
   playerDetected: 0
+  intensityEmission: 0
 --- !u!114 &3972192711839714519
 MonoBehaviour:
   m_ObjectHideFlags: 0
