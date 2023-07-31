@@ -6,10 +6,9 @@ public class PlayerDissolve_sc : MonoBehaviour
     [SerializeField] MonoBehaviour[] scripts;
 
     [SerializeField] Transform rayCheckDissolve;
-
+    [SerializeField] AudioSource _meltSound;
     [SerializeField] float time;
     [SerializeField] float dissolveTime;
-    [SerializeField] float checkDissolveRadius;
     [SerializeField] bool freezed;
     [SerializeField] bool melted;
     [SerializeField] bool dissolve;
@@ -38,6 +37,7 @@ public class PlayerDissolve_sc : MonoBehaviour
             }
         }
     }
+    
     public void Dissolve()
     {
         dissolve = false;
@@ -46,7 +46,7 @@ public class PlayerDissolve_sc : MonoBehaviour
             RaycastHit hitDissolve;
             Ray rayDissolve = new Ray(rayCheckDissolve.position, rayCheckDissolve.forward);
 
-            if (Physics.Raycast(rayDissolve, out hitDissolve))
+            if (Physics.Raycast(rayDissolve, out hitDissolve, 4f))
             {
                 if (hitDissolve.collider.tag == ("Dissolve"))
                 {                    
@@ -54,7 +54,7 @@ public class PlayerDissolve_sc : MonoBehaviour
                     if(Input.GetKeyDown(KeyCode.Q) && dissolve && time <= 0)
                     {
                         time = dissolveTime;
-
+                        _meltSound.Play();
                         freezed = hitDissolve.transform.GetComponent<DissolveIce_sc>().Freez; //obtiene si el objeto esta congelado o derretido
                         melted = hitDissolve.transform.GetComponent<DissolveIce_sc>().Melt;
 

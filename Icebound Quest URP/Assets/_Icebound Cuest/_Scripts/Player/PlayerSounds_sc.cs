@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class PlayerSounds_sc : MonoBehaviour
 {
-    [SerializeField] AudioSource hurt, melt, die, punch, walk;
+    [SerializeField] AudioSource hurt, die, punch, walk;
     public void HurtSound()
     {
         hurt.Play();
-    }
-    public void MeltSoud()
-    {
-        melt.Play();
     }
     public void DieSound()
     {
