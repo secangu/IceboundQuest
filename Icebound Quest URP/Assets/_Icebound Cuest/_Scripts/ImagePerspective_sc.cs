@@ -89,9 +89,9 @@ public class ImagePerspective_sc : MonoBehaviour
     }
     public void ChangeColor()
     {
-        if (_checkImage1) _rendererTarget1.material.color = Color.red; else _rendererTarget1.material.color = Color.white;
-        if (_checkImage2) _rendererTarget2.material.color = Color.red; else _rendererTarget2.material.color = Color.white;
-        if (_checkImage3) _rendererTarget3.material.color = Color.red; else _rendererTarget3.material.color = Color.white;
+        if (_checkImage1) _rendererTarget1.material.color = Color.red; else _rendererTarget1.material.color = Color.green;
+        if (_checkImage2) _rendererTarget2.material.color = Color.red; else _rendererTarget2.material.color = Color.green;
+        if (_checkImage3) _rendererTarget3.material.color = Color.red; else _rendererTarget3.material.color = Color.green;
     }
     IEnumerator ChangeScene()
     {
