@@ -38,12 +38,12 @@ public class CameraMovement_sc : MonoBehaviour
     {
         /* Movimiento Camara*/
 
-        float moveX = 0.03f * Input.GetAxis("Horizontal");
-        float moveY = 0.03f * Input.GetAxis("Vertical");
+        float moveX = 1f * Input.GetAxis("Horizontal");
+        float moveY = 1f * Input.GetAxis("Vertical");
 
         transform.localPosition = new Vector3(currentPosition.x, currentPosition.y, _initialPosition.z);
         transform.Translate(new Vector3(moveX, moveY, 0) * Time.deltaTime); //No borrar si se borra la camara se pega al limite establecido
-        currentPosition.x += moveX;
+        currentPosition.x += moveX*Time.deltaTime;
 
         /* establece el limite de movimiento en X*/
         if (transform.localPosition.x >= _initialPosition.x + _maxPositionX)
@@ -51,7 +51,7 @@ public class CameraMovement_sc : MonoBehaviour
         else if (transform.localPosition.x <= _initialPosition.x - _maxPositionX)
             currentPosition.x = _initialPosition.x - _maxPositionX;
 
-        currentPosition.y += moveY;
+        currentPosition.y += moveY*Time.deltaTime;
         /* establece el limite de movimiento en Y*/
         if (transform.localPosition.y >= _initialPosition.y + _maxPositionY)
             currentPosition.y = _initialPosition.y + _maxPositionY;
