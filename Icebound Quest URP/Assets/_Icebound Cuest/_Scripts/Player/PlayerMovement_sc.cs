@@ -13,6 +13,7 @@ public class PlayerMovement_sc : MonoBehaviour
     [Header("Movement")]
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
+    [SerializeField] float slideSpeed;
     [SerializeField] float speed, currentSpeed, transitionTime;
     [SerializeField] float jumpForce;
     [SerializeField] float _timeSmoothRotation; //Establece el tiempo de la rotacion al momento de caminar en diferentes direcciones
@@ -26,13 +27,15 @@ public class PlayerMovement_sc : MonoBehaviour
     [SerializeField] Transform _groundCheck;
     [SerializeField] float _groundCheckRadius;
 
+    [Header("Slide")]
+    bool _isSlide;
+
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
 
     void Start()
     {
         _rbPlayer = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();
-
+        _animator = GetComponent<Animator>();        
         _rbPlayer.isKinematic = false;
     }
 
@@ -42,13 +45,26 @@ public class PlayerMovement_sc : MonoBehaviour
     }
     public void Movement()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        float horizontal;
+        float vertical;
+
+        if (_isSlide)
+        {
+            vertical = 1;
+            horizontal = 0;
+            currentSpeed = slideSpeed;
+        }
+        else
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+            vertical = Input.GetAxisRaw("Vertical");
+            currentSpeed = horizontal != 0 || vertical != 0 ? (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed) : 0;
+        }
+
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized; //Recibe input horizontal y vertical
         isGrounded = Physics.CheckSphere(transform.position, _groundCheckRadius, _groundLayer); //Comprueba si el jugador esta en el suelo
 
         //Detecta si esta caminando o corriendo
-        currentSpeed = horizontal != 0 || vertical != 0 ? (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed) : 0;        
         if (speed != currentSpeed) speed = Mathf.MoveTowards(speed, currentSpeed, transitionTime * Time.deltaTime);
 
         if (direction.magnitude >= 0.1f)
@@ -70,11 +86,16 @@ public class PlayerMovement_sc : MonoBehaviour
 
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))        
             _rbPlayer.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
-        
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            _isSlide = true;
+            
+        }if(Input.GetKeyUp(KeyCode.R))_isSlide = false;
 
         _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetFloat("Speed", speed);
-
+        _animator.SetBool("Slide", _isSlide);
     }
     
     private void OnDrawGizmos()
