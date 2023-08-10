@@ -1,7 +1,5 @@
+using Unity.VisualScripting;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System.Timers;
 
 public class PlayerMovement_sc : MonoBehaviour
 {
@@ -29,13 +27,15 @@ public class PlayerMovement_sc : MonoBehaviour
 
     [Header("Slide")]
     bool _isSlide;
+    bool _slideLoop;
+    [SerializeField]float timerSlide;
 
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
 
     void Start()
     {
         _rbPlayer = GetComponent<Rigidbody>();
-        _animator = GetComponent<Animator>();        
+        _animator = GetComponent<Animator>();
         _rbPlayer.isKinematic = false;
     }
 
@@ -84,20 +84,40 @@ public class PlayerMovement_sc : MonoBehaviour
             if (timer > 1.5f) _animator.SetFloat("IdleNumber", random); else timer += Time.deltaTime;
         }
 
-        if (isGrounded && Input.GetKeyDown(KeyCode.Space))        
+        if (isGrounded && Input.GetKeyDown(KeyCode.Space))
             _rbPlayer.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            _isSlide = true;
-            
-        }if(Input.GetKeyUp(KeyCode.R))_isSlide = false;
 
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            _isSlide = !_isSlide;
+            _slideLoop = false;
+            timerSlide = 0;
+
+        }
+        if (_isSlide)
+        {
+
+            if (timerSlide > 0.14f)
+            {
+                _slideLoop = true;                
+            }
+            else
+            {
+                timerSlide += Time.deltaTime;
+            }
+        }
         _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetFloat("Speed", speed);
         _animator.SetBool("Slide", _isSlide);
+        _animator.SetBool("SlideLoop", _slideLoop);
     }
-    
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) { _isSlide = false; _slideLoop = false; timerSlide = 0; }
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
