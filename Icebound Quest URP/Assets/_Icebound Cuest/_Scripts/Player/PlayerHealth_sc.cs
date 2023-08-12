@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class PlayerHealth_sc : MonoBehaviour
 {
     Animator animator;
-    [SerializeField]MonoBehaviour[] scripts;
     [SerializeField] float health;
     Collider _collider;
     Rigidbody rb;
@@ -37,11 +36,7 @@ public class PlayerHealth_sc : MonoBehaviour
         {            
             StartCoroutine(CorroutineDeath());
             _collider.enabled = false;
-            rb.isKinematic = true;
-            for (int i = 0; i < scripts.Length; i++)
-            {
-                if(scripts!=null) scripts[i].enabled = false;
-            }            
+            rb.isKinematic = true;                       
         }
         else
         {

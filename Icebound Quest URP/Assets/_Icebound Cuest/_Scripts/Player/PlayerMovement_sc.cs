@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement_sc : MonoBehaviour
@@ -8,27 +7,31 @@ public class PlayerMovement_sc : MonoBehaviour
     Animator _animator;
     [SerializeField] int random;
     float timer;
+
     [Header("Movement")]
-    [SerializeField] float walkSpeed;
-    [SerializeField] float runSpeed;
-    [SerializeField] float slideSpeed;
-    [SerializeField] float speed, currentSpeed, transitionTime;
-    [SerializeField] float jumpForce;
+
+    [SerializeField] float transitionTime; /*Hace que la velocidad cambie gradualmente*/
     [SerializeField] float _timeSmoothRotation; //Establece el tiempo de la rotacion al momento de caminar en diferentes direcciones
+    [SerializeField] float walkSpeed, runSpeed, slideSpeed;
+    float speed, currentSpeed;
     float _velocitySmoothRotation; //ajusta la velocidad la rotacion al momento de caminar en diferentes direcciones 
 
     [Header("Jump")]
+
+    [SerializeField] float jumpForce;
     [SerializeField] LayerMask _groundLayer;
     [SerializeField] bool isGrounded;
 
     [Header("Gizmos")]
+
     [SerializeField] Transform _groundCheck;
     [SerializeField] float _groundCheckRadius;
 
     [Header("Slide")]
     bool _isSlide;
     bool _slideLoop;
-    [SerializeField]float timerSlide;
+    float slideAnimationTimer; // tiempo para activar la animacion de slideloop
+    float slideAttackTimer; // tiempo que tarda en deslizarse nuevamente si choco con un enemigo
 
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
 
@@ -48,7 +51,7 @@ public class PlayerMovement_sc : MonoBehaviour
         float horizontal;
         float vertical;
 
-        if (_isSlide)
+        if (_isSlide && slideAttackTimer <= 0)
         {
             vertical = 1;
             horizontal = 0;
@@ -88,36 +91,49 @@ public class PlayerMovement_sc : MonoBehaviour
             _rbPlayer.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
 
 
-
+        //Controla cuando se desliza el jugador
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             _isSlide = !_isSlide;
             _slideLoop = false;
-            timerSlide = 0;
+            slideAnimationTimer = 0;
 
         }
         if (_isSlide)
         {
-
-            if (timerSlide > 0.14f)
+            if (slideAnimationTimer > 0.14f)
             {
-                _slideLoop = true;                
+                _slideLoop = true;
             }
             else
             {
-                timerSlide += Time.deltaTime;
+                slideAnimationTimer += Time.deltaTime;
             }
         }
+
+        if (slideAttackTimer > 0)
+        {
+            slideAttackTimer -= Time.deltaTime;
+            _isSlide = false; _slideLoop = false; slideAnimationTimer = 0;
+        }
+
+
+
         _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetFloat("Speed", speed);
         _animator.SetBool("Slide", _isSlide);
         _animator.SetBool("SlideLoop", _slideLoop);
     }
 
-    private void OnCollisionEnter(Collision other)
+
+    private void OnCollisionStay(Collision other)
     {
-        if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) { _isSlide = false; _slideLoop = false; timerSlide = 0; }
+
+        if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) { _isSlide = false; _slideLoop = false; slideAnimationTimer = 0; }
+        if (other.gameObject.tag == ("Enemy") && slideAttackTimer <= 0) { slideAttackTimer = 5; }
+
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
