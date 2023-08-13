@@ -20,10 +20,12 @@ public class AudioController_sc : MonoBehaviour
         if (PlayerPrefs.HasKey("MelodyVolume") == false) PlayerPrefs.SetFloat("MelodyVolume", 1.5f);
         if (PlayerPrefs.HasKey("EffectsVolume") == false) PlayerPrefs.SetFloat("EffectsVolume", 5f);
 
+        // Cargar los valores guardados
         _masterVolume = PlayerPrefs.GetFloat("MasterVolume");
         _melodyVolume = PlayerPrefs.GetFloat("MelodyVolume");
         _effectsVolume = PlayerPrefs.GetFloat("EffectsVolume");
 
+        // Configurar los sliders con los valores
         _masterSlider.value = _masterVolume;
         _melodySlider.value = _melodyVolume;
         effectsSlider.value = _effectsVolume;
