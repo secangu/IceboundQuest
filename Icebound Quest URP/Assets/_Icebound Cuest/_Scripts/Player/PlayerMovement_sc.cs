@@ -121,7 +121,7 @@ public class PlayerMovement_sc : MonoBehaviour
         
         if (_isSlide)
         {
-            if (slideAnimationTimer > 0.14f) // hace la transicion de tirarse a deslizarse
+            if (_isSlide&&slideAnimationTimer > 0.14f) // hace la transicion de tirarse a deslizarse
             {
                 SlideLoop = true;
             }

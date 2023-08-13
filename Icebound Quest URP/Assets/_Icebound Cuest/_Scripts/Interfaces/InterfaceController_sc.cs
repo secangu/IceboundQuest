@@ -10,6 +10,9 @@ public class InterfaceController_sc : MonoBehaviour
     [SerializeField] bool _isMenu;
     [SerializeField] GameObject _pauseInterface;
     [SerializeField] GameObject _settingsInterface;
+    [SerializeField] GameObject _controlsInterface;
+    [SerializeField] GameObject _keyboardInterface;
+    [SerializeField] GameObject _mouseInterface;
 
     PlayerMovement_sc playerMovement;
 
@@ -50,6 +53,10 @@ public class InterfaceController_sc : MonoBehaviour
         MouseUnLock();
         _pauseInterface.SetActive(false);
         _settingsInterface.SetActive(false);
+        _controlsInterface.SetActive(false);
+        _keyboardInterface.SetActive(false);
+        _mouseInterface.SetActive(false);
+
     }
     public void Restart()
     {
@@ -59,6 +66,18 @@ public class InterfaceController_sc : MonoBehaviour
     public void Settings()
     {
         _settingsInterface.SetActive(true);
+    }
+    public void Controls()
+    {
+        _controlsInterface.SetActive(true);
+    }
+    public void Keyboard()
+    {
+        _keyboardInterface.SetActive(true);
+    }
+    public void Mouse()
+    {
+        _mouseInterface.SetActive(true);
     }
     public void Exit()
     {
