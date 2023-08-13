@@ -25,6 +25,7 @@ public class PlayerAttack_sc : MonoBehaviour
             
         if (Input.GetMouseButtonDown(0) && time <= 0)
         {
+            playerMovement.CancelSlide();
             time = attackTime;
             animator.SetTrigger("Attack");
             //sonidoAtaque.Play();

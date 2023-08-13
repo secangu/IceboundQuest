@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerDissolve_sc : MonoBehaviour
 {
     Animator animator;
-    [SerializeField] MonoBehaviour[] scripts;
+    [SerializeField] PlayerMovement_sc playerMovement ;
 
     [SerializeField] Transform rayCheckDissolve;
     [SerializeField] AudioSource _meltSound;
@@ -15,6 +15,7 @@ public class PlayerDissolve_sc : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        playerMovement= GetComponent<PlayerMovement_sc>();
     }
 
     void Update()
@@ -23,19 +24,9 @@ public class PlayerDissolve_sc : MonoBehaviour
 
         if (time > 0)
         {
-            for (int i = 0; i < scripts.Length; i++)
-            {
-                scripts[i].enabled = false; //Desactiva scripts mientras hace la accion
-            }
             time -= Time.deltaTime;
         }
-        if (time <= 0)
-        {
-            for (int i = 0; i < scripts.Length; i++)
-            {
-                scripts[i].enabled = true; //Activa nuevamente los scripts desactivados
-            }
-        }
+       
     }
     
     public void Dissolve()
@@ -60,7 +51,7 @@ public class PlayerDissolve_sc : MonoBehaviour
 
                         if (freezed) animator.SetTrigger("Melted"); //si el objeto esta congelado hacer animacion de derretir y viceversa
                         if (melted) animator.SetTrigger("Freezed");
-
+                        playerMovement.CancelSlide();
                         hitDissolve.transform.GetComponent<DissolveIce_sc>().CanDissolve(); // pasa info de derretir o congelar
                     }                    
                 }
