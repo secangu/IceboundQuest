@@ -11,6 +11,7 @@ public class InterfaceController_sc : MonoBehaviour
     [SerializeField] GameObject _pauseInterface;
     [SerializeField] GameObject _settingsInterface;
     [SerializeField] GameObject _controlsInterface;
+    [SerializeField] GameObject _audioSettingsInterface;
     [SerializeField] GameObject _keyboardInterface;
     [SerializeField] GameObject _mouseInterface;
 
@@ -56,6 +57,8 @@ public class InterfaceController_sc : MonoBehaviour
         _controlsInterface.SetActive(false);
         _keyboardInterface.SetActive(false);
         _mouseInterface.SetActive(false);
+        _audioSettingsInterface.SetActive(false);
+
 
     }
     public void Restart()
@@ -67,10 +70,11 @@ public class InterfaceController_sc : MonoBehaviour
     {
         _settingsInterface.SetActive(true);
     }
+    #region controls
     public void Controls()
     {
         _controlsInterface.SetActive(true);
-    }
+    }    
     public void Keyboard()
     {
         _keyboardInterface.SetActive(true);
@@ -78,6 +82,11 @@ public class InterfaceController_sc : MonoBehaviour
     public void Mouse()
     {
         _mouseInterface.SetActive(true);
+    }
+    #endregion
+    public void AudioSettings()
+    {
+        _audioSettingsInterface.SetActive(true);
     }
     public void Exit()
     {
