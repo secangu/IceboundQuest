@@ -230,6 +230,67 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 19843722}
   m_PrefabAsset: {fileID: 0}
+--- !u!21 &25087909
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Override
+  m_Shader: {fileID: 4800000, guid: a3a3bc8785681554d9558e2ea68f100e, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _Banner: 1
+    - _DirectionalCat: 1
+    - _DirectionalFalloff: 2
+    - _DirectionalIntensity: 1
+    - _FogAxisMode: 1
+    - _FogCat: 1
+    - _FogColorDuo: 1
+    - _FogDistanceEnd: 200
+    - _FogDistanceFalloff: 2
+    - _FogDistanceStart: -200
+    - _FogHeightEnd: 200
+    - _FogHeightFalloff: 2
+    - _FogHeightStart: 0
+    - _FogIntensity: 1
+    - _FogLayersMode: 0
+    - _IsHeightFogPreset: 1
+    - _IsHeightFogShader: 1
+    - _NoiseCat: 1
+    - _NoiseDistanceEnd: 50
+    - _NoiseIntensity: 1
+    - _NoiseModeBlend: 1
+    - _NoiseScale: 30
+    - _SkyboxCat: 1
+    - _SkyboxFogFalloff: 1
+    - _SkyboxFogFill: 1
+    - _SkyboxFogHeight: 1
+    - _SkyboxFogIntensity: 1
+    - _SkyboxFogOffset: 0
+    m_Colors:
+    - _DirectionalColor: {r: 1, g: 0.7793103, b: 0.5, a: 1}
+    - _DirectionalDir: {r: 0, g: 0, b: 0, a: 0}
+    - _FogAxisOption: {r: 0, g: 0, b: 0, a: 0}
+    - _FogColorEnd: {r: 0.8862745, g: 1.443137, b: 2, a: 1}
+    - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
+    - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
+  m_BuildTextureStacks: []
 --- !u!1 &25840227
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,10 +917,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: -204882593, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_HighlightedSprite: {fileID: -742587855, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
-    m_PressedSprite: {fileID: -1009416455, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
-      type: 3}
+    m_PressedSprite: {fileID: 273792361, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -917,7 +977,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 199141964, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 1445747670, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1500,67 +1560,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 95485434}
   m_PrefabAsset: {fileID: 0}
---- !u!21 &103454663
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Override
-  m_Shader: {fileID: 4800000, guid: a3a3bc8785681554d9558e2ea68f100e, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _Banner: 1
-    - _DirectionalCat: 1
-    - _DirectionalFalloff: 2
-    - _DirectionalIntensity: 1
-    - _FogAxisMode: 1
-    - _FogCat: 1
-    - _FogColorDuo: 1
-    - _FogDistanceEnd: 200
-    - _FogDistanceFalloff: 2
-    - _FogDistanceStart: -200
-    - _FogHeightEnd: 200
-    - _FogHeightFalloff: 2
-    - _FogHeightStart: 0
-    - _FogIntensity: 1
-    - _FogLayersMode: 0
-    - _IsHeightFogPreset: 1
-    - _IsHeightFogShader: 1
-    - _NoiseCat: 1
-    - _NoiseDistanceEnd: 50
-    - _NoiseIntensity: 1
-    - _NoiseModeBlend: 1
-    - _NoiseScale: 30
-    - _SkyboxCat: 1
-    - _SkyboxFogFalloff: 1
-    - _SkyboxFogFill: 1
-    - _SkyboxFogHeight: 1
-    - _SkyboxFogIntensity: 1
-    - _SkyboxFogOffset: 0
-    m_Colors:
-    - _DirectionalColor: {r: 1, g: 0.7793103, b: 0.5, a: 1}
-    - _DirectionalDir: {r: 0, g: 0, b: 0, a: 0}
-    - _FogAxisOption: {r: 0, g: 0, b: 0, a: 0}
-    - _FogColorEnd: {r: 0.8862745, g: 1.443137, b: 2, a: 1}
-    - _FogColorStart: {r: 0.4411765, g: 0.722515, b: 1, a: 1}
-    - _NoiseSpeed: {r: 0.5, g: 0, b: 0.5, a: 0}
-  m_BuildTextureStacks: []
 --- !u!1001 &103741275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1923,7 +1922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &139821942
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3519,9 +3518,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 273792361, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_HighlightedSprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
-    m_PressedSprite: {fileID: 1546881731, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_PressedSprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -3580,7 +3579,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -742587855, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 199141964, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5675,7 +5674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1422096294, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -1072400815, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6096,7 +6095,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448483951}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.008285835, y: -0.98289204, z: 0.17823228, w: -0.045693636}
+  m_LocalRotation: {x: -0.008285828, y: -0.98289204, z: 0.17823231, w: -0.045693606}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6267,6 +6266,41 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.8045934, y: 3.5, z: 2.0723286}
   m_Center: {x: -4.413086, y: 0, z: 0.5361639}
+--- !u!21 &464107869
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Height Fog Global
+  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3001
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs: []
+    m_Ints: []
+    m_Floats:
+    - _AlphaCutoff: 0.5
+    - _Banner: 1
+    - _HeightFogGlobal: 1
+    - _IsHDPipeline: 0
+    - _IsHeightFogShader: 1
+    - _IsStandardPipeline: 0
+    - _IsUniversalPipeline: 0
+    m_Colors:
+    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &467965452
 GameObject:
   m_ObjectHideFlags: 0
@@ -11185,7 +11219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1422096294, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -1072400815, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -11929,7 +11963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1445747670, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 2099336402, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -13620,9 +13654,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 273792361, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_HighlightedSprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
-    m_PressedSprite: {fileID: 1546881731, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_PressedSprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -13681,7 +13715,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -742587855, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 199141964, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -14766,7 +14800,7 @@ MonoBehaviour:
   manualPositionAndScale: 0
   renderPriority: 1
   styledSpace0: 0
-  overrideMaterial: {fileID: 103454663}
+  overrideMaterial: {fileID: 25087909}
   overrideCamToVolumeDistance: 1
   overrideVolumeDistanceFade: 0
   version: 0
@@ -14790,7 +14824,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2127051118}
+  - {fileID: 464107869}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14892,7 +14926,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -1027449537, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15499,7 +15533,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1445747670, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 817042212, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17711,7 +17745,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -1027449537, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -18345,9 +18379,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 273792361, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_HighlightedSprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
-    m_PressedSprite: {fileID: 1546881731, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_PressedSprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -18418,7 +18452,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -742587855, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 199141964, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -29523,7 +29557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375378581}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.12034283, y: -0.7264518, z: 0.13173081, w: 0.6636508}
+  m_LocalRotation: {x: 0.12034284, y: -0.7264518, z: 0.13173082, w: 0.6636509}
   m_LocalPosition: {x: 2.3537054, y: 4.434, z: 18.090681}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -30469,7 +30503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1422096294, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -1072400815, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -31361,7 +31395,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1445747670, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 817042212, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -31752,9 +31786,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 273792361, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_HighlightedSprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
-    m_PressedSprite: {fileID: 1546881731, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_PressedSprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -31813,7 +31847,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -742587855, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 199141964, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -32192,9 +32226,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 273792361, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_HighlightedSprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
-    m_PressedSprite: {fileID: 1546881731, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_PressedSprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -32253,7 +32287,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -742587855, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 199141964, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -32964,9 +32998,9 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 273792361, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_HighlightedSprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
-    m_PressedSprite: {fileID: 1546881731, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
+    m_PressedSprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23,
       type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
@@ -33025,7 +33059,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -742587855, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 199141964, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -33931,7 +33965,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -204882593, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -34342,7 +34376,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -204882593, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -35529,7 +35563,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 141833624, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -1027449537, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -37400,7 +37434,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1445747670, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: 817042212, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -37855,7 +37889,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2001732502}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.008285835, y: -0.98289204, z: 0.17823228, w: -0.045693636}
+  m_LocalRotation: {x: -0.008285828, y: -0.98289204, z: 0.17823231, w: -0.045693606}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40566,41 +40600,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f7545f619a7ac444be24cdebbca3063, type: 3}
---- !u!21 &2127051118
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Height Fog Global
-  m_Shader: {fileID: 4800000, guid: 3a7ef1b66bafb7a448a880ef76d2e6e6, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs: []
-    m_Ints: []
-    m_Floats:
-    - _AlphaCutoff: 0.5
-    - _Banner: 1
-    - _HeightFogGlobal: 1
-    - _IsHDPipeline: 0
-    - _IsHeightFogShader: 1
-    - _IsStandardPipeline: 0
-    - _IsUniversalPipeline: 0
-    m_Colors:
-    - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1 &2127117975
 GameObject:
   m_ObjectHideFlags: 0
@@ -40658,7 +40657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1026753713, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
+  m_Sprite: {fileID: -204882593, guid: 2b4ef5d9e03320e4eae5183c3e123a23, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
