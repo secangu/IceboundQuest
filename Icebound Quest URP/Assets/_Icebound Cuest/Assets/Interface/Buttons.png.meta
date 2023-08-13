@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2b4ef5d9e03320e4eae5183c3e123a23
+guid: a8303487f9c9a3240be403dcfb0f1831
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,30 +106,101 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Icebound_Quest_Interface_0
+      name: Buttons_0
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 427
+        width: 126
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 515add35df5f1924d81867ab459a3dc0
+      internalID: 622583529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_1
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 430
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a6f9671e036b4b47bbdb26ae78152bb
+      internalID: -1636295789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_2
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 434
+        width: 126
+        height: 125
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2373b1988be797941ad262250da1c09c
+      internalID: 1756838527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_3
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 310
+        width: 579
+        height: 272
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41b296585bac798428ee7a53e8c09bb7
+      internalID: -2044780547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Buttons_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 28
-        width: 597
-        height: 1002
+        y: 284
+        width: 129
+        height: 129
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,125 +208,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f17a79a4dfed2b642a2996d883c67f0d
-      internalID: 1954687772
+      spriteID: 839952611169e5a4ea972c5eef76ec4b
+      internalID: -1016100575
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icebound_Quest_Interface_1
+      name: Buttons_5
       rect:
         serializedVersion: 2
-        x: 642
-        y: 595
-        width: 813
-        height: 451
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 76dd24b61242c154db05754a78509566
-      internalID: 1451690916
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_2
-      rect:
-        serializedVersion: 2
-        x: 1498
-        y: 880
-        width: 178
-        height: 124
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ebf2b44bbe727544b951b6571d8a35a2
-      internalID: -109197413
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_3
-      rect:
-        serializedVersion: 2
-        x: 1499
-        y: 578
-        width: 146
-        height: 191
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 73e9e4547beaa5044a9218e7e9c3d782
-      internalID: 1445747670
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_4
-      rect:
-        serializedVersion: 2
-        x: 632
-        y: 426
-        width: 288
-        height: 140
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ace17c8faee286142861b813ec0b11f6
-      internalID: 199141964
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_6
-      rect:
-        serializedVersion: 2
-        x: 1499
-        y: 381
-        width: 147
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bada46bbb8381e247afe4aa16eed59e4
-      internalID: -742587855
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_7
-      rect:
-        serializedVersion: 2
-        x: 632
+        x: 132
         y: 281
-        width: 288
-        height: 140
+        width: 128
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -263,20 +229,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a7b1fbe4a548e8047a3a1fc9b319372e
-      internalID: 141833624
+      spriteID: 64e0ffc28a659eb4c815e1bfd0209ccb
+      internalID: 615782647
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icebound_Quest_Interface_8
+      name: Buttons_7
       rect:
         serializedVersion: 2
-        x: 985
-        y: 364
-        width: 350
-        height: 40
+        x: 0
+        y: 137
+        width: 129
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -284,41 +250,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b44348aff5f102b45a9207cde2a78fb4
-      internalID: -204882593
+      spriteID: 8a750194544ea7041916ac313d2259d8
+      internalID: 1865851339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icebound_Quest_Interface_10
+      name: Buttons_8
       rect:
         serializedVersion: 2
-        x: 1500
-        y: 178
-        width: 146
-        height: 190
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b2e77b86d987c5c47b3acf170f972ccd
-      internalID: 273792361
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_11
-      rect:
-        serializedVersion: 2
-        x: 632
+        x: 132
         y: 140
-        width: 288
-        height: 140
+        width: 129
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -326,20 +271,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62b627c5201b5064a96d607816e8d31b
-      internalID: -1026753713
+      spriteID: 46ef87ac9a2e46243bfc501b7771370e
+      internalID: -1752131115
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icebound_Quest_Interface_12
+      name: Buttons_9
       rect:
         serializedVersion: 2
-        x: 977
-        y: 14
-        width: 139
-        height: 320
+        x: 823
+        y: 18
+        width: 1075
+        height: 212
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -347,20 +292,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 795c86373ed5b5442bc049ffb2007ca7
-      internalID: -1009416455
+      spriteID: 75d106cb6261c7c488c35b4bf222d7b6
+      internalID: 1979108930
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icebound_Quest_Interface_15
+      name: Buttons_12
       rect:
         serializedVersion: 2
-        x: 1430
+        x: 5
         y: 0
-        width: 76
-        height: 57
+        width: 129
+        height: 130
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,83 +313,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 73677edded15a23448549c8a7bc28582
-      internalID: 1422096294
+      spriteID: 8410639cb33a45e42bf9f0a763831920
+      internalID: 573814839
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Icebound_Quest_Interface_5
+      name: Buttons_13
       rect:
         serializedVersion: 2
-        x: 957
-        y: 432
-        width: 413
-        height: 115
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 37497b8fc1b632b439591f8762d346f4
-      internalID: -1027449537
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_9
-      rect:
-        serializedVersion: 2
-        x: 1356
-        y: 353
-        width: 50
-        height: 66
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b47192e492d1a8547a28fd2aba9ac7a6
-      internalID: -1072400815
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_13
-      rect:
-        serializedVersion: 2
-        x: 1196
-        y: 11
-        width: 101
-        height: 242
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 851b44b0c5b11ac478d6fb23a7071ea5
-      internalID: 817042212
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Icebound_Quest_Interface_14
-      rect:
-        serializedVersion: 2
-        x: 1336
+        x: 136
         y: 0
-        width: 58
-        height: 155
+        width: 129
+        height: 129
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -452,8 +334,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e60f069375009f439e47d1eeb203f85
-      internalID: 2099336402
+      spriteID: c70295e47355e3b469514f00892120f9
+      internalID: 1327031053
       vertices: []
       indices: 
       edges: []
@@ -461,7 +343,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 835a267cb52102a488b6778e8b571b97
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -469,22 +351,20 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Icebound_Quest_Interface_0: 1954687772
-      Icebound_Quest_Interface_1: 1451690916
-      Icebound_Quest_Interface_10: 273792361
-      Icebound_Quest_Interface_11: -1026753713
-      Icebound_Quest_Interface_12: -1009416455
-      Icebound_Quest_Interface_13: 817042212
-      Icebound_Quest_Interface_14: 2099336402
-      Icebound_Quest_Interface_15: 1422096294
-      Icebound_Quest_Interface_2: -109197413
-      Icebound_Quest_Interface_3: 1445747670
-      Icebound_Quest_Interface_4: 199141964
-      Icebound_Quest_Interface_5: -1027449537
-      Icebound_Quest_Interface_6: -742587855
-      Icebound_Quest_Interface_7: 141833624
-      Icebound_Quest_Interface_8: -204882593
-      Icebound_Quest_Interface_9: -1072400815
+      Buttons_0: 622583529
+      Buttons_1: -1636295789
+      Buttons_10: -1849800507
+      Buttons_11: -587910829
+      Buttons_12: 573814839
+      Buttons_13: 1327031053
+      Buttons_2: 1756838527
+      Buttons_3: -2044780547
+      Buttons_4: -1016100575
+      Buttons_5: 615782647
+      Buttons_6: -1717635340
+      Buttons_7: 1865851339
+      Buttons_8: -1752131115
+      Buttons_9: 1979108930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
