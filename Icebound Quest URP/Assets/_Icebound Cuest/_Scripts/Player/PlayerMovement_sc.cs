@@ -29,11 +29,12 @@ public class PlayerMovement_sc : MonoBehaviour
 
     [Header("Slide")]
     bool _isSlide;
-    bool _slideLoop;
+    bool slideLoop;
     float slideAnimationTimer; // tiempo para activar la animacion de slideloop
     float slideAttackTimer; // tiempo que tarda en deslizarse nuevamente si choco con un enemigo
 
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
+    public bool SlideLoop { get => slideLoop; set => slideLoop = value; }
 
     void Start()
     {
@@ -95,7 +96,7 @@ public class PlayerMovement_sc : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             _isSlide = !_isSlide;
-            _slideLoop = false;
+            SlideLoop = false;
             slideAnimationTimer = 0;
 
         }
@@ -103,7 +104,7 @@ public class PlayerMovement_sc : MonoBehaviour
         {
             if (slideAnimationTimer > 0.14f)
             {
-                _slideLoop = true;
+                SlideLoop = true;
             }
             else
             {
@@ -114,7 +115,7 @@ public class PlayerMovement_sc : MonoBehaviour
         if (slideAttackTimer > 0)
         {
             slideAttackTimer -= Time.deltaTime;
-            _isSlide = false; _slideLoop = false; slideAnimationTimer = 0;
+            _isSlide = false; SlideLoop = false; slideAnimationTimer = 0;
         }
 
 
@@ -122,14 +123,14 @@ public class PlayerMovement_sc : MonoBehaviour
         _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetFloat("Speed", speed);
         _animator.SetBool("Slide", _isSlide);
-        _animator.SetBool("SlideLoop", _slideLoop);
+        _animator.SetBool("SlideLoop", SlideLoop);
     }
 
 
     private void OnCollisionStay(Collision other)
     {
 
-        if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) { _isSlide = false; _slideLoop = false; slideAnimationTimer = 0; }
+        if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) { _isSlide = false; SlideLoop = false; slideAnimationTimer = 0; }
         if (other.gameObject.tag == ("Enemy") && slideAttackTimer <= 0) { slideAttackTimer = 5; }
 
     }

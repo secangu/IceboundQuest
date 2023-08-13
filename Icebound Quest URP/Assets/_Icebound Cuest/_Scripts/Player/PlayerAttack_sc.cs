@@ -9,12 +9,14 @@ public class PlayerAttack_sc : MonoBehaviour
     [SerializeField] float time;
     [SerializeField] float attackTime;
     [SerializeField] float damage;
+    [SerializeField] float stunningDamage;
     [SerializeField] float checkAttackRadius;
-
+    PlayerMovement_sc playerMovement;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        playerMovement = GetComponent<PlayerMovement_sc>();
     }
 
     void Update()
@@ -39,6 +41,11 @@ public class PlayerAttack_sc : MonoBehaviour
                 checkAttackCollision.transform.GetComponent<EnemyHealth_sc>().TakeDamage(damage);
             }
         }
+    }
+   
+    private void OnCollisionEnter(Collision other)
+    {
+        if(other.gameObject.tag =="Enemy"&&playerMovement.SlideLoop) other.transform.GetComponent<EnemyHealth_sc>().StunningDamage(stunningDamage);
     }
     private void OnDrawGizmos()
     {

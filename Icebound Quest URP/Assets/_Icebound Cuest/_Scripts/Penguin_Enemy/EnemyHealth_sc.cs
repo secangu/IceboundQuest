@@ -18,9 +18,6 @@ public class EnemyHealth_sc : MonoBehaviour
         _healthBar.value = _health;
     }
 
-    void Update()
-    {
-    }
     public void TakeDamage(float damage)
     {
         _health -= damage;
@@ -34,6 +31,21 @@ public class EnemyHealth_sc : MonoBehaviour
         else
         {
             animator.SetTrigger("Damage");
+        }
+    }
+    public void StunningDamage(float damage)
+    {
+        _health -= damage;
+        _healthBar.value = _health;
+        if (_health <= 0)
+        {
+            agent.acceleration = 0;
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine(CorroutineDeath());
+        }
+        else
+        {
+            animator.SetTrigger("Stunned");
         }
     }
     IEnumerator CorroutineDeath()
