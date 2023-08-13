@@ -7,6 +7,7 @@ public class PlayerMovement_sc : MonoBehaviour
     Animator _animator;
     [SerializeField] int random;
     float timer;
+    bool _snowDrift; // bool para reducir la velocidad del player
 
     [Header("Movement")]
 
