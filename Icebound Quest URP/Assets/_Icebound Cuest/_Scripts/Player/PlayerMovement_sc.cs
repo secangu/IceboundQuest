@@ -14,7 +14,7 @@ public class PlayerMovement_sc : MonoBehaviour
     [SerializeField] float transitionTime; /*Hace que la velocidad cambie gradualmente*/
     [SerializeField] float _timeSmoothRotation; //Establece el tiempo de la rotacion al momento de caminar en diferentes direcciones
     [SerializeField] float walkSpeed, runSpeed, slideSpeed;
-    float speed, currentSpeed;
+    [SerializeField] float speed, currentSpeed;
     float _velocitySmoothRotation; //ajusta la velocidad la rotacion al momento de caminar en diferentes direcciones 
 
     [Header("Jump")]
@@ -58,12 +58,22 @@ public class PlayerMovement_sc : MonoBehaviour
             vertical = 1;
             horizontal = 0;
             currentSpeed = slideSpeed;
+
+            if (_snowDrift)
+            {
+                currentSpeed -= 70 * Time.deltaTime;                
+            }
+            else if (_snowDrift && currentSpeed < 3.5f)
+            {
+                _isSlide = false; SlideLoop = false; slideAnimationTimer = 0;
+            }
         }
         else
         {
             horizontal = Input.GetAxisRaw("Horizontal");
             vertical = Input.GetAxisRaw("Vertical");
             currentSpeed = horizontal != 0 || vertical != 0 ? (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed) : 0;
+            if (_snowDrift) currentSpeed = horizontal != 0 || vertical != 0 ? currentSpeed < 1 ? currentSpeed = 1 : currentSpeed -= 50 * Time.deltaTime : 0;
         }
 
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized; //Recibe input horizontal y vertical
@@ -134,6 +144,14 @@ public class PlayerMovement_sc : MonoBehaviour
         if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) { _isSlide = false; SlideLoop = false; slideAnimationTimer = 0; }
         if (other.gameObject.tag == ("Enemy") && slideAttackTimer <= 0) { slideAttackTimer = 5; }
 
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.tag == "SnowDrift") _snowDrift = true;
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "SnowDrift") _snowDrift = false;
     }
 
     private void OnDrawGizmos()
