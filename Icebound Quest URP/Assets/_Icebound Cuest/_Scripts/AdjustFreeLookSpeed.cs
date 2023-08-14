@@ -1,6 +1,6 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
-using Cinemachine;
 
 public class ControlFreeLookSpeed : MonoBehaviour
 {
@@ -10,7 +10,7 @@ public class ControlFreeLookSpeed : MonoBehaviour
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("RotationSpeedX") == false) PlayerPrefs.SetFloat("RotationSpeedX", 250);
+        if (PlayerPrefs.HasKey("RotationSpeedX") == false) PlayerPrefs.SetFloat("RotationSpeedX", 300);
         if (PlayerPrefs.HasKey("RotationSpeedY") == false) PlayerPrefs.SetFloat("RotationSpeedY", 2);
         // Cargar los valores guardados
         float savedRotationSpeedX = PlayerPrefs.GetFloat("RotationSpeedX", _horizontalSlider.value);

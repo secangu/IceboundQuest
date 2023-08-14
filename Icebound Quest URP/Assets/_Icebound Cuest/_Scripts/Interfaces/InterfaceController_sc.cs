@@ -55,7 +55,7 @@ public class InterfaceController_sc : MonoBehaviour
         _pauseInterface.SetActive(false);
         _settingsInterface.SetActive(false);
         _controlsInterface.SetActive(false);
-        _keyboardInterface.SetActive(false);
+        //_keyboardInterface.SetActive(false);
         _mouseInterface.SetActive(false);
         _audioSettingsInterface.SetActive(false);
 

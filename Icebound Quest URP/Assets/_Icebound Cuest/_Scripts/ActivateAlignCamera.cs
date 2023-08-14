@@ -4,6 +4,7 @@ public class ActivateAlignCamera : MonoBehaviour
 {
     [SerializeField] GameObject _cameraPlayer;
     [SerializeField] GameObject _cameraImages;
+    [SerializeField] GameObject _player;
     [SerializeField] MonoBehaviour[] scriptsPlayer;
     [SerializeField] GameObject _text;
     bool active;
@@ -12,10 +13,7 @@ public class ActivateAlignCamera : MonoBehaviour
     {
         if (active && Input.GetKeyDown(KeyCode.T))
         {
-            for (int i = 0; i < scriptsPlayer.Length; i++)
-            {
-                scriptsPlayer[i].enabled = false;
-            }
+            _player.SetActive(false);
             _cameraPlayer.SetActive(false);
             _cameraImages.SetActive(true);
         }
