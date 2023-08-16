@@ -7,11 +7,13 @@ public class FloatingCristal_sc : MonoBehaviour
 {
     [SerializeField] GameObject _interface;
     InterfaceController_sc interfaceController;
+    Animator animator;
+    Transform target;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
     }
-
     public void CloseInterface()
     {
         interfaceController.Turorial = false;
@@ -27,6 +29,7 @@ public class FloatingCristal_sc : MonoBehaviour
             interfaceController.Turorial = true;
             _interface.SetActive(true);
             interfaceController.Pause();
+            animator.SetTrigger("Static");
         }
     }
 }

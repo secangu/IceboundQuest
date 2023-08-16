@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerDissolve_sc : MonoBehaviour
 {
     Animator animator;
-    [SerializeField] PlayerMovement_sc playerMovement ;
+    PlayerMovement_sc playerMovement ;
 
     [SerializeField] Transform rayCheckDissolve;
     [SerializeField] AudioSource _meltSound;

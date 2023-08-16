@@ -13,13 +13,16 @@ public class EnemyPatrollState_sc : StateMachineBehaviour
 
     NavMeshAgent agent;
     bool patrolling; // bool que le dice al script de PatrollGameObjects que inicio a patrullar 
-
+    EnemyDetectedPlayer_sc enemy;
     public bool Patrolling { get => patrolling; set => patrolling = value; }
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        enemy = animator.GetComponent<EnemyDetectedPlayer_sc>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = animator.GetComponent<NavMeshAgent>();
+
+        enemy.Color = Color.green;
 
         agent.speed = 1f;
         timer = 0;

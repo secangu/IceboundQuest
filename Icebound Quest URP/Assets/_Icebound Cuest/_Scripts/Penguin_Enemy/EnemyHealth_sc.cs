@@ -25,7 +25,6 @@ public class EnemyHealth_sc : MonoBehaviour
         if (_health <= 0)
         {
             agent.acceleration = 0;
-            GetComponent<Collider>().enabled = false;
             StartCoroutine(CorroutineDeath());
         }
         else
@@ -40,7 +39,6 @@ public class EnemyHealth_sc : MonoBehaviour
         if (_health <= 0)
         {
             agent.acceleration = 0;
-            GetComponent<Collider>().enabled = false;
             StartCoroutine(CorroutineDeath());
         }
         else

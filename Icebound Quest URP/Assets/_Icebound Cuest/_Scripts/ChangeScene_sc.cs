@@ -6,15 +6,12 @@ public class ChangeScene_sc : MonoBehaviour
 {
     InterfaceController_sc interfaceController;
     [SerializeField] int scene;
-    void Start()
-    {
-        interfaceController=FindObjectOfType<InterfaceController_sc>();
-    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            interfaceController = FindObjectOfType<InterfaceController_sc>();
             interfaceController.ChangeScene(scene);
         }
     }
