@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +5,7 @@ public class InterfaceController_sc : MonoBehaviour
 {
     MouseLock_sc mouseLock;
     bool _isPaused;
+    bool turorial;
     [SerializeField] bool _isMenu;
     [SerializeField] GameObject _pauseInterface;
     [SerializeField] GameObject _settingsInterface;
@@ -17,17 +16,19 @@ public class InterfaceController_sc : MonoBehaviour
 
     PlayerMovement_sc playerMovement;
 
+    public bool Turorial { get => turorial; set => turorial = value; }
+
     void Start()
     {
-        mouseLock=FindObjectOfType<MouseLock_sc>();    
-        playerMovement=FindObjectOfType<PlayerMovement_sc>();
+        mouseLock = FindObjectOfType<MouseLock_sc>();
+        playerMovement = FindObjectOfType<PlayerMovement_sc>();
     }
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Escape)&&!_isMenu)
+        if (Input.GetKeyUp(KeyCode.Escape) && !_isMenu && !Turorial)
         {
-            if (_isPaused) Resume(); else Pause();
-            
+            if (_isPaused) { Resume(); CloseInterfaces(); } else { Pause(); PauseInterface(); }
+
         }
     }
     public void ChangeScene(int Scene)
@@ -42,7 +43,10 @@ public class InterfaceController_sc : MonoBehaviour
         playerMovement.JumpForce = 0;
 
         Time.timeScale = 0f;
-        MouseLock();
+        MouseUnLock();
+    }
+    public void PauseInterface()
+    {
         _pauseInterface.SetActive(true);
     }
     public void Resume()
@@ -51,15 +55,16 @@ public class InterfaceController_sc : MonoBehaviour
         playerMovement.JumpForce = 3;
 
         Time.timeScale = 1f;
-        MouseUnLock();
+        MouseLock();
+    }
+    public void CloseInterfaces()
+    {
         _pauseInterface.SetActive(false);
         _settingsInterface.SetActive(false);
         _controlsInterface.SetActive(false);
         //_keyboardInterface.SetActive(false);
         _mouseInterface.SetActive(false);
         _audioSettingsInterface.SetActive(false);
-
-
     }
     public void Restart()
     {
@@ -74,7 +79,7 @@ public class InterfaceController_sc : MonoBehaviour
     public void Controls()
     {
         _controlsInterface.SetActive(true);
-    }    
+    }
     public void Keyboard()
     {
         _keyboardInterface.SetActive(true);
@@ -100,16 +105,12 @@ public class InterfaceController_sc : MonoBehaviour
     {
         audioSource.Play();
     }
-    public void MouseUnLock()
-    {
-        if (mouseLock != null) mouseLock.enabled = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
     public void MouseLock()
     {
-        if (mouseLock != null) mouseLock.enabled = true;
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        if (mouseLock != null) mouseLock.Mouse = false;
+    }
+    public void MouseUnLock()
+    {
+        if (mouseLock != null) mouseLock.Mouse = true;
     }
 }

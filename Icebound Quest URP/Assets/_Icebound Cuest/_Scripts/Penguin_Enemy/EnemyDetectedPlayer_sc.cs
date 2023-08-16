@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class EnemyDetectedPlayer_sc : MonoBehaviour
 {
@@ -40,7 +36,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         material = exclamationMark.GetComponent<Renderer>().material;
         Color = material.color;
         Color = Color.green;
-        enemySounds=GetComponent<EnemySounds_sc>();
+        enemySounds = GetComponent<EnemySounds_sc>();
     }
 
     void Update()
@@ -49,12 +45,12 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         front = false;
         back = false;
         material.color = color;
-        material.SetColor("_EmissionColor", color*2);
+        material.SetColor("_EmissionColor", color * 2);
         //Rayo detecta al jugador con la "Vista"
         if (frontCheckPlayer != null)
         {
             if (Physics.SphereCast(frontCheckPlayer.position, radiusFront, frontCheckPlayer.forward, out hitFront,
-                distanceFrontBox))
+                distanceFrontBox, player, QueryTriggerInteraction.Ignore))
             {
                 if (hitFront.collider.tag == "Player")
                 {
@@ -69,7 +65,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
         if (backCheckPlayer != null)
         {
             if (Physics.SphereCast(backCheckPlayer.position, radiusBackBox, backCheckPlayer.forward, out hitBack,
-               distanceBackBox))
+               distanceBackBox, player, QueryTriggerInteraction.Ignore))
             {
                 if (hitBack.collider.tag == "Player")
                 {
@@ -78,7 +74,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
                 }
             }
         }
-        if(PlayerDetected) enemySounds.SeenSound(); 
+        if (PlayerDetected) enemySounds.SeenSound();
 
     }
     private void OnDrawGizmos()

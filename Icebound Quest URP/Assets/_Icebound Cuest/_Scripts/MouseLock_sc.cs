@@ -2,9 +2,22 @@ using UnityEngine;
 
 public class MouseLock_sc : MonoBehaviour
 {
-    private void Start()
+    [SerializeField] bool mouse;
+
+    public bool Mouse { get => mouse; set => mouse = value; }
+
+    void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (Mouse)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

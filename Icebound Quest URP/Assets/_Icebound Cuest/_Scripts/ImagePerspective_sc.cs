@@ -20,7 +20,7 @@ public class ImagePerspective_sc : MonoBehaviour
 
     [SerializeField] bool arrived;
     [SerializeField] AudioSource alignImageSound;
-    [SerializeField] private CameraMovement_sc cameraMove;
+    private CameraMovement_sc cameraMove;
     bool bol;
     InterfaceController_sc interfaceController;
     void Start()
