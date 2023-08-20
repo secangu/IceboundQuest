@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerMovement_sc : MonoBehaviour
 {
     [SerializeField] Transform _camera; //camara que sigue al jugador
+    [SerializeField] PlayerButtonsController_sc slideButtonScript;
     Rigidbody _rbPlayer;
     Animator _animator;
     [SerializeField] int random;
@@ -29,11 +30,11 @@ public class PlayerMovement_sc : MonoBehaviour
     [SerializeField] float _groundCheckRadius;
 
     [Header("Slide")]
-    [SerializeField] float slideAttackTimer; // tiempo que tarda en deslizarse nuevamente si choco con un enemigo
+    [SerializeField] float slideAttackTimer; // tiempo que tarda en deslizarse nuevamente si choco con un enemigo    
     bool _isSlide;
     bool slideLoop;
     float slideAnimationTimer; // tiempo para activar la animacion de slideloop
-    
+
 
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
     public bool SlideLoop { get => slideLoop; set => slideLoop = value; }
@@ -65,9 +66,9 @@ public class PlayerMovement_sc : MonoBehaviour
 
                 if (_snowDrift)
                 {
-                    currentSpeed -= 70 * Time.deltaTime;
+                    currentSpeed -= 75 * Time.deltaTime;
                 }
-                else if (_snowDrift && currentSpeed < 3.5f)
+                else if (_snowDrift && currentSpeed <= 3.5f)
                 {
                     CancelSlide();
                 }
@@ -76,8 +77,12 @@ public class PlayerMovement_sc : MonoBehaviour
             {
                 horizontal = Input.GetAxisRaw("Horizontal");
                 vertical = Input.GetAxisRaw("Vertical");
-                currentSpeed = horizontal != 0 || vertical != 0 ? (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed) : 0;
-                if (_snowDrift) currentSpeed = horizontal != 0 || vertical != 0 ? currentSpeed < 1 ? currentSpeed = 1 : currentSpeed -= 50 * Time.deltaTime : 0;
+                if (_snowDrift)
+                {
+                    currentSpeed = horizontal != 0 || vertical != 0 ? currentSpeed <= 1.5 ? currentSpeed = Mathf.Max(currentSpeed, 1.5f) : currentSpeed -= 55 * Time.deltaTime : 0;
+                    currentSpeed = Mathf.Max(currentSpeed, 0.0f);
+                }
+                else currentSpeed = horizontal != 0 || vertical != 0 ? (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed) : 0;
             }
 
             Vector3 direction = new Vector3(horizontal, 0, vertical).normalized; //Recibe input horizontal y vertical
@@ -115,13 +120,12 @@ public class PlayerMovement_sc : MonoBehaviour
                 _isSlide = !_isSlide;
                 SlideLoop = false;
                 slideAnimationTimer = 0;
-
             }
         }
-        
+
         if (_isSlide)
         {
-            if (_isSlide&&slideAnimationTimer > 0.14f) // hace la transicion de tirarse a deslizarse
+            if (_isSlide && slideAnimationTimer > 0.14f) // hace la transicion de tirarse a deslizarse
             {
                 SlideLoop = true;
             }
@@ -134,10 +138,14 @@ public class PlayerMovement_sc : MonoBehaviour
         if (slideAttackTimer > 0)
         {
             slideAttackTimer -= Time.deltaTime;
+            slideButtonScript.DisabledSprites();
+            slideButtonScript.SliderValue(slideAttackTimer);
             CancelSlide();
         }
-
-
+        else
+        {
+            slideButtonScript.ActiveSprites();
+        }
 
         _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetFloat("Speed", speed);
@@ -154,8 +162,11 @@ public class PlayerMovement_sc : MonoBehaviour
     {
 
         if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) CancelSlide();
-        
-        if (other.gameObject.tag == ("Enemy") && slideAttackTimer <= 0) { slideAttackTimer = 5; }
+
+        if (other.gameObject.tag == ("Enemy") && slideAttackTimer <= 0)
+        {
+            if (_isSlide || slideLoop) slideAttackTimer = 10;
+        }
 
     }
     private void OnTriggerStay(Collider other)
