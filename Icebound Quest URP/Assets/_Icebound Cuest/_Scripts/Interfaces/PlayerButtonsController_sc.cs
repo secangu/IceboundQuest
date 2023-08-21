@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class PlayerButtonsController_sc : MonoBehaviour
 {
+    [SerializeField] int intFor;
     [SerializeField] Image[] buttonSprites;
     [SerializeField] Sprite[] activebuttonSprites;
     [SerializeField] Sprite[] disabledbuttonSprites;
@@ -12,7 +13,7 @@ public class PlayerButtonsController_sc : MonoBehaviour
   
     private void SetButtonSprites(Sprite[] newSprites)
     {
-        for (int i = 0; i <= 2; i++)
+        for (int i = 0; i <= intFor; i++)
         {
             buttonSprites[i].sprite = newSprites[i];
         }

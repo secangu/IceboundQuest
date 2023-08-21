@@ -1,45 +1,52 @@
 using System.Collections;
-using System.Threading;
 using UnityEngine;
+
 public class ImagePerspective_sc : MonoBehaviour
 {
+    [SerializeField] PlayerButtonsController_sc cameraButtonScan;
 
-    [SerializeField] Transform _ray1;
-    [SerializeField] Renderer _rendererTarget1;
-    [SerializeField] LayerMask _layerTarget1;
-    [SerializeField] bool _checkImage1;
+    [System.Serializable]
+    public struct ImageRay
+    {
+        public Transform ray;
+        public Renderer rendererTarget;
+        public LayerMask layerTarget;
+        public bool checkImage;
+    }
 
-    [SerializeField] Transform _ray2;
-    [SerializeField] Renderer _rendererTarget2;
-    [SerializeField] LayerMask _layerTarget2;
-    [SerializeField] bool _checkImage2;
+    [SerializeField] ImageRay[] imageRays;
 
-    [SerializeField] Transform _ray3;
-    [SerializeField] Renderer _rendererTarget3;
-    [SerializeField] LayerMask _layerTarget3;
-    [SerializeField] bool _checkImage3;
     [SerializeField] bool arrived;
     [SerializeField] float timerScan;
     float time;
     [SerializeField] AudioSource alignImageSound;
+
     private CameraMovement_sc cameraMove;
-    InterfaceController_sc interfaceController;
+    private InterfaceController_sc interfaceController;
+
     void Start()
     {
-        interfaceController=FindObjectOfType<InterfaceController_sc>();
-        cameraMove=GetComponent<CameraMovement_sc>();
+        interfaceController = FindObjectOfType<InterfaceController_sc>();
+        cameraMove = GetComponent<CameraMovement_sc>();
     }
 
     void Update()
     {
-        HitImage();
+        if (arrived)
+        {
+            HitImages();
+        }
         ChangeColor();
-        ;
-        if (_checkImage1 && _checkImage2 && _checkImage3)
+
+
+        if (CheckAllImagesChecked())
         {
             time -= Time.deltaTime;
+            cameraButtonScan.DisabledSprites();
+            cameraButtonScan.SliderValue(time);
             if (time <= 0)
             {
+                cameraButtonScan.ActiveSprites();
                 Sound();
                 cameraMove.enabled = false;
                 StartCoroutine(ChangeScene());
@@ -50,81 +57,90 @@ public class ImagePerspective_sc : MonoBehaviour
             time = timerScan;
         }
     }
+
     public void Sound()
     {
         alignImageSound.Play();
     }
-    public void HitImage()
+
+    public void HitImages()
     {
-        _checkImage1 = false; _checkImage2 = false; _checkImage3 = false;
-
-        if (arrived)
+        for (int i = 0; i < imageRays.Length; i++)
         {
-            //Ray Target1
-            RaycastHit hitImage1;
-            Ray rayImage1 = new Ray(_ray1.position, _ray1.forward);
+            RaycastHit hitImage;
+            Ray rayImage = new Ray(imageRays[i].ray.position, imageRays[i].ray.forward);
 
-            if (_checkImage1 = Physics.Raycast(rayImage1, out hitImage1, 30f, _layerTarget1))
+            if (Physics.Raycast(rayImage, out hitImage, 30f, imageRays[i].layerTarget))
             {
-                if (hitImage1.collider.tag == "Image1")
-                {
-                    _checkImage1 = true;
-                }
+                imageRays[i].checkImage = hitImage.collider.CompareTag("Image" + (i + 1));
             }
-            //Ray Target2
-            RaycastHit hitImage2;
-            Ray rayImage2 = new Ray(_ray2.position, _ray2.forward);
-
-            if (Physics.Raycast(rayImage2, out hitImage2, 30f, _layerTarget2))
+            else
             {
-                if (hitImage2.collider.tag == "Image2")
-                {
-                    _checkImage2 = true;
-                }
+                imageRays[i].checkImage = false;
             }
-
-            //Ray Target3
-            RaycastHit hitImage3;
-            Ray rayImage3 = new Ray(_ray3.position, _ray3.forward);
-
-            if (Physics.Raycast(rayImage3, out hitImage3, 30f, _layerTarget3))
-            {
-                if (hitImage3.collider.tag == "Image3")
-                {
-                    _checkImage3 = true;
-                }
-            }
-        }        
+        }
     }
+
     public void ChangeColor()
     {
-        if (_checkImage1) _rendererTarget1.material.color = Color.red; else _rendererTarget1.material.color = Color.green;
-        if (_checkImage2) _rendererTarget2.material.color = Color.red; else _rendererTarget2.material.color = Color.green;
-        if (_checkImage3) _rendererTarget3.material.color = Color.red; else _rendererTarget3.material.color = Color.green;
+        foreach (var imageRay in imageRays)
+        {
+            Color targetColor = Color.green; // Por defecto es verde 
+
+            if (arrived)
+            {
+                targetColor = new Color(1.0f, 0.5f, 0.0f); // Si arrived es verdadero, el color es naranja 
+                if (imageRay.checkImage)
+                {
+                    targetColor = Color.red; // si alinea la vista, el color es rojo (RGB: 1, 0, 0)
+                }
+            }else targetColor = Color.green;
+
+            imageRay.rendererTarget.sharedMaterial.color = targetColor;
+        }
     }
+
     IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(2.9f);
         interfaceController.ChangeScene(0);
     }
-    private void OnTriggerEnter(Collider other)
+
+    private bool CheckAllImagesChecked()
     {
-        if (other.CompareTag("AlignCamera")) arrived = true;
+        foreach (var imageRay in imageRays)
+        {
+            if (!imageRay.checkImage)
+            {
+                return false; // Al menos una  no fue verificada
+            }
+        }
+        return true;// Todas las imágenes fueron verificadas
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("AlignCamera"))
+        {
+            arrived = true;
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("AlignCamera")) arrived = false;
+        if (other.CompareTag("AlignCamera"))
+        {
+            arrived = false;
+        }
     }
-    
+
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawRay(_ray1.position, _ray1.TransformDirection(Vector3.forward) * 30f);
-
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(_ray2.position, _ray2.TransformDirection(Vector3.forward) * 30f);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(_ray3.position, _ray3.TransformDirection(Vector3.forward) * 30f);
+        foreach (var imageRay in imageRays)
+        {
+            Gizmos.color = imageRay.rendererTarget.sharedMaterial.color;
+            Gizmos.DrawRay(imageRay.ray.position, imageRay.ray.TransformDirection(Vector3.forward) * 30f);
+        }
     }
+
 }
