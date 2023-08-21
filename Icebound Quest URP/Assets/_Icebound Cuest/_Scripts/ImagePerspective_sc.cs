@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 public class ImagePerspective_sc : MonoBehaviour
 {
@@ -17,11 +18,11 @@ public class ImagePerspective_sc : MonoBehaviour
     [SerializeField] Renderer _rendererTarget3;
     [SerializeField] LayerMask _layerTarget3;
     [SerializeField] bool _checkImage3;
-
     [SerializeField] bool arrived;
+    [SerializeField] float timerScan;
+    float time;
     [SerializeField] AudioSource alignImageSound;
     private CameraMovement_sc cameraMove;
-    bool bol;
     InterfaceController_sc interfaceController;
     void Start()
     {
@@ -33,13 +34,21 @@ public class ImagePerspective_sc : MonoBehaviour
     {
         HitImage();
         ChangeColor();
-        if (_checkImage1 && _checkImage2 && _checkImage3&&!bol)
+        ;
+        if (_checkImage1 && _checkImage2 && _checkImage3)
         {
-            bol = true;
-            Sound();
-            cameraMove.enabled = false;
-            StartCoroutine(ChangeScene());
-        } 
+            time -= Time.deltaTime;
+            if (time <= 0)
+            {
+                Sound();
+                cameraMove.enabled = false;
+                StartCoroutine(ChangeScene());
+            }
+        }
+        else
+        {
+            time = timerScan;
+        }
     }
     public void Sound()
     {

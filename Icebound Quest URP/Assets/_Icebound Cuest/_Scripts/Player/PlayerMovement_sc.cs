@@ -66,12 +66,14 @@ public class PlayerMovement_sc : MonoBehaviour
 
                 if (_snowDrift)
                 {
-                    currentSpeed -= 75 * Time.deltaTime;
-                }
-                else if (_snowDrift && currentSpeed <= 3.5f)
-                {
-                    CancelSlide();
-                }
+                    currentSpeed -= 50 * Time.deltaTime;
+                    currentSpeed = Mathf.Max(currentSpeed, 1.5f);
+
+                    if (currentSpeed <= 1.5f)
+                    {
+                        CancelSlide();
+                    }
+                }                
             }
             else
             {
@@ -79,7 +81,7 @@ public class PlayerMovement_sc : MonoBehaviour
                 vertical = Input.GetAxisRaw("Vertical");
                 if (_snowDrift)
                 {
-                    currentSpeed = horizontal != 0 || vertical != 0 ? currentSpeed <= 1.5 ? currentSpeed = Mathf.Max(currentSpeed, 1.5f) : currentSpeed -= 55 * Time.deltaTime : 0;
+                    currentSpeed = horizontal != 0 || vertical != 0 ? currentSpeed <= 1 ? currentSpeed = Mathf.Max(currentSpeed, 1f) : currentSpeed -= 50 * Time.deltaTime : 0;
                     currentSpeed = Mathf.Max(currentSpeed, 0.0f);
                 }
                 else currentSpeed = horizontal != 0 || vertical != 0 ? (Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed) : 0;

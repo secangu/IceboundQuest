@@ -4,6 +4,7 @@ public class PlayerDissolve_sc : MonoBehaviour
 {
     Animator animator;
     PlayerMovement_sc playerMovement ;
+    [SerializeField] PlayerButtonsController_sc dissolveButtonScript;
 
     [SerializeField] Transform rayCheckDissolve;
     [SerializeField] AudioSource _meltSound;
@@ -25,13 +26,16 @@ public class PlayerDissolve_sc : MonoBehaviour
         if (time > 0)
         {
             time -= Time.deltaTime;
+            dissolveButtonScript.SliderValue(time);
+            dissolveButtonScript.DisabledSprites();
         }
-       
+
     }
     
     public void Dissolve()
     {
         dissolve = false;
+        dissolveButtonScript.DisabledSprites();
         if (rayCheckDissolve != null)
         {
             RaycastHit hitDissolve;
@@ -42,6 +46,7 @@ public class PlayerDissolve_sc : MonoBehaviour
                 if (hitDissolve.collider.tag == ("Dissolve"))
                 {                    
                     dissolve = true;
+                    dissolveButtonScript.ActiveSprites();
                     if(Input.GetKeyDown(KeyCode.Q) && dissolve && time <= 0)
                     {
                         time = dissolveTime;

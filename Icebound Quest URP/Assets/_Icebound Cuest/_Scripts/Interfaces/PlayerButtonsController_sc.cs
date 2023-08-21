@@ -20,7 +20,15 @@ public class PlayerButtonsController_sc : MonoBehaviour
     public void SliderValue(float value)
     {
         slider.value = value;
-        text.text = value.ToString("0.0");
+
+        if (value > 0)
+        {
+            text.text = value.ToString("0.0");
+        }
+        else
+        {
+            text.text = "";
+        }
     }
     public void ActiveSprites()
     {

@@ -9,8 +9,8 @@ public class CameraMovement_sc : MonoBehaviour
     [SerializeField] float _speedX;
     [SerializeField] float _speedY;
 
-    [SerializeField] float _maxRotationX;
-    [SerializeField] float _maxRotationY;
+    //[SerializeField] float _maxRotationX;
+    //[SerializeField] float _maxRotationY;
 
     [SerializeField] float _maxPositionX;
     [SerializeField] float _maxPositionY;
@@ -19,15 +19,15 @@ public class CameraMovement_sc : MonoBehaviour
     Vector3 _initialPosition;
     Vector3 currentPosition;
 
-    Vector3 _rotationX;
-    Vector3 _rotationY;
-    Vector3 _initiaRotation;
+    //Vector3 _rotationX;
+    //Vector3 _rotationY;
+    //Vector3 _initiaRotation;
     void Start()
     {
         _initialPosition = transform.localPosition;
         currentPosition = _initialPosition;
 
-        _initiaRotation = transform.localEulerAngles;
+        //_initiaRotation = transform.localEulerAngles;
     }
 
     void Update()
@@ -58,20 +58,21 @@ public class CameraMovement_sc : MonoBehaviour
         else if (transform.localPosition.y <= _initialPosition.y + _minPositionY)
             currentPosition.y = _initialPosition.y + _minPositionY;
 
-        /* Rotacion de la camara*/
+        if (transform.localPosition.x > 1) currentPosition.x = 1; // evita que la camara pase la pared derecha
+        ///* Rotacion de la camara*/
 
-        float X = _speedX * Input.GetAxis("Mouse X");
-        float Y = _speedY * Input.GetAxis("Mouse Y");
+        //float X = _speedX * Input.GetAxis("Mouse X");
+        //float Y = _speedY * Input.GetAxis("Mouse Y");
 
-        transform.localEulerAngles = new Vector3(_rotationX.x, _rotationY.y, 0);
+        //transform.localEulerAngles = new Vector3(_rotationX.x, _rotationY.y, 0);
 
-        /* Establece un limite de rotacion*/
-        _rotationX.x -= Y;
-        if (_rotationX.x >= _initiaRotation.x + _maxRotationY) _rotationX.x = _initiaRotation.x + _maxRotationY;
-        else if (_rotationX.x <= _initiaRotation.x - _maxRotationY) _rotationX.x = _initiaRotation.x - _maxRotationY;
+        ///* Establece un limite de rotacion*/
+        //_rotationX.x -= Y;
+        //if (_rotationX.x >= _initiaRotation.x + _maxRotationY) _rotationX.x = _initiaRotation.x + _maxRotationY;
+        //else if (_rotationX.x <= _initiaRotation.x - _maxRotationY) _rotationX.x = _initiaRotation.x - _maxRotationY;
 
-        _rotationY.y += X;
-        if (_rotationY.y >= _initiaRotation.y + _maxRotationX) _rotationY.y = _initiaRotation.y + _maxRotationX;
-        else if (_rotationY.y <= _initiaRotation.y - _maxRotationX) _rotationY.y = _initiaRotation.y - _maxRotationX;
+        //_rotationY.y += X;
+        //if (_rotationY.y >= _initiaRotation.y + _maxRotationX) _rotationY.y = _initiaRotation.y + _maxRotationX;
+        //else if (_rotationY.y <= _initiaRotation.y - _maxRotationX) _rotationY.y = _initiaRotation.y - _maxRotationX;
     }    
 }
