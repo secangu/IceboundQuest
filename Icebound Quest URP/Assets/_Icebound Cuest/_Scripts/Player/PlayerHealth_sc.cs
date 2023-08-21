@@ -1,37 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerHealth_sc : MonoBehaviour
 {
+    HeartSystem_sc heartSystem;
     Animator animator;
     [SerializeField] float health;
+    [SerializeField] float maxHealth;
     Collider _collider;
     Rigidbody rb;
-    [SerializeField]Slider _healthBar;
     [SerializeField] GameObject _death;
     public float Health { get => health; set => health = value; }
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
 
     void Start()
     {
+        heartSystem = FindObjectOfType<HeartSystem_sc>();
         animator=GetComponent<Animator>();
         _collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
-
-        _healthBar.maxValue = Health;
-        _healthBar.value = Health;
+        health = maxHealth;
+        heartSystem.DrawHearts();
     }
 
-    void Update()
-    {
-        _healthBar.value = Health;
-
-    }
     public void TakeDamage(float damage)
     {
         Health -= damage;
-
+        heartSystem.DrawHearts();
         if (Health <= 0)
         {            
             StartCoroutine(CorroutineDeath());
