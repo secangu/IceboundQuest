@@ -9,7 +9,7 @@ public class HeartSystem_sc : MonoBehaviour
     [SerializeField] PlayerHealth_sc playerHealth;
 
     List<HealthHear_sc> hearts = new List<HealthHear_sc>();
-    void Awake()
+    void Start()
     {
         DrawHearts();
     }

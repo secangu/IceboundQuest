@@ -31,13 +31,15 @@ public class PlayerMovement_sc : MonoBehaviour
 
     [Header("Slide")]
     [SerializeField] float slideAttackTimer; // tiempo que tarda en deslizarse nuevamente si choco con un enemigo    
-    bool _isSlide;
+    bool isSlide;
     bool slideLoop;
     float slideAnimationTimer; // tiempo para activar la animacion de slideloop
 
 
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
     public bool SlideLoop { get => slideLoop; set => slideLoop = value; }
+    public bool IsSlide { get => isSlide; set => isSlide = value; }
+    public float SlideAttackTimer { get => slideAttackTimer; set => slideAttackTimer = value; }
 
     void Start()
     {
@@ -58,7 +60,7 @@ public class PlayerMovement_sc : MonoBehaviour
             float horizontal;
             float vertical;
 
-            if (slideLoop && slideAttackTimer <= 0)
+            if (slideLoop && SlideAttackTimer <= 0)
             {
                 vertical = 1;
                 horizontal = 0;
@@ -119,15 +121,15 @@ public class PlayerMovement_sc : MonoBehaviour
             //Controla cuando se desliza el jugador
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                _isSlide = !_isSlide;
+                IsSlide = !IsSlide;
                 SlideLoop = false;
                 slideAnimationTimer = 0;
             }
         }
 
-        if (_isSlide)
+        if (IsSlide)
         {
-            if (_isSlide && slideAnimationTimer > 0.14f) // hace la transicion de tirarse a deslizarse
+            if (IsSlide && slideAnimationTimer > 0.14f) // hace la transicion de tirarse a deslizarse
             {
                 SlideLoop = true;
             }
@@ -137,11 +139,11 @@ public class PlayerMovement_sc : MonoBehaviour
             }
         }
 
-        if (slideAttackTimer > 0)
+        if (SlideAttackTimer > 0)
         {
-            slideAttackTimer -= Time.deltaTime;
+            SlideAttackTimer -= Time.deltaTime;
             slideButtonScript.DisabledSprites();
-            slideButtonScript.SliderValue(slideAttackTimer);
+            slideButtonScript.SliderValue(SlideAttackTimer);
             CancelSlide();
         }
         else
@@ -151,24 +153,19 @@ public class PlayerMovement_sc : MonoBehaviour
 
         _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetFloat("Speed", speed);
-        _animator.SetBool("Slide", _isSlide);
+        _animator.SetBool("Slide", IsSlide);
         _animator.SetBool("SlideLoop", SlideLoop);
     }
 
     public void CancelSlide()
     {
-        _isSlide = false; SlideLoop = false; slideAnimationTimer = 0;
+        IsSlide = false; SlideLoop = false; slideAnimationTimer = 0;
 
     }
     private void OnCollisionStay(Collision other)
     {
 
         if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) CancelSlide();
-
-        if (other.gameObject.tag == ("Enemy") && slideAttackTimer <= 0)
-        {
-            if (_isSlide || slideLoop) slideAttackTimer = 10;
-        }
 
     }
     private void OnTriggerStay(Collider other)

@@ -39,7 +39,6 @@ public class EnemySpawner_sc : MonoBehaviour
         }
         else if (activeEnemy == null)
         {
-            playerHealth.Health += 5;
             defeatCount++;
             if(defeatCount<numEnemy) SpawnEnemy(true);
         }

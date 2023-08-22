@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ImagePerspective_sc : MonoBehaviour
@@ -21,46 +22,44 @@ public class ImagePerspective_sc : MonoBehaviour
     float time;
     [SerializeField] AudioSource alignImageSound;
 
-    private CameraMovement_sc cameraMove;
-    private InterfaceController_sc interfaceController;
+    CameraMovement_sc cameraMove;
+    InterfaceController_sc interfaceController;
+    bool shouldPlaySound = false;
 
     void Start()
     {
         interfaceController = FindObjectOfType<InterfaceController_sc>();
         cameraMove = GetComponent<CameraMovement_sc>();
+        time = timerScan;
     }
 
     void Update()
     {
+        ChangeColor();
+
         if (arrived)
         {
             HitImages();
-        }
-        ChangeColor();
-
-
-        if (CheckAllImagesChecked())
-        {
-            time -= Time.deltaTime;
-            cameraButtonScan.DisabledSprites();
-            cameraButtonScan.SliderValue(time);
-            if (time <= 0)
+            if (CheckAllImagesChecked())
             {
-                cameraButtonScan.ActiveSprites();
-                Sound();
-                cameraMove.enabled = false;
-                StartCoroutine(ChangeScene());
+                time -= Time.deltaTime;
+                cameraButtonScan.DisabledSprites();
+                cameraButtonScan.SliderValue(time);
+
+                if (time <= 0&& !shouldPlaySound)
+                {
+                    shouldPlaySound = true;
+                    alignImageSound.Play();
+                    cameraButtonScan.ActiveSprites();
+                    cameraMove.enabled = false;
+                    StartCoroutine(ChangeScene());                    
+                }
+            }
+            else
+            {
+                time = timerScan;
             }
         }
-        else
-        {
-            time = timerScan;
-        }
-    }
-
-    public void Sound()
-    {
-        alignImageSound.Play();
     }
 
     public void HitImages()
@@ -85,27 +84,33 @@ public class ImagePerspective_sc : MonoBehaviour
     {
         foreach (var imageRay in imageRays)
         {
-            Color targetColor = Color.green; // Por defecto es verde 
+            Color targetEmissionColor = new Color(0.0f, 0.75f, 0.004f); // Por defecto es verde 
 
             if (arrived)
             {
-                targetColor = new Color(1.0f, 0.5f, 0.0f); // Si arrived es verdadero, el color es naranja 
+                targetEmissionColor = new Color(0.75f, 0.61f, 0.0f); // Si arrived es verdadero, el color de emisión es amarillo
+                                                                     // 
                 if (imageRay.checkImage)
                 {
-                    targetColor = Color.red; // si alinea la vista, el color es rojo (RGB: 1, 0, 0)
+                    targetEmissionColor = new Color(0.75f, 0.094f, 0.0f); // si alinea la vista, el color de emisión es rojo
                 }
-            }else targetColor = Color.green;
+            }
 
-            imageRay.rendererTarget.sharedMaterial.color = targetColor;
+            Material material = imageRay.rendererTarget.sharedMaterial;
+            material.EnableKeyword("_EMISSION");
+
+            if (material.HasProperty("_EmissionColor"))
+            {
+                targetEmissionColor *= 2.0f;
+                material.SetColor("_EmissionColor", targetEmissionColor);
+            }
         }
     }
-
     IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(2.9f);
         interfaceController.ChangeScene(0);
     }
-
     private bool CheckAllImagesChecked()
     {
         foreach (var imageRay in imageRays)
@@ -117,7 +122,6 @@ public class ImagePerspective_sc : MonoBehaviour
         }
         return true;// Todas las imágenes fueron verificadas
     }
-
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("AlignCamera"))
@@ -125,7 +129,6 @@ public class ImagePerspective_sc : MonoBehaviour
             arrived = true;
         }
     }
-
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("AlignCamera"))

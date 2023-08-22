@@ -46,7 +46,14 @@ public class PlayerAttack_sc : MonoBehaviour
    
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag =="Enemy"&&playerMovement.SlideLoop) other.transform.GetComponent<EnemyHealth_sc>().StunningDamage(stunningDamage);
+        if (other.gameObject.tag == "Enemy")
+        {
+            if (playerMovement.SlideLoop || playerMovement.IsSlide && playerMovement.SlideAttackTimer <= 0)
+            {
+                other.transform.GetComponent<EnemyHealth_sc>().StunningDamage(stunningDamage);
+                playerMovement.SlideAttackTimer = 10;
+            }            
+        }
     }
     private void OnDrawGizmos()
     {
