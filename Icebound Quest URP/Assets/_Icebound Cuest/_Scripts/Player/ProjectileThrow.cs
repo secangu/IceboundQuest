@@ -4,41 +4,72 @@ using UnityEngine;
 public class ProjectileThrow : MonoBehaviour
 {
     TrajectoryPredictor trajectoryPredictor;
-    PlayerButtonsController_sc throwButtonScript;
-
+    
+    [SerializeField] PlayerButtonsController_sc throwButtonScript;
+    [SerializeField] Animator animator;
     [SerializeField] Rigidbody objectToThrow;
-    [SerializeField, Range(0.0f, 50.0f)] float force;
-    [SerializeField] Transform StartPosition;
 
-    [SerializeField] float throwCooldown; // Tiempo de espera entre lanzamientos
-    float throwTime; // Último tiempo en que se lanzó un proyectil
+    [SerializeField, Range(0.0f, 50.0f)] float force;
+
+    [SerializeField] Transform StartPosition;
+    [SerializeField] GameObject throwCamera;
+
+    [SerializeField] float throwCooldown;
+    [SerializeField] bool canThrow=true;
+    bool aiming = false;
+
+    float throwTime; 
 
     private void Start()
     {
         trajectoryPredictor = GetComponent<TrajectoryPredictor>();
-
-        if (StartPosition == null)
-            StartPosition = transform;
-
-        throwTime = throwCooldown; // Inicializa lastThrowTime para permitir el primer lanzamiento
+        canThrow = true;
+        throwButtonScript.ActiveSprites();
     }
 
     private void Update()
     {
-        Predict(); // Llama al método para predecir y visualizar la trayectoria
-
-        throwTime -= Time.deltaTime; // Actualiza el tiempo transcurrido desde el último lanzamiento
-
-        if (Input.GetMouseButtonDown(1) && throwTime >= throwCooldown) // Botón derecho del mouse para lanzar el proyectil
+        if (throwTime <= 0 && canThrow)
         {
-            ThrowObject();
-            throwTime = throwCooldown; // Reinicia el tiempo transcurrido
+            throwButtonScript.ActiveSprites();
+            if (canThrow)
+            {
+                if (Input.GetMouseButton(1))
+                {
+                    throwCamera.SetActive(true);
+                    Predict(true);
+                    if (!aiming)
+                    {
+                        animator.SetTrigger("Aim");
+                        aiming = true;
+                        trajectoryPredictor.SetTrajectoryVisible(true);
+                    }
+                }
+                if (Input.GetMouseButtonUp(1))
+                {
+                    throwTime = throwCooldown;
+                    animator.SetTrigger("Throw");
+                    aiming = false;
+
+                    ThrowObject();
+
+                    Predict(false);
+                    throwCamera.SetActive(false);
+                    trajectoryPredictor.SetTrajectoryVisible(false);
+                }
+            }            
+        }
+        else if (throwTime > 0)
+        {
+            throwButtonScript.DisabledSprites();
+            throwButtonScript.SliderValue(throwTime);
+            throwTime -= Time.deltaTime;
         }
     }
 
-    private void Predict()
+    private void Predict(bool Predict)
     {
-        trajectoryPredictor.PredictTrajectory(ProjectileData());
+        if (Predict) trajectoryPredictor.PredictTrajectory(ProjectileData());
     }
 
     private ProjectileProperties ProjectileData()

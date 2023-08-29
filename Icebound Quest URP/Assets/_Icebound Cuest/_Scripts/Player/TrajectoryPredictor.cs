@@ -9,11 +9,10 @@ public class TrajectoryPredictor : MonoBehaviour
     [SerializeField, Range(10, 100)] int maxPoints = 50;  // Número máximo de puntos en la línea de trayectoria
     [SerializeField, Range(0.01f, 0.5f)] float increment = 0.025f;  // Incremento de tiempo entre puntos en el cálculo de la trayectoria
     [SerializeField, Range(1.05f, 2f)] float rayOverlap = 1.1f;  // Superposición de rayos entre puntos de la trayectoria
-
+    [SerializeField] LayerMask layers;
     private void Start()
     {
-        if (trajectoryLine == null)
-            trajectoryLine = GetComponent<LineRenderer>();
+        trajectoryLine = GetComponent<LineRenderer>();
 
         SetTrajectoryVisible(true);  // Hace visible la trayectoria al inicio
     }
@@ -37,7 +36,7 @@ public class TrajectoryPredictor : MonoBehaviour
             overlap = Vector3.Distance(position, nextPosition) * rayOverlap;
 
             // Si se golpea una superficie, muestra el marcador y detiene el cálculo de la línea
-            if (Physics.Raycast(position, velocity.normalized, out RaycastHit hit, overlap))
+            if (Physics.Raycast(position, velocity.normalized, out RaycastHit hit, overlap,layers,QueryTriggerInteraction.Ignore))
             {
                 UpdateLineRender(i, (i - 1, hit.point));  // Actualiza la línea hasta el punto de impacto
                 MoveHitMarker(hit);  // Mueve el marcador al punto de impacto
@@ -45,10 +44,9 @@ public class TrajectoryPredictor : MonoBehaviour
             }
 
             // Si no se golpea nada, continúa dibujando el arco de la trayectoria
-            hitMarker.gameObject.SetActive(false);  // Desactiva el marcador
+            hitMarker.gameObject.SetActive(false);
             position = nextPosition;  // Actualiza la posición actual
             UpdateLineRender(maxPoints, (i, position));  // Actualiza la línea con el nuevo punto
-            Debug.Log("asd");
         }
     }
 
@@ -77,7 +75,6 @@ public class TrajectoryPredictor : MonoBehaviour
 
     public void SetTrajectoryVisible(bool visible)
     {
-        Debug.Log("aa");
         trajectoryLine.enabled = visible;  // Establece la visibilidad de la línea de trayectoria
         hitMarker.gameObject.SetActive(visible);  // Establece la visibilidad del marcador de impacto
     }
