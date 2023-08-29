@@ -28,7 +28,6 @@ public class PlayerAttack_sc : MonoBehaviour
             playerMovement.CancelSlide();
             time = attackTime;
             animator.SetTrigger("Attack");
-            //sonidoAtaque.Play();
         }
     }
     public void Attack()
@@ -48,7 +47,7 @@ public class PlayerAttack_sc : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            if (playerMovement.SlideLoop || playerMovement.IsSlide && playerMovement.SlideAttackTimer <= 0)
+            if (playerMovement.SlideLoop || playerMovement.IsSliding && playerMovement.SlideAttackTimer <= 0)
             {
                 other.transform.GetComponent<EnemyHealth_sc>().StunningDamage(stunningDamage);
                 playerMovement.SlideAttackTimer = 10;

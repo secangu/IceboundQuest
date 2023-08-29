@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class DissolveIce_sc : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class DissolveIce_sc : MonoBehaviour
     float height;
     [SerializeField] float heightBack;
     [SerializeField] float _meltHeight;
-    [SerializeField] float _freezedHeight;   
-    
+    [SerializeField] float _freezedHeight;
+
+    [SerializeField] NavMeshObstacle meshObstacle;
     Material material;
     Collider _collider;
     public bool Melt { get => melted; set => melted = value; }
@@ -22,6 +24,7 @@ public class DissolveIce_sc : MonoBehaviour
     {        
         material = GetComponent<Renderer>().material;
         _collider = GetComponent<Collider>();
+        meshObstacle=GetComponent<NavMeshObstacle>();
         height = transform.position.y;
 
         /* Para saber los valores de MeltHeight y freezedHeight dar play con estos valores en 0 y con el bool de freezed marcado
@@ -30,8 +33,14 @@ public class DissolveIce_sc : MonoBehaviour
         _meltHeight = Mathf.Abs(height - _meltHeight);
         _freezedHeight = Mathf.Abs(height - _freezedHeight);
 
-        if (Freez) Freezed();
-        if (Melt) Melted();
+        if (Freez) 
+        { 
+            Freezed();
+        }
+        if (Melt)
+        { 
+            Melted();
+        }
     }
 
     private void Update()
@@ -52,6 +61,7 @@ public class DissolveIce_sc : MonoBehaviour
                 {
                     CancelDissolved(true, false);
                     _collider.isTrigger = true;
+                    meshObstacle.carving = false;
                 }
             }
             else if (Melt)
@@ -60,6 +70,7 @@ public class DissolveIce_sc : MonoBehaviour
                 {
                     heightBack += Time.deltaTime;
                     _collider.isTrigger = false; //activa el collider desde el inicio para evitar que se meta dentro del modelo
+                    meshObstacle.carving = true;
                 }
                 else
                 {
@@ -83,6 +94,7 @@ public class DissolveIce_sc : MonoBehaviour
     {
         heightBack = transform.position.y - _meltHeight;
         _collider.isTrigger = true;
+
     }
     public void Freezed()
     {

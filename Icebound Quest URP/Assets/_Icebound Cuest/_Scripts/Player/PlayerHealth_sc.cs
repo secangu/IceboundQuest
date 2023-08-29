@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerHealth_sc : MonoBehaviour
 {
     HeartSystem_sc heartSystem;
+    ProjectileThrow projectileThrow;
     Animator animator;
     [SerializeField] float health;
     [SerializeField] float maxHealth;
@@ -17,6 +18,7 @@ public class PlayerHealth_sc : MonoBehaviour
     void Start()
     {
         heartSystem = FindObjectOfType<HeartSystem_sc>();
+        projectileThrow = FindObjectOfType<ProjectileThrow>();
         animator=GetComponent<Animator>();
         _collider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
@@ -28,6 +30,7 @@ public class PlayerHealth_sc : MonoBehaviour
     {
         Health -= damage;
         heartSystem.DrawHearts();
+        projectileThrow.WhileThrowing();
         if (Health <= 0)
         {            
             StartCoroutine(CorroutineDeath());

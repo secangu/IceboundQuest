@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class FloatingCristal_sc : MonoBehaviour
 {
     [SerializeField] GameObject _interface;
+    [SerializeField] GameObject _pressF;
     InterfaceController_sc interfaceController;
     Animator animator;
     Transform target;
@@ -22,8 +20,9 @@ public class FloatingCristal_sc : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player" )
+        if (other.gameObject.tag == "Player")
         {
+            _pressF.SetActive(true);
             interfaceController = FindObjectOfType<InterfaceController_sc>();
             Debug.Log("a");
             if (Input.GetKeyDown(KeyCode.F))
@@ -32,7 +31,14 @@ public class FloatingCristal_sc : MonoBehaviour
                 _interface.SetActive(true);
                 interfaceController.Pause();
                 animator.SetTrigger("Static");
-            }    
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            _pressF.SetActive(false);
         }
     }
 }

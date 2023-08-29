@@ -31,22 +31,23 @@ public class PlayerMovement_sc : MonoBehaviour
 
     [Header("Slide")]
     [SerializeField] float slideAttackTimer; // tiempo que tarda en deslizarse nuevamente si choco con un enemigo    
-    bool isSlide;
+    bool isSliding;
     bool slideLoop;
     float slideAnimationTimer; // tiempo para activar la animacion de slideloop
 
 
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
     public bool SlideLoop { get => slideLoop; set => slideLoop = value; }
-    public bool IsSlide { get => isSlide; set => isSlide = value; }
+    public bool IsSliding { get => isSliding; set => isSliding = value; }
     public float SlideAttackTimer { get => slideAttackTimer; set => slideAttackTimer = value; }
+    public bool CanMove { get => canMove; set => canMove = value; }
 
     void Start()
     {
         _rbPlayer = GetComponent<Rigidbody>();
         _animator = GetComponent<Animator>();
         _rbPlayer.isKinematic = false;
-        canMove = true;
+        CanMove = true;
     }
 
     void Update()
@@ -55,7 +56,7 @@ public class PlayerMovement_sc : MonoBehaviour
     }
     public void Movement()
     {
-        if (canMove)
+        if (CanMove)
         {
             float horizontal;
             float vertical;
@@ -121,15 +122,16 @@ public class PlayerMovement_sc : MonoBehaviour
             //Controla cuando se desliza el jugador
             if (Input.GetKeyDown(KeyCode.LeftControl))
             {
-                IsSlide = !IsSlide;
+                IsSliding = !IsSliding;
                 SlideLoop = false;
                 slideAnimationTimer = 0;
             }
+            _animator.SetFloat("Speed", speed);
         }
 
-        if (IsSlide)
+        if (IsSliding)
         {
-            if (IsSlide && slideAnimationTimer > 0.14f) // hace la transicion de tirarse a deslizarse
+            if (IsSliding && slideAnimationTimer > 0.14f) // hace la transicion de tirarse a deslizarse
             {
                 SlideLoop = true;
             }
@@ -152,14 +154,13 @@ public class PlayerMovement_sc : MonoBehaviour
         }
 
         _animator.SetBool("IsGrounded", isGrounded);
-        _animator.SetFloat("Speed", speed);
-        _animator.SetBool("Slide", IsSlide);
+        _animator.SetBool("Slide", IsSliding);
         _animator.SetBool("SlideLoop", SlideLoop);
     }
 
     public void CancelSlide()
     {
-        IsSlide = false; SlideLoop = false; slideAnimationTimer = 0;
+        IsSliding = false; SlideLoop = false; slideAnimationTimer = 0;
 
     }
     private void OnCollisionStay(Collision other)
