@@ -5,6 +5,7 @@ public class ProjectileThrow : MonoBehaviour
 {
     TrajectoryPredictor trajectoryPredictor;
     [SerializeField] PlayerButtonsController_sc throwButtonScript;
+    PlayerMovement_sc playerMovement;
     Animator animator;
     [SerializeField] Rigidbody objectToThrow;
 
@@ -21,6 +22,7 @@ public class ProjectileThrow : MonoBehaviour
 
     private void Start()
     {
+        playerMovement = GetComponent<PlayerMovement_sc>();
         animator = GetComponent<Animator>();
         trajectoryPredictor = GetComponent<TrajectoryPredictor>();
         throwTime = throwCooldown;
@@ -35,13 +37,14 @@ public class ProjectileThrow : MonoBehaviour
         if (throwTime <= 0)
         {
             throwButtonScript.ActiveSprites();
-            if (Input.GetMouseButton(1) && canThrow)
+            if (Input.GetMouseButton(1) && canThrow && playerMovement.CanMove && playerMovement.IsGrounded)
             {
-                throwCamera.SetActive(true);
+                playerMovement.CanMove = false;
                 Predict(true);
+                animator.SetTrigger("Aim");
                 if (!aiming)
                 {
-                    animator.SetTrigger("Aim");
+                    throwCamera.SetActive(true);
                     aiming = true;
                     trajectoryPredictor.SetTrajectoryVisible(true);
                 }
@@ -57,7 +60,7 @@ public class ProjectileThrow : MonoBehaviour
             throwButtonScript.SliderValue(throwTime);
             throwTime -= Time.deltaTime;
             canThrow = false;
-            if(throwTime <= 0) canThrow = true;
+            if (throwTime <= 0) canThrow = true;
         }
     }
 
@@ -95,12 +98,13 @@ public class ProjectileThrow : MonoBehaviour
             aiming = false;
 
             if (!aiming)
-            {                
+            {
                 throwTime = throwCooldown;
                 animator.SetTrigger("Throw");
                 Predict(false);
                 throwCamera.SetActive(false);
                 trajectoryPredictor.SetTrajectoryVisible(false);
+                playerMovement.CanMove = true;
             }
         }
     }

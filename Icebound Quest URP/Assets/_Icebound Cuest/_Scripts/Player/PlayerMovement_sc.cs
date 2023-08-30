@@ -41,6 +41,7 @@ public class PlayerMovement_sc : MonoBehaviour
     public bool IsSliding { get => isSliding; set => isSliding = value; }
     public float SlideAttackTimer { get => slideAttackTimer; set => slideAttackTimer = value; }
     public bool CanMove { get => canMove; set => canMove = value; }
+    public bool IsGrounded { get => isGrounded; set => isGrounded = value; }
 
     void Start()
     {
@@ -91,7 +92,7 @@ public class PlayerMovement_sc : MonoBehaviour
             }
 
             Vector3 direction = new Vector3(horizontal, 0, vertical).normalized; //Recibe input horizontal y vertical
-            isGrounded = Physics.CheckSphere(transform.position, _groundCheckRadius, _groundLayer); //Comprueba si el jugador esta en el suelo
+            IsGrounded = Physics.CheckSphere(transform.position, _groundCheckRadius, _groundLayer); //Comprueba si el jugador esta en el suelo
 
             //Detecta si esta caminando o corriendo
             if (speed != currentSpeed) speed = Mathf.MoveTowards(speed, currentSpeed, transitionTime * Time.deltaTime);
@@ -113,7 +114,8 @@ public class PlayerMovement_sc : MonoBehaviour
                 if (timer > 1.5f) _animator.SetFloat("IdleNumber", random); else timer += Time.deltaTime;
             }
 
-            if (isGrounded && Input.GetKeyDown(KeyCode.Space))
+            //salto
+            if (IsGrounded && Input.GetKeyDown(KeyCode.Space))
             {
                 _rbPlayer.AddForce(Vector3.up * JumpForce, ForceMode.Impulse);
                 CancelSlide();
@@ -127,6 +129,8 @@ public class PlayerMovement_sc : MonoBehaviour
                 slideAnimationTimer = 0;
             }
             _animator.SetFloat("Speed", speed);
+            _animator.SetBool("IsGrounded", IsGrounded);
+
         }
 
         if (IsSliding)
@@ -153,7 +157,6 @@ public class PlayerMovement_sc : MonoBehaviour
             slideButtonScript.ActiveSprites();
         }
 
-        _animator.SetBool("IsGrounded", isGrounded);
         _animator.SetBool("Slide", IsSliding);
         _animator.SetBool("SlideLoop", SlideLoop);
     }

@@ -84,15 +84,15 @@ public class ImagePerspective_sc : MonoBehaviour
     {
         foreach (var imageRay in imageRays)
         {
-            Color targetEmissionColor = new Color(0.0f, 0.75f, 0.004f); // Por defecto es verde 
+            Color targetEmissionColor = new Color(0.75f, 0.094f, 0.0f); // Por defecto es rojo  
 
             if (arrived)
             {
                 targetEmissionColor = new Color(0.75f, 0.61f, 0.0f); // Si arrived es verdadero, el color de emisión es amarillo
-                                                                     // 
+                                                                     
                 if (imageRay.checkImage)
                 {
-                    targetEmissionColor = new Color(0.75f, 0.094f, 0.0f); // si alinea la vista, el color de emisión es rojo
+                    targetEmissionColor = new Color(0.0f, 0.75f, 0.004f); // si alinea la vista, el color de emisión es verde
                 }
             }
 
