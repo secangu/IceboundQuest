@@ -31,7 +31,7 @@ public class EnemyChaseState_sc : StateMachineBehaviour
             distance = Vector3.Distance(player.position, animator.transform.position);
         }
        
-        if (distance >= maxChasingDistance && !enemy.PlayerDetected && timer > 1.2f) // si se aleja o deja de ver al jugador durante 1.2 segundo deja de seguirlo
+        if (distance >= maxChasingDistance || !enemy.PlayerDetected && timer > 1.2f) // si se aleja o deja de ver al jugador durante 1.2 segundo deja de seguirlo
         {
             animator.SetBool("IsChanging", false); 
         }

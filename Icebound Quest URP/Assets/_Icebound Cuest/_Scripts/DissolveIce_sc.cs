@@ -61,7 +61,7 @@ public class DissolveIce_sc : MonoBehaviour
                 {
                     CancelDissolved(true, false);
                     _collider.isTrigger = true;
-                    meshObstacle.carving = false;
+                    meshObstacle.enabled = false;
                 }
             }
             else if (Melt)
@@ -70,7 +70,7 @@ public class DissolveIce_sc : MonoBehaviour
                 {
                     heightBack += Time.deltaTime;
                     _collider.isTrigger = false; //activa el collider desde el inicio para evitar que se meta dentro del modelo
-                    meshObstacle.carving = true;
+                    meshObstacle.enabled = true;
                 }
                 else
                 {
