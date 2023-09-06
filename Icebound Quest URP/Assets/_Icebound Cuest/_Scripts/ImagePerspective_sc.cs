@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ImagePerspective_sc : MonoBehaviour
 {
-    [SerializeField] PlayerButtonsController_sc cameraButtonScan;
 
     [System.Serializable]
     public struct ImageRay
@@ -16,11 +15,13 @@ public class ImagePerspective_sc : MonoBehaviour
     }
 
     [SerializeField] ImageRay[] imageRays;
-
-    [SerializeField] bool arrived;
-    [SerializeField] float timerScan;
-    float time;
+    [SerializeField] PlayerButtonsController_sc cameraButtonScan;
+    [SerializeField] float timerScan; // tiempo que debe escanear la imagen
     [SerializeField] AudioSource alignImageSound;
+    [SerializeField] int _scene;
+
+    bool arrived; //Esta en la posicion correcta
+    float time;
 
     CameraMovement_sc cameraMove;
     InterfaceController_sc interfaceController;
@@ -109,7 +110,7 @@ public class ImagePerspective_sc : MonoBehaviour
     IEnumerator ChangeScene()
     {
         yield return new WaitForSeconds(2.9f);
-        interfaceController.ChangeScene(0);
+        interfaceController.ChangeScene(_scene);
     }
     private bool CheckAllImagesChecked()
     {

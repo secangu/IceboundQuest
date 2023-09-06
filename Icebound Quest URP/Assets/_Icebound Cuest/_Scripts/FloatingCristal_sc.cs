@@ -24,7 +24,6 @@ public class FloatingCristal_sc : MonoBehaviour
         {
             _pressF.SetActive(true);
             interfaceController = FindObjectOfType<InterfaceController_sc>();
-            Debug.Log("a");
             if (Input.GetKeyDown(KeyCode.F))
             {
                 interfaceController.Turorial = true;

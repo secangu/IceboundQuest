@@ -9,10 +9,12 @@ public class SkipVideo : MonoBehaviour
 {
     [SerializeField] VideoPlayer cinematic;
     [SerializeField] int scene;
+    [SerializeField] GameObject text;
     void Start()
     {
         cinematic=GetComponent<VideoPlayer>();
         cinematic.loopPointReached += OnVideoEnd;
+        StartCoroutine(DisabledText());
     }
 
     void Update()
@@ -24,4 +26,9 @@ public class SkipVideo : MonoBehaviour
         SceneManager.LoadScene("Fight");
     }
 
+    IEnumerator DisabledText()
+    {
+        yield return new WaitForSeconds(5);
+        text.SetActive(false);
+    }
 }

@@ -14,7 +14,7 @@ public class EnemyIdleState_sc : StateMachineBehaviour
     {
         enemy = animator.GetComponent<EnemyDetectedPlayer_sc>();
         timer = 0;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         enemy.Color = Color.green;
     }
 

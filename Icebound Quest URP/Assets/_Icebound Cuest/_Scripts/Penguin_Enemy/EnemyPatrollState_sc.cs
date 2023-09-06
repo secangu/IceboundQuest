@@ -19,7 +19,7 @@ public class EnemyPatrollState_sc : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         enemy = animator.GetComponent<EnemyDetectedPlayer_sc>();
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         agent = animator.GetComponent<NavMeshAgent>();
 
         enemy.Color = Color.green;
