@@ -6,23 +6,28 @@ using UnityEngine.UI;
 
 public class EnemyHealth_sc : MonoBehaviour
 {
-    [SerializeField] float _health;
-    [SerializeField] Slider _healthBar;
+    EnemyHeartSystem_sc enemyHeartSystem;
+    [SerializeField] float health;
+    [SerializeField] float maxHealth;
+    public float Health { get => health; set => health = value; }
+    public float MaxHealth { get => maxHealth; set => maxHealth = value; }
+
     Animator animator;
     NavMeshAgent agent;
     void Start()
     {
         animator=GetComponent<Animator>();
         agent=GetComponent<NavMeshAgent>();
-        _healthBar.maxValue = _health;
-        _healthBar.value = _health;
+
+        health = maxHealth;
+        enemyHeartSystem.DrawHearts();
     }
 
     public void TakeDamage(float damage)
     {
-        _health -= damage;
-        _healthBar.value = _health;
-        if (_health <= 0)
+        Health -= damage;
+        enemyHeartSystem.DrawHearts();
+        if (Health <= 0)
         {
             agent.acceleration = 0;
             StartCoroutine(CorroutineDeath());
@@ -34,9 +39,9 @@ public class EnemyHealth_sc : MonoBehaviour
     }
     public void StunningDamage(float damage)
     {
-        _health -= damage;
-        _healthBar.value = _health;
-        if (_health <= 0)
+        Health -= damage;
+        enemyHeartSystem.DrawHearts();
+        if (Health <= 0)
         {
             agent.acceleration = 0;
             StartCoroutine(CorroutineDeath());

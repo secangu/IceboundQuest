@@ -22,7 +22,7 @@ public class PlayerButtonsController_sc : MonoBehaviour
     {
         slider.value = value;
 
-        if (value > 0)
+        if (value > 0.05)
         {
             text.text = value.ToString("0.0");
         }

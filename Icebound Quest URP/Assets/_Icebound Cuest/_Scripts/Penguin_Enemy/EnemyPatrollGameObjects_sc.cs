@@ -7,8 +7,9 @@ public class EnemyPatrollGameObjects_sc : MonoBehaviour
     EnemyPatrollState_sc patrollState;
 
     NavMeshAgent agent;
-    [SerializeField] GameObject go;
     List<Transform> wayPoints = new List<Transform>();
+
+    [SerializeField] GameObject go;
 
     public GameObject Go { get => go; set => go = value; }
 
