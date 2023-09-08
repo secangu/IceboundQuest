@@ -36,8 +36,8 @@ public class InterfaceController_sc : MonoBehaviour
     }
     public void ChangeScene(int Scene)
     {
-        sceneLoadManager.SceneLoad(Scene);
         Time.timeScale = 1;
+        sceneLoadManager.SceneLoad(Scene);
     }
 
     public void Pause()
@@ -71,8 +71,8 @@ public class InterfaceController_sc : MonoBehaviour
     }
     public void Restart()
     {
-        sceneLoadManager.SceneLoad(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
+        sceneLoadManager.SceneLoad(SceneManager.GetActiveScene().buildIndex);
     }
     public void Settings()
     {

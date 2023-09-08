@@ -40,6 +40,7 @@ public class FoundController_sc : MonoBehaviour
                 Time.timeScale = 0;
                 timer = 0;
                 gameOver.SetActive(true);
+                Destroy(gameObject);
             }
         }
         else

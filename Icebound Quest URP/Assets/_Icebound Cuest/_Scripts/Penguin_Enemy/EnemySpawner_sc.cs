@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using TMPro;
 using UnityEngine;
 
@@ -15,7 +13,10 @@ public class EnemySpawner_sc : MonoBehaviour
     int defeatCount;
     [SerializeField] int numEnemy;
     [SerializeField] Collider colliderDissolve;
-
+    [SerializeField] GameObject gameObjectText;
+    float timer = 3;
+    bool wall;
+    bool spawn;
     [Header("GUI")]
     [SerializeField] TextMeshProUGUI text;
 
@@ -24,25 +25,45 @@ public class EnemySpawner_sc : MonoBehaviour
         foreach (Transform t in this.transform) spawnPoints.Add(t); // recorre los elementos hijos del objeto
         SpawnEnemy(true);
         colliderDissolve.enabled = true;
-        playerHealth=FindObjectOfType<PlayerHealth_sc>();
+        playerHealth = FindObjectOfType<PlayerHealth_sc>();
+        spawn = true;
     }
 
     private void Update()
     {
-        text.text = "Enemies left: " + (numEnemy - defeatCount).ToString();
-        
-        if(defeatCount >= numEnemy)
+        if (timer > 0 && spawn)
+        {            
+            gameObjectText.SetActive(true);
+            text.text = "Enemies left: " + (numEnemy - defeatCount).ToString();
+            timer -= Time.deltaTime;
+            if (timer <= 0) spawn = false;
+        }
+        else if (wall)
+        {
+            text.text = "Now you can go to the shiny wall you can melt pressing (Q)";
+            gameObjectText.SetActive(true);
+        }
+        else
+        {
+            gameObjectText.SetActive(false);
+        }
+
+
+        if (defeatCount >= numEnemy)
         {
             SpawnEnemy(false);
             colliderDissolve.enabled = false;
-            text.text = "Now you can go to the shiny wall you can melt pressing (Q)";
+            wall = true;
+            spawn = false;
         }
         else if (activeEnemy == null)
         {
             defeatCount++;
-            if(defeatCount<numEnemy) SpawnEnemy(true);
+            timer = 3;
+            spawn = true;
+            if (defeatCount < numEnemy) SpawnEnemy(true);
         }
-    } 
+    }
 
     private void SpawnEnemy(bool spawn)
     {
@@ -50,7 +71,7 @@ public class EnemySpawner_sc : MonoBehaviour
         {
             activeEnemy = Instantiate(enemyPrefab, GetRandomSpawnPoint(), Quaternion.identity);
             activeEnemy.GetComponent<EnemyPatrollGameObjects_sc>().Go = patrollPoints;
-        }                        
+        }
     }
 
     private Vector3 GetRandomSpawnPoint()

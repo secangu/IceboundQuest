@@ -11,7 +11,7 @@ public class Win_sc : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             win.SetActive(true);
-            Time.timeScale = 0f;
+            other.gameObject.SetActive(false);
         }
     }
 }
