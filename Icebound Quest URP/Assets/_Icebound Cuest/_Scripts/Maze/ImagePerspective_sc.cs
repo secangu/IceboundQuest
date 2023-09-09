@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -18,18 +19,17 @@ public class ImagePerspective_sc : MonoBehaviour
     [SerializeField] PlayerButtonsController_sc cameraButtonScan;
     [SerializeField] float timerScan; // tiempo que debe escanear la imagen
     [SerializeField] AudioSource alignImageSound;
-    [SerializeField] int _scene;
+    [SerializeField] GameObject sucess;
+    [SerializeField] int num;
 
     bool arrived; //Esta en la posicion correcta
     float time;
 
     CameraMovement_sc cameraMove;
-    InterfaceController_sc interfaceController;
     bool shouldPlaySound = false;
 
     void Start()
     {
-        interfaceController = FindObjectOfType<InterfaceController_sc>();
         cameraMove = GetComponent<CameraMovement_sc>();
         time = timerScan;
     }
@@ -109,8 +109,10 @@ public class ImagePerspective_sc : MonoBehaviour
     }
     IEnumerator ChangeScene()
     {
-        yield return new WaitForSeconds(2.9f);
-        interfaceController.ChangeScene(_scene);
+        if (num > PlayerPrefs.GetInt("idLevel")) PlayerPrefs.SetInt("idLevel", num);
+        yield return new WaitForSeconds(1.5f);
+        sucess.SetActive(true);
+        Time.timeScale = 0;
     }
     private bool CheckAllImagesChecked()
     {
