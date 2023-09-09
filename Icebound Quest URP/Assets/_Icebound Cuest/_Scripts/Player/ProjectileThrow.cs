@@ -21,7 +21,7 @@ public class ProjectileThrow : MonoBehaviour
     [SerializeField, Range(0.0f, 50.0f)] float force;
     [SerializeField] Transform StartPosition;
     [SerializeField] float throwCooldown;
-    bool canThrow = true;
+    [SerializeField] bool canThrow = true;
     int maxBall;
     int currentBall; // Bolas disponibles
     bool aiming = false;
@@ -168,7 +168,7 @@ public class ProjectileThrow : MonoBehaviour
                 Rigidbody ammoInstance = ballInstances[i];
                 ammoInstance.GetComponent<MeshRenderer>().enabled = true;
                 ammoInstance.GetComponent<Collider>().enabled = true;
-                ammoInstance.isKinematic= false;
+                ammoInstance.isKinematic = false;
                 ammoInstance.gameObject.SetActive(false); // Desactiva la bala
                 ammoInstance.velocity = Vector3.zero; // Reinicia la velocidad
                 ammoInstance.angularVelocity = Vector3.zero; // Reinicia la velocidad angular

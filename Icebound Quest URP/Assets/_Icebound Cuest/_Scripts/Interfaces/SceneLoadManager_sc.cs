@@ -8,7 +8,7 @@ public class SceneLoadManager_sc : MonoBehaviour
 {
     [SerializeField] Slider slider;
     [SerializeField] GameObject loadPanel;
-    [SerializeField] InterfaceController_sc interfaceController;
+    InterfaceController_sc interfaceController;
 
     void Start()
     {

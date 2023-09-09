@@ -15,7 +15,7 @@ public class SnowBall_sc : MonoBehaviour
         this.gameObject.GetComponent<Collider>().enabled = false;
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.transform.GetComponent<EnemyHealth_sc>().StunningDamage(damage);
+            other.transform.GetComponent<EnemyHealth_sc>().TakeDamage(damage);
 
         }
     }

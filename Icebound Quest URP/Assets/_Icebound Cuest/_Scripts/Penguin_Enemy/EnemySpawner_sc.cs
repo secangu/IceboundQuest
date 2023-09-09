@@ -71,6 +71,7 @@ public class EnemySpawner_sc : MonoBehaviour
         {
             activeEnemy = Instantiate(enemyPrefab, GetRandomSpawnPoint(), Quaternion.identity);
             activeEnemy.GetComponent<EnemyPatrollGameObjects_sc>().Go = patrollPoints;
+            activeEnemy.transform.SetParent(transform);
         }
     }
 

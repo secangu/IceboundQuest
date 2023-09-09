@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class EnemyHealth_sc : MonoBehaviour
 {
-    EnemyHeartSystem_sc enemyHeartSystem;
+    [SerializeField]EnemyHeartSystem_sc enemyHeartSystem;
     [SerializeField] float health;
     [SerializeField] float maxHealth;
     public float Health { get => health; set => health = value; }

@@ -14,7 +14,12 @@ public class HealthHear_sc : MonoBehaviour
     {
         heartImage = GetComponent<Image>();
     }
-
+    private void Update()
+    {
+        gameObject.transform.localScale = new Vector3(1, 1, 1);
+        gameObject.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x, gameObject.transform.localPosition.y, 0);
+    }
     public void SetHearthImage(HeartStatus status)
     {
         switch (status)

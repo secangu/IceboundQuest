@@ -12,8 +12,6 @@ public class EnemyHeartSystem_sc : MonoBehaviour
     void Start()
     {
         DrawHearts();
-        enemyHealth = GetComponent<EnemyHealth_sc>();
-
     }
     public void DrawHearts()
     {
