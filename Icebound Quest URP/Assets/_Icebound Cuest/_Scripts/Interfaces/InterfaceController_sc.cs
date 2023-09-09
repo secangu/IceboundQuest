@@ -116,4 +116,8 @@ public class InterfaceController_sc : MonoBehaviour
     {
         if (mouseLock != null) mouseLock.Mouse = true;
     }
+    public void UnlockLevel(int num)
+    {
+        PlayerPrefs.SetInt("idLevel", num);
+    }
 }
