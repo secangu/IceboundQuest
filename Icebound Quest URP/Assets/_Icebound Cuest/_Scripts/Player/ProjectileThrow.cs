@@ -27,6 +27,9 @@ public class ProjectileThrow : MonoBehaviour
     bool aiming = false;
     float throwTime;
 
+    public int CurrentBall { get => currentBall; set => currentBall = value; }
+    public int MaxBall { get => maxBall; set => maxBall = value; }
+
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement_sc>();
@@ -44,21 +47,19 @@ public class ProjectileThrow : MonoBehaviour
             }
         }
 
-        maxBall = balls.Count; // establece como maxball el tamaño de balas en la lista
-        currentBall = maxBall; // Comienzas con la cantidad máxima de balas
+        MaxBall = balls.Count; // establece como maxball el tamaño de balas en la lista
+        CurrentBall = MaxBall; // Comienzas con la cantidad máxima de balas
 
         canThrow = true;
         throwButtonScript.ActiveSprites();
-
-
     }
 
     private void Update()
     {
-        ballsAmount.text = currentBall + "/" + maxBall;
+        ballsAmount.text = CurrentBall + "/" + MaxBall;
         animator.SetBool("Aiming", aiming);
 
-        if (currentBall > 0 && throwTime <= 0)
+        if (CurrentBall > 0 && throwTime <= 0)
         {
             throwButtonScript.ActiveSprites();
             if (Input.GetMouseButton(1) && canThrow && playerMovement.CanMove && playerMovement.IsGrounded)
@@ -86,10 +87,6 @@ public class ProjectileThrow : MonoBehaviour
             canThrow = false;
             if (throwTime <= 0) canThrow = true;
         }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Reload();
-        }
     }
 
     private void Predict(bool Predict)
@@ -113,7 +110,7 @@ public class ProjectileThrow : MonoBehaviour
 
     public void ThrowObject()
     {
-        if (currentBall > 0 && balls.Count > 0)
+        if (CurrentBall > 0 && balls.Count > 0)
         {
             // Toma la primera bola de la lista
             Rigidbody thrownObject = balls[0];
@@ -135,7 +132,7 @@ public class ProjectileThrow : MonoBehaviour
             // Remueve la bola de la lista
             balls.RemoveAt(0);
 
-            currentBall--; // Reduce la cantidad de bolas disponibles
+            CurrentBall--; // Reduce la cantidad de bolas disponibles
         }
     }
     public void WhileThrowing()
@@ -156,11 +153,12 @@ public class ProjectileThrow : MonoBehaviour
             }
         }
     }
-    private void Reload()
+    public void Reload()
     {
-        if (currentBall < maxBall)
+        if (CurrentBall < MaxBall)
         {
-            int remainingAmmo = maxBall - currentBall;
+            animator.Play("Collect");
+            int remainingAmmo = MaxBall - CurrentBall;
             int ammoToReload = Mathf.Min(remainingAmmo, ballInstances.Count); // Calcula cuántas balas se pueden recargar
 
             for (int i = 0; i < ammoToReload; i++)
@@ -176,7 +174,7 @@ public class ProjectileThrow : MonoBehaviour
                 ammoInstance.transform.rotation = Quaternion.identity; // Reinicia la rotación
             }
             balls.AddRange(ballInstances); //recarga la lista encargada del disparo
-            currentBall += ammoToReload; // Incrementa la cantidad de balas disponibles
+            CurrentBall += ammoToReload; // Incrementa la cantidad de balas disponibles
 
             ballInstances.Clear(); // limpia la lista de recarga
         }
