@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RockMaterial
+  m_Name: LevelScenery_M
   m_Shader: {fileID: -6465566751694194690, guid: e8de8ebe306c61e4fb086b2c5cab97ab,
     type: 3}
   m_Parent: {fileID: 0}
@@ -38,7 +38,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: 06a7fd2bd31b6f14cb10637ba6269c58, type: 3}
+        m_Texture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -82,7 +82,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnowNoise:
-        m_Texture: {fileID: 2800000, guid: f362f12154b18464bbe19e20abd8e7e1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1bdbf4763ca6bb74b8f2494b9a9b62bd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SnowNormal:
@@ -124,7 +124,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _MaxSnowAngle: 1
+    - _MaxSnowAngle: 0.35
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -133,11 +133,11 @@ Material:
     - _ReceiveShadows: 1
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
-    - _SnowIntensity: 1
-    - _SnowNoiseSmooth: 0.203
-    - _SnowNoiseTiling: 2.7
-    - _SnowNormalStength: 0.6
-    - _SnowNormalsTiling: 0.42
+    - _SnowIntensity: 0.77
+    - _SnowNoiseSmooth: 0.025
+    - _SnowNoiseTiling: 2.58
+    - _SnowNormalStength: 0.34
+    - _SnowNormalsTiling: 0
     - _SnowSmoothnes: 0.5
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -149,6 +149,6 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SnowColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SnowColor: {r: 0.7028302, g: 0.9256527, b: 1, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
