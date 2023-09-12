@@ -148,13 +148,16 @@ public class PlayerMovement_sc : MonoBehaviour
         if (SlideAttackTimer > 0)
         {
             SlideAttackTimer -= Time.deltaTime;
-            slideButtonScript.DisabledSprites();
-            slideButtonScript.SliderValue(SlideAttackTimer);
+            if (slideButtonScript != null)
+            {
+                slideButtonScript.DisabledSprites();
+                slideButtonScript.SliderValue(SlideAttackTimer);
+            }                
             CancelSlide();
         }
         else
         {
-            slideButtonScript.ActiveSprites();
+            if(slideButtonScript!=null)slideButtonScript.ActiveSprites();
         }
 
         _animator.SetBool("Slide", IsSliding);

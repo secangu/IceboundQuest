@@ -62,9 +62,8 @@ public class ProjectileThrow : MonoBehaviour
         if (CurrentBall > 0 && throwTime <= 0)
         {
             throwButtonScript.ActiveSprites();
-            if (Input.GetMouseButton(1) && canThrow && playerMovement.CanMove && playerMovement.IsGrounded)
+            if (Input.GetMouseButton(1) && canThrow && playerMovement.IsGrounded)
             {
-                playerMovement.CanMove = false;
                 Predict(true);
                 animator.SetTrigger("Aim");
                 if (!aiming)
@@ -149,7 +148,6 @@ public class ProjectileThrow : MonoBehaviour
                 Predict(false);
                 throwCamera.SetActive(false);
                 trajectoryPredictor.SetTrajectoryVisible(false);
-                playerMovement.CanMove = true;
             }
         }
     }

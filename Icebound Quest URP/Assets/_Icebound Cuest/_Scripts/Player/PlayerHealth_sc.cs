@@ -30,7 +30,7 @@ public class PlayerHealth_sc : MonoBehaviour
     {
         Health -= damage;
         heartSystem.DrawHearts();
-        projectileThrow.WhileThrowing();
+        if(projectileThrow!=null)projectileThrow.WhileThrowing();
         if (Health <= 0)
         {            
             StartCoroutine(CorroutineDeath());
