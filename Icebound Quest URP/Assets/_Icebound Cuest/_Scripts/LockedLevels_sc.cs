@@ -8,6 +8,7 @@ public class LockedLevels_sc : MonoBehaviour
 
     [SerializeField] GameObject platform;
     [SerializeField] GameObject colliderNextLevel;
+    [SerializeField] GameObject canvas;
 
     public float Rotation { get => rotation; set => rotation = value; }
     public int Scene { get => scene; set => scene = value; }
@@ -26,5 +27,13 @@ public class LockedLevels_sc : MonoBehaviour
             platform.SetActive(true);
             colliderNextLevel.SetActive(false);
         }
+    }
+    public void enableCanvas()
+    {
+        canvas.SetActive(true);
+    }
+    public void DisabledCanvas()
+    {
+        canvas.SetActive(false);
     }
 }

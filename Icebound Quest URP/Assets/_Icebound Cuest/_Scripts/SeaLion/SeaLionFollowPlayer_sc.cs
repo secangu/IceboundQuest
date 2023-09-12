@@ -28,7 +28,7 @@ public class SeaLionFollowPlayer : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         animator = GetComponent<Animator>();
 
         foreach (Transform t in waypoints.transform)
@@ -80,7 +80,6 @@ public class SeaLionFollowPlayer : MonoBehaviour
         {
             animator.SetTrigger("Attack");
             animator.SetBool("Follow", false);
-
         }
         else
         {
@@ -100,7 +99,7 @@ public class SeaLionFollowPlayer : MonoBehaviour
         // Si el leon marino está cerca del punto de referencia actual, avanza al siguiente.
         float distanceToWaypoint = Vector3.Distance(transform.position, currentWaypoint.position);
 
-        if (distanceToWaypoint < 0.2f)
+        if (distanceToWaypoint < 1f)
         {
             currentWaypointIndex = Random.Range(0, wayPoints.Count);
         }

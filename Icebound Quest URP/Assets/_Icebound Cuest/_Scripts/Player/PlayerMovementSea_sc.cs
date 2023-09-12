@@ -1,3 +1,5 @@
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovementSea_sc : MonoBehaviour
@@ -13,7 +15,8 @@ public class PlayerMovementSea_sc : MonoBehaviour
     [SerializeField] float _timeSmoothRotation; //Establece el tiempo de la rotacion al momento de caminar en diferentes direcciones
     [SerializeField] float swimmingSpeed, fastSwimmingSpeed;
     [SerializeField] float speed, currentSpeed;
-    [SerializeField] bool canSwim=true;
+    [SerializeField] bool canSwim = true;
+    bool collision;
 
     [Header("Boost")]
     [SerializeField] float boostForce;
@@ -21,7 +24,7 @@ public class PlayerMovementSea_sc : MonoBehaviour
     [Header("Slide")]
     [SerializeField] float slideBoostTimer; // tiempo que tarda en impulsarse nuevamente si choco con un enemigo    
 
-
+    public float BoostForce { get => boostForce; set => boostForce = value; }
 
     void Start()
     {
@@ -37,7 +40,7 @@ public class PlayerMovementSea_sc : MonoBehaviour
     }
     public void Movement()
     {
-        if(canSwim)
+        if (canSwim)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
@@ -65,16 +68,18 @@ public class PlayerMovementSea_sc : MonoBehaviour
             }
             _animator.SetFloat("Speed", speed);
         }
-        
-
-
 
         //Impulso 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && slideBoostTimer <= 0)
+        if (Input.GetKeyDown(KeyCode.LeftControl) && slideBoostTimer <= 0 && canSwim)
         {
+            _animator.SetTrigger("CanBoost");
+            _animator.SetBool("Boost", true);
+
             Vector3 forwardDirection = transform.forward;
-            _rbPlayer.AddForce(forwardDirection * boostForce, ForceMode.Impulse);
+            _rbPlayer.AddForce(forwardDirection * BoostForce, ForceMode.Impulse);
             slideBoostTimer = 10;
+            canSwim = false;
+            StartCoroutine(EnableSwimmingAfterDelay(1f));
         }
 
         if (slideBoostTimer > 0)
@@ -90,5 +95,35 @@ public class PlayerMovementSea_sc : MonoBehaviour
         {
             if (boostButtonScript != null) boostButtonScript.ActiveSprites();
         }
+    }
+    Vector3 impulseToCancel = Vector3.zero;
+    private void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            canSwim = false;
+            Vector3 targetPosition = new Vector3(0, 0, 0);
+            Vector3 directionToTarget = (targetPosition - transform.position).normalized;
+
+            _rbPlayer.AddForce(directionToTarget * 0.5f, ForceMode.Impulse);
+        }
+    }
+    private void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            StartCoroutine(EnableSwimmingAfterDelay(0.5f));
+        }
+        
+    }
+
+    IEnumerator EnableSwimmingAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        _rbPlayer.velocity = Vector3.zero;
+        _rbPlayer.angularVelocity = Vector3.zero;
+        canSwim = true;
+        Debug.Log("Cancelo");
+        _animator.SetBool("Boost", false);
     }
 }

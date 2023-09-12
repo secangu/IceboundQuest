@@ -6,6 +6,7 @@ public class PlayerSelectLevel_sc : MonoBehaviour
     [SerializeField] AnimationClip jumpIntoWater;
     [SerializeField] float rotation;
     [SerializeField] int scene;
+    
     bool enter;
     bool cancel;
 
@@ -32,6 +33,7 @@ public class PlayerSelectLevel_sc : MonoBehaviour
         {
             rotation = other.GetComponentInParent<LockedLevels_sc>().Rotation;
             scene= other.GetComponentInParent<LockedLevels_sc>().Scene;
+            other.GetComponentInParent<LockedLevels_sc>().enableCanvas();
             enter = true;
         }
     }
@@ -39,6 +41,7 @@ public class PlayerSelectLevel_sc : MonoBehaviour
     {
         if (other.CompareTag("SelectLevel"))
         {
+            other.GetComponentInParent<LockedLevels_sc>().DisabledCanvas();
             enter = false;
         }
     }

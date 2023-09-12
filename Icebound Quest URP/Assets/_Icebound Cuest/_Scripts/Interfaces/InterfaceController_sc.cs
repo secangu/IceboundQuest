@@ -15,6 +15,7 @@ public class InterfaceController_sc : MonoBehaviour
     [SerializeField] GameObject _mouseInterface;
 
     PlayerMovement_sc playerMovement;
+    PlayerMovementSea_sc playerMovementSea;
     SceneLoadManager_sc sceneLoadManager;
 
     public bool Turorial { get => turorial; set => turorial = value; }
@@ -23,6 +24,7 @@ public class InterfaceController_sc : MonoBehaviour
     {
         mouseLock = FindObjectOfType<MouseLock_sc>();
         playerMovement = FindObjectOfType<PlayerMovement_sc>();
+        playerMovementSea = FindObjectOfType<PlayerMovementSea_sc>();
         sceneLoadManager = FindObjectOfType<SceneLoadManager_sc>();
         Time.timeScale = 1;
     }
@@ -43,7 +45,8 @@ public class InterfaceController_sc : MonoBehaviour
     public void Pause()
     {
         _isPaused = true;
-        playerMovement.JumpForce = 0;
+        if(playerMovement!=null)playerMovement.JumpForce = 0;
+        if(playerMovementSea!=null)playerMovementSea.BoostForce = 0;
 
         Time.timeScale = 0f;
         MouseUnLock();
@@ -55,7 +58,8 @@ public class InterfaceController_sc : MonoBehaviour
     public void Resume()
     {
         _isPaused = false;
-        playerMovement.JumpForce = 3;
+        if (playerMovement != null) playerMovement.JumpForce = 3;
+        if (playerMovementSea != null) playerMovementSea.BoostForce = 7;
 
         Time.timeScale = 1f;
         MouseLock();
