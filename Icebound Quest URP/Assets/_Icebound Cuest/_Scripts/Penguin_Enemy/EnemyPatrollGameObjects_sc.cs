@@ -44,9 +44,7 @@ public class EnemyPatrollGameObjects_sc : MonoBehaviour
         if (patrollState != null)
         {
             if (patrollState.Patrolling)
-            {
-                Debug.Log(currentWaypointIndex); // Puedes agregar esto para depuración
-                Debug.Log(hasNewDestination); // Puedes agregar esto para depuración
+            {                
                 agent.SetDestination(wayPoints[currentWaypointIndex].position);
                 if (hasNewDestination && agent.remainingDistance <= agent.stoppingDistance)
                 {
