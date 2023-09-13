@@ -24,6 +24,6 @@ public class EnemyIdleState_sc : StateMachineBehaviour
         if (timer > timerIdle) animator.SetBool("IsPatrolling", true);
 
         if (player != null) distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance < alertDistance) animator.SetBool("IsAlert", true);
+        if (distance < alertDistance && enemy.TimeSinceAlert <= 0) animator.SetBool("IsAlert", true); else if (enemy.TimeSinceAlert > 0) enemy.TimeSinceAlert -= Time.deltaTime;
     }
 }

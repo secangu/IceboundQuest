@@ -2722,6 +2722,7 @@ MonoBehaviour:
   player:
     serializedVersion: 2
     m_Bits: 128
+  timeSinceAlert: 0
   frontCheckPlayer: {fileID: 1754585528}
   radiusFront: 0.2
   distanceFrontBox: 5
@@ -2831,7 +2832,7 @@ NavMeshAgent:
   m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 500
-  m_StoppingDistance: 0.1
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

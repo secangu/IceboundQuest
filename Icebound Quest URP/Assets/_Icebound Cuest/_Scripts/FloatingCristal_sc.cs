@@ -18,19 +18,22 @@ public class FloatingCristal_sc : MonoBehaviour
         _interface.SetActive(false);
         interfaceController.Resume();
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            interfaceController.Turorial = true;
+            _interface.SetActive(true);
+            interfaceController.Pause();
+            animator.SetTrigger("Static");
+        }
+    }
     private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
             _pressF.SetActive(true);
-            interfaceController = FindObjectOfType<InterfaceController_sc>();
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                interfaceController.Turorial = true;
-                _interface.SetActive(true);
-                interfaceController.Pause();
-                animator.SetTrigger("Static");
-            }
+            interfaceController = FindObjectOfType<InterfaceController_sc>();            
         }
     }
     private void OnTriggerExit(Collider other)

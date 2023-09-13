@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyAlertState_sc : StateMachineBehaviour
 {
-    float timer;
+    [SerializeField]float timer;
     [SerializeField] float distance; // distancia a la que esta del jugador
     [SerializeField] float alertDistance; // distancia para salir de la alerta
-    int random;
+
     Transform player;
     EnemyDetectedPlayer_sc enemy;
     EnemySounds_sc enemySounds;
@@ -25,17 +25,19 @@ public class EnemyAlertState_sc : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         timer+= Time.deltaTime;
-
         distance = Vector3.Distance(player.position, animator.transform.position);
 
         if (enemy.PlayerDetected) animator.SetBool("IsChanging", true); //Si detecta al jugador pasa a perseguirlo
-        if (distance >= alertDistance || timer > 5.21f) animator.SetBool("IsAlert", false); //si el jugador se aleja o se acaba el tiempo finaliza la alerta
-        else timer = 0;
+        if (distance >= alertDistance || timer > 5)
+        {
+            enemy.TimeSinceAlert = 2.0f;
+            animator.SetBool("IsAlert", false); //si el jugador se aleja o se acaba el tiempo finaliza la alerta
+            Debug.Log("Locos");
+        }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        random=Random.Range(0, 2);
-        animator.SetFloat("Idle", random);
+
     }
 }

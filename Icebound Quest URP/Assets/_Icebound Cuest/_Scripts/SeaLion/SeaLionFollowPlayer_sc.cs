@@ -24,6 +24,8 @@ public class SeaLionFollowPlayer : MonoBehaviour
 
     [Header("Detected Area")]
     [SerializeField] Transform areaSizeTransform;
+    [SerializeField] Vector3 patrolAreaSize;
+    [SerializeField] Vector3 chaseAreaSize;
     [SerializeField] Vector3 areaSize;
 
     private void Start()
@@ -41,11 +43,13 @@ public class SeaLionFollowPlayer : MonoBehaviour
         // Si no está siguiendo al jugador, sigue el patrullaje.
         if (AreaDetected())
         {
+            areaSize = chaseAreaSize;
             FollowPlayer();
             animator.SetBool("Patrol", false);
         }
         else
         {
+            areaSize = patrolAreaSize;
             Patrol();
             animator.SetBool("Patrol",true);
             animator.SetBool("Follow",false);
@@ -65,7 +69,6 @@ public class SeaLionFollowPlayer : MonoBehaviour
     }
     void FollowPlayer()
     {
-
         Vector3 directionToPlayer = (player.position - transform.position).normalized; // Calcula la dirección hacia el punto de referencia actual.
         Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer); // Calcula la rotacion deseada hacia el jugador.
 
@@ -101,7 +104,7 @@ public class SeaLionFollowPlayer : MonoBehaviour
 
         if (distanceToWaypoint < 1f)
         {
-            currentWaypointIndex = Random.Range(0, wayPoints.Count);
+            currentWaypointIndex = (currentWaypointIndex + 1) % wayPoints.Count;
         }
     }
     public void Attack()

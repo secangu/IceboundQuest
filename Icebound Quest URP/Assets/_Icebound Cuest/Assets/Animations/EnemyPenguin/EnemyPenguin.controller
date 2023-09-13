@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77004ccc52cd9214385e842e20ffd9e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
   distance: 0
   alertDistance: 5.01
 --- !u!1101 &-6271169604326831082
@@ -148,7 +149,7 @@ AnimatorStateMachine:
     m_Position: {x: 280, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -887383411732161332}
-    m_Position: {x: 300, y: 160, z: 0}
+    m_Position: {x: 280, y: 160, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -9057252455583706914}
     m_Position: {x: 280, y: -130, z: 0}
@@ -165,34 +166,6 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 326817520263344231}
---- !u!1101 &-2485331204453636913
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsAlert
-    m_EventTreshold: 0
-  - m_ConditionMode: 2
-    m_ConditionEvent: IsPatrolling
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 326817520263344231}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.9571429
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!114 &-1049636429186485589
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,7 +193,6 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8529320468200951594}
-  - {fileID: -2485331204453636913}
   - {fileID: -44967205751223428}
   m_StateMachineBehaviours:
   - {fileID: -8036962036950431400}
@@ -246,9 +218,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: IsPatrolling
-    m_EventTreshold: 0
   - m_ConditionMode: 2
     m_ConditionEvent: IsAlert
     m_EventTreshold: 0

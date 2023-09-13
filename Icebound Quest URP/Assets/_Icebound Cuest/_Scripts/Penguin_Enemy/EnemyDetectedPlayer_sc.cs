@@ -3,6 +3,8 @@ using UnityEngine;
 public class EnemyDetectedPlayer_sc : MonoBehaviour
 {
     [SerializeField] LayerMask player;
+    [SerializeField] float timeSinceAlert;
+
     [Header("DetectorVista")]
     //Detector Vista
     [SerializeField] Transform frontCheckPlayer;
@@ -30,6 +32,7 @@ public class EnemyDetectedPlayer_sc : MonoBehaviour
 
     public bool PlayerDetected { get => playerDetected; set => playerDetected = value; }
     public Color Color { get => color; set => color = value; }
+    public float TimeSinceAlert { get => timeSinceAlert; set => timeSinceAlert = value; }
 
     void Start()
     {

@@ -18,6 +18,8 @@ public class EnemyPatrollState_sc : StateMachineBehaviour
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Patrolling = true;
+
         enemy = animator.GetComponent<EnemyDetectedPlayer_sc>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         agent = animator.GetComponent<NavMeshAgent>();
@@ -27,7 +29,6 @@ public class EnemyPatrollState_sc : StateMachineBehaviour
         agent.speed = 1f;
         timer = 0;
 
-        Patrolling = true;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,7 +37,8 @@ public class EnemyPatrollState_sc : StateMachineBehaviour
         if (timer > timerPatrolling) animator.SetBool("IsPatrolling", false); //cuando timer supere a timerpatrolling dejara de patrullar y pasa a idle        
 
         if (player != null) distance = Vector3.Distance(player.position, animator.transform.position);
-        if (distance < alertDistance) animator.SetBool("IsAlert", true); //detecta si el jugador esta cerca y pasa a modo alerta
+        if (distance < alertDistance && enemy.TimeSinceAlert <= 0) animator.SetBool("IsAlert", true); else if(enemy.TimeSinceAlert>0) enemy.TimeSinceAlert -= Time.deltaTime;
+
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
