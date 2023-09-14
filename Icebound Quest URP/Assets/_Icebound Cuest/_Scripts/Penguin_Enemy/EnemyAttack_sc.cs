@@ -25,7 +25,7 @@ public class EnemyAttack_sc : MonoBehaviour
         {
             if (checkAttackCollision.gameObject.tag == "Player")
             {
-                checkAttackCollision.transform.GetComponent<PlayerHealth_sc>().TakeDamage(damage);
+                checkAttackCollision.transform.GetComponent<PlayerHealth_sc>()?.TakeDamage(damage);
             }
         }
     }
