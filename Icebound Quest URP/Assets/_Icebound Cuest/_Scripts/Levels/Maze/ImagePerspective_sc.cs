@@ -110,7 +110,7 @@ public class ImagePerspective_sc : MonoBehaviour
     IEnumerator ChangeScene()
     {
         if (num > PlayerPrefs.GetInt("idLevel")) PlayerPrefs.SetInt("idLevel", num);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.2f);
         sucess.SetActive(true);
         Time.timeScale = 0;
     }

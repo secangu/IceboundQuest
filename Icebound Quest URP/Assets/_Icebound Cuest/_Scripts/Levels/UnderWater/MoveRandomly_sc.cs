@@ -3,7 +3,6 @@ using UnityEngine;
 public class MoveRandomly_sc : MonoBehaviour
 {
     [SerializeField] float moveSpeed;          // Velocidad de movimiento del objeto.
-    [SerializeField] float rotationSpeed;     // Velocidad de rotación del objeto.
     [SerializeField] float changeInterval;     // Intervalo de cambio de dirección.
     [SerializeField] float rotationSmoothing;  // Suavizado de rotación.
 
