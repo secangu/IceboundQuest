@@ -103,7 +103,7 @@ public class PlayerMovementSea_sc : MonoBehaviour
         if (other.gameObject.CompareTag("Wall"))
         {
             canSwim = false;
-            Vector3 targetPosition = new Vector3(0, 0, 0);
+            Vector3 targetPosition = new Vector3(0, -5.27f, 0);
             Vector3 directionToTarget = (targetPosition - transform.position).normalized;
 
             _rbPlayer.AddForce(directionToTarget * 0.5f, ForceMode.Impulse);
