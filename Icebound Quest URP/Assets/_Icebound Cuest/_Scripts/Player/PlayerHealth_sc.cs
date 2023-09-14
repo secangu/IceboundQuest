@@ -9,8 +9,6 @@ public class PlayerHealth_sc : MonoBehaviour
     Animator animator;
     [SerializeField] float health;
     [SerializeField] float maxHealth;
-    Collider _collider;
-    Rigidbody rb;
     [SerializeField] GameObject _death;
     public float Health { get => health; set => health = value; }
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
@@ -20,8 +18,6 @@ public class PlayerHealth_sc : MonoBehaviour
         heartSystem = FindObjectOfType<HeartSystem_sc>();
         projectileThrow = FindObjectOfType<ProjectileThrow>();
         animator=GetComponent<Animator>();
-        _collider = GetComponent<Collider>();
-        rb = GetComponent<Rigidbody>();
         health = maxHealth;
         heartSystem.DrawHearts();
     }
@@ -32,10 +28,9 @@ public class PlayerHealth_sc : MonoBehaviour
         heartSystem.DrawHearts();
         if(projectileThrow!=null)projectileThrow.WhileThrowing();
         if (Health <= 0)
-        {            
+        {
+            gameObject.tag = "wa";
             StartCoroutine(CorroutineDeath());
-            _collider.enabled = false;
-            rb.isKinematic = true;                       
         }
         else
         {
