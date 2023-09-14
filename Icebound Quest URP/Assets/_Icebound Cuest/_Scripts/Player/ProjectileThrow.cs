@@ -136,6 +136,8 @@ public class ProjectileThrow : MonoBehaviour
     }
     public void WhileThrowing()
     {
+        throwCamera.SetActive(false);
+
         if (aiming)
         {
             aiming = false;
@@ -146,7 +148,6 @@ public class ProjectileThrow : MonoBehaviour
                 throwTime = throwCooldown;
                 animator.SetTrigger("Throw");
                 Predict(false);
-                throwCamera.SetActive(false);
                 trajectoryPredictor.SetTrajectoryVisible(false);
             }
         }

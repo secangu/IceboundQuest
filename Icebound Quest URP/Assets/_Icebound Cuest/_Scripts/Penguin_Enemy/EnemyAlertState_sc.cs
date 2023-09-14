@@ -32,7 +32,6 @@ public class EnemyAlertState_sc : StateMachineBehaviour
         {
             enemy.TimeSinceAlert = 2.0f;
             animator.SetBool("IsAlert", false); //si el jugador se aleja o se acaba el tiempo finaliza la alerta
-            Debug.Log("Locos");
         }
     }
 

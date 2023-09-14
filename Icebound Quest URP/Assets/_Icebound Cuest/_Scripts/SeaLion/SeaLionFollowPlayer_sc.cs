@@ -120,6 +120,7 @@ public class SeaLionFollowPlayer : MonoBehaviour
                 if (playerHealth != null)
                 {
                     playerHealth.TakeDamage(damage);
+                    break;
                 }
             }
         }

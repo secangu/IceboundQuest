@@ -16,6 +16,7 @@ public class PlayerMovementSea_sc : MonoBehaviour
     [SerializeField] float swimmingSpeed, fastSwimmingSpeed;
     [SerializeField] float speed, currentSpeed;
     [SerializeField] bool canSwim = true;
+    [SerializeField] bool boost;
     bool collision;
 
     [Header("Boost")]
@@ -45,7 +46,7 @@ public class PlayerMovementSea_sc : MonoBehaviour
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
-            currentSpeed = horizontal != 0 || vertical != 0 ? (Input.GetKey(KeyCode.LeftShift) ? fastSwimmingSpeed : swimmingSpeed) : 0;
+            currentSpeed = horizontal != 0 || vertical != 0 ? boost ? fastSwimmingSpeed : swimmingSpeed : 0;
 
             Vector3 inputDirection = new Vector3(horizontal, 0, vertical).normalized;
 
@@ -79,7 +80,7 @@ public class PlayerMovementSea_sc : MonoBehaviour
             _rbPlayer.AddForce(forwardDirection * BoostForce, ForceMode.Impulse);
             slideBoostTimer = 10;
             canSwim = false;
-            StartCoroutine(EnableSwimmingAfterDelay(1f));
+            StartCoroutine(EnableSwimmingAfterDelay(1f,true));
         }
 
         if (slideBoostTimer > 0)
@@ -112,12 +113,12 @@ public class PlayerMovementSea_sc : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Wall"))
         {
-            StartCoroutine(EnableSwimmingAfterDelay(0.5f));
+            StartCoroutine(EnableSwimmingAfterDelay(0.5f,false));
         }
         
     }
 
-    IEnumerator EnableSwimmingAfterDelay(float delay)
+    IEnumerator EnableSwimmingAfterDelay(float delay, bool speed)
     {
         yield return new WaitForSeconds(delay);
         _rbPlayer.velocity = Vector3.zero;
@@ -125,5 +126,11 @@ public class PlayerMovementSea_sc : MonoBehaviour
         canSwim = true;
         Debug.Log("Cancelo");
         _animator.SetBool("Boost", false);
+        if (speed)
+        {
+            boost = true;
+            yield return new WaitForSeconds(3);
+            boost = false;
+        }
     }
 }

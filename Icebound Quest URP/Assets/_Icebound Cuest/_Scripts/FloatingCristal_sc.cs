@@ -7,7 +7,7 @@ public class FloatingCristal_sc : MonoBehaviour
     InterfaceController_sc interfaceController;
     Animator animator;
     Transform target;
-
+    bool enter;
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -20,7 +20,7 @@ public class FloatingCristal_sc : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F)&&enter)
         {
             interfaceController.Turorial = true;
             _interface.SetActive(true);
@@ -33,7 +33,8 @@ public class FloatingCristal_sc : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             _pressF.SetActive(true);
-            interfaceController = FindObjectOfType<InterfaceController_sc>();            
+            interfaceController = FindObjectOfType<InterfaceController_sc>();   
+            enter= true;
         }
     }
     private void OnTriggerExit(Collider other)
@@ -41,6 +42,7 @@ public class FloatingCristal_sc : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             _pressF.SetActive(false);
+            enter= false;
         }
     }
 }
