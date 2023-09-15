@@ -29,12 +29,25 @@ public class PlayerHealth_sc : MonoBehaviour
         if(projectileThrow!=null)projectileThrow.WhileThrowing();
         if (Health <= 0)
         {
-            gameObject.tag = "wa";
             StartCoroutine(CorroutineDeath());
         }
         else
         {
             animator.SetTrigger("Damage");
+        }
+    }
+    public void StunningTakeDamage(float damage)
+    {
+        Health -= damage;
+        heartSystem.DrawHearts();
+        if (projectileThrow != null) projectileThrow.WhileThrowing();
+        if (Health <= 0)
+        {
+            StartCoroutine(CorroutineDeath());
+        }
+        else
+        {
+            animator.SetTrigger("Stunning");
         }
     }
     IEnumerator CorroutineDeath() 
