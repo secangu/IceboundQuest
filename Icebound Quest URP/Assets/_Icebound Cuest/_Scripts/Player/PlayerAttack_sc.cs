@@ -38,7 +38,8 @@ public class PlayerAttack_sc : MonoBehaviour
         {
             if (checkAttackCollision.gameObject.tag == "Enemy")
             {
-                checkAttackCollision.transform.GetComponent<EnemyHealth_sc>().TakeDamage(damage);
+                checkAttackCollision.transform.GetComponent<EnemyHealth_sc>()?.TakeDamage(damage);
+                checkAttackCollision.transform.GetComponent<BossHealth_sc>()?.TakeDamage(damage);
             }
         }
     }
@@ -49,7 +50,8 @@ public class PlayerAttack_sc : MonoBehaviour
         {
             if (playerMovement.SlideLoop || playerMovement.IsSliding && playerMovement.SlideAttackTimer <= 0)
             {
-                other.transform.GetComponent<EnemyHealth_sc>().StunningDamage(stunningDamage);
+                other.transform.GetComponent<EnemyHealth_sc>()?.StunningDamage(stunningDamage);
+                other.transform.GetComponent<BossHealth_sc>()?.TakeDamage(stunningDamage);
                 playerMovement.SlideAttackTimer = 10;
             }            
         }

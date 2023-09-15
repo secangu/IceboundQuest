@@ -4,19 +4,18 @@ public class BossAttackController_sc : MonoBehaviour
 {
     Transform player;
     [SerializeField] bool lookPlayer;
-    [Header("PeckAreaAttack")]
+
+    [Header("PeckAttack")]
     [SerializeField] bool activePeck;
     [SerializeField] Transform peckAttack;
     [SerializeField] float radiusPeckAttack;
     [SerializeField] int damagePeckAttack;
 
-    [Header("StompAreaAttack")]
-    [SerializeField] bool activeStomp;
-    [SerializeField] Transform stompAttack;
-    [SerializeField] Vector3 sizeStompAttack;
-    [SerializeField] int damageStompAttack;
+    [Header("StompAttack")]
+    [SerializeField] GameObject prefabCrystals;
+    [SerializeField] Transform originInstantiate;
 
-    [Header("JumpAreaAttack")]
+    [Header("JumpAttack")]
     [SerializeField] bool activeJump;
     [SerializeField] Transform jumpAttack;
     [SerializeField] float radiusJumpAttack;
@@ -38,7 +37,6 @@ public class BossAttackController_sc : MonoBehaviour
         }
 
         if (activePeck) PeckAttack();
-        if (activeStomp) StompAttack();
         if (activeJump) JumpAttack();
     }
     private void PeckAttack()
@@ -55,20 +53,7 @@ public class BossAttackController_sc : MonoBehaviour
             }
         }
     }
-    private void StompAttack()
-    {
-        Collider[] colliders = Physics.OverlapBox(stompAttack.position, sizeStompAttack);
 
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Player"))
-            {
-                collider.GetComponent<PlayerHealth_sc>().TakeDamage(damageStompAttack);
-                activeStomp = false;
-                break;
-            }
-        }
-    }
     private void JumpAttack()
     {
         Collider[] colliders = Physics.OverlapSphere(jumpAttack.position, radiusJumpAttack);
@@ -83,13 +68,15 @@ public class BossAttackController_sc : MonoBehaviour
             }
         }
     }
+
+    public void Crystals()
+    {
+        Instantiate(prefabCrystals, originInstantiate.position, Quaternion.LookRotation(originInstantiate.forward));
+    }
+
     public void ActivePeckAttackActive()
     {
         activePeck = true;
-    }
-    public void ActiveStompttackActive()
-    {
-        activeStomp = true;
     }
     public void ActiveJumpAttackActive()
     {
@@ -98,10 +85,6 @@ public class BossAttackController_sc : MonoBehaviour
     public void DisabledPeckAttackActive()
     {
         activePeck = false;
-    }
-    public void DisabledStompttackActive()
-    {
-        activeStomp = false;
     }
     public void DisabledJumpAttackActive()
     {
@@ -115,11 +98,5 @@ public class BossAttackController_sc : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(jumpAttack.position, radiusJumpAttack);
-
-        Gizmos.color = Color.blue;
-        Gizmos.matrix = Matrix4x4.TRS(stompAttack.position, stompAttack.rotation, Vector3.one); ;
-        Gizmos.DrawWireCube(Vector3.zero, sizeStompAttack);
-
-        
     }
 }
