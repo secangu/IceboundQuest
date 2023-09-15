@@ -7,6 +7,7 @@ public class BossChaseState_sc : StateMachineBehaviour
     Transform player;
 
     int random;
+    int previousRandom;
     float timer;
     [SerializeField] float timerChasing;
     bool hasAttacked;
@@ -17,19 +18,19 @@ public class BossChaseState_sc : StateMachineBehaviour
     {
         agent = animator.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        //agent.speed = 1f;
+        agent.speed = 2f;
         timer = 0;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer += Time.deltaTime;
+        timer += Time.deltaTime;        
 
         if (timer > timerChasing)
         {
             animator.SetBool("Chasing", false);
         }
-
+        
         if (player != null)
         {
             agent.SetDestination(player.position);
@@ -47,8 +48,14 @@ public class BossChaseState_sc : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         agent.SetDestination(animator.transform.position);
-        random = Random.Range(0, 3);
-        animator.SetFloat("IdAttack", random);
+
+        do
+        {
+            random = Random.Range(0, 3);
+        } while (random == previousRandom);
+
+        previousRandom = random;
+        animator.SetInteger("IdAttack", random);
         hasAttacked = false;
     }
 }

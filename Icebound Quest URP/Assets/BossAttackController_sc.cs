@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class BossAttackController_sc : MonoBehaviour
 {
+    Transform player;
+    [SerializeField] bool lookPlayer;
     [Header("PeckAreaAttack")]
     [SerializeField] bool activePeck;
     [SerializeField] Transform peckAttack;
@@ -21,11 +23,20 @@ public class BossAttackController_sc : MonoBehaviour
     [SerializeField] int damageJumpAttack;
     void Start()
     {
-
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     void Update()
     {
+        if (lookPlayer)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(player.position - transform.position);
+            targetRotation = Quaternion.Euler(0, targetRotation.eulerAngles.y, 0);
+
+            float rotationSpeed = 5.0f; // Ajusta la velocidad de rotacion segun tus preferencias.
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
+
         if (activePeck) PeckAttack();
         if (activeStomp) StompAttack();
         if (activeJump) JumpAttack();
@@ -84,16 +95,31 @@ public class BossAttackController_sc : MonoBehaviour
     {
         activeJump = true;
     }
+    public void DisabledPeckAttackActive()
+    {
+        activePeck = false;
+    }
+    public void DisabledStompttackActive()
+    {
+        activeStomp = false;
+    }
+    public void DisabledJumpAttackActive()
+    {
+        activeJump = false;
+    }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(peckAttack.position, radiusPeckAttack);
 
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(stompAttack.position, sizeStompAttack);
-
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(jumpAttack.position, radiusJumpAttack);
+
+        Gizmos.color = Color.blue;
+        Gizmos.matrix = Matrix4x4.TRS(stompAttack.position, stompAttack.rotation, Vector3.one); ;
+        Gizmos.DrawWireCube(Vector3.zero, sizeStompAttack);
+
+        
     }
 }

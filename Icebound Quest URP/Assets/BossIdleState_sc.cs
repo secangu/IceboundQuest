@@ -5,6 +5,7 @@ public class BossIdleState_sc : StateMachineBehaviour
     Transform player;
 
     int random;
+    int previousRandom;
     float timer;
     [SerializeField] float timerIdle;
     bool hasAttacked;
@@ -40,8 +41,13 @@ public class BossIdleState_sc : StateMachineBehaviour
     }
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        random = Random.Range(0, 3);
-        animator.SetFloat("IdAttack", random);
+        do
+        {
+            random = Random.Range(0, 3);
+        } while (random == previousRandom);
+
+        previousRandom = random;
+        animator.SetInteger("IdAttack", random);        
         hasAttacked = false;
     }
 }
