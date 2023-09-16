@@ -8,15 +8,6 @@ public class EnemyAttack_sc : MonoBehaviour
     [SerializeField] float checkAttackRadius;
     [SerializeField] Transform checkAttack;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
     public void Attack()
     {
         Collider[] checkAttacks = Physics.OverlapSphere(checkAttack.position, checkAttackRadius);

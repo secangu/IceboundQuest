@@ -8,6 +8,7 @@ public class BossHealth_sc : MonoBehaviour
     [SerializeField] BossHeartSystem_sc bossHeartSystem;
     [SerializeField] float health;
     [SerializeField] float maxHealth;
+    bool invocate;
     public float Health { get => health; set => health = value; }
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
 
@@ -26,10 +27,11 @@ public class BossHealth_sc : MonoBehaviour
     {
         Health -= damage;
         bossHeartSystem.DrawHearts();
-        if (Health <= 4)
+
+        if (Health <= 20&&!invocate)
         {
-            agent.acceleration = 0;
-            StartCoroutine(CorroutinePhase2());
+            animator.SetTrigger("Invocation");
+            invocate= true;
         }
         else
         {
@@ -43,4 +45,12 @@ public class BossHealth_sc : MonoBehaviour
         Destroy(gameObject);
     }
 
+    void ChageTag()
+    {
+        gameObject.tag = "wa";
+    }
+    void RestoreTag()
+    {
+        gameObject.tag = "Enemy";
+    }
 }

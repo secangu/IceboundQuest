@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +9,11 @@ public class BossAttackController_sc : MonoBehaviour
     NavMeshAgent agent;
     float distance;
     [SerializeField] bool lookPlayer;
+
+
+    [Header ("SummonEnemies")]
+    [SerializeField] GameObject enemyPrefab; 
+    [SerializeField] Transform[] entryPoints;
 
     [Header("PeckAttack")]
     [SerializeField] bool activePeck;
@@ -84,10 +91,47 @@ public class BossAttackController_sc : MonoBehaviour
         }
     }
 
+    private void SummonEnemies()
+    {
+        int numberOfEnemiesToSummon = Random.Range(1, 3); // Entre 1 y 2 enemigos
+        List<int> availableEntryPoints = new List<int>(entryPoints.Length);
+
+        for (int i = 0; i < entryPoints.Length; i++)
+        {
+            availableEntryPoints.Add(i);
+        }
+
+        for (int i = 0; i < numberOfEnemiesToSummon; i++)
+        {
+            if (availableEntryPoints.Count > 0)
+            {
+                int randomIndex = Random.Range(0, availableEntryPoints.Count);
+                int entryPointIndex = availableEntryPoints[randomIndex];
+                Vector3 spawnPosition = entryPoints[entryPointIndex].position;
+
+                // Crear el enemigo en la posición de la entrada seleccionada
+                if (entryPointIndex == 0)
+                {
+                    Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(0, -90, 0));
+                }
+                else if (entryPointIndex == 1)
+                {
+                    Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(0, 90, 0));
+                }
+
+                availableEntryPoints.RemoveAt(randomIndex);
+            }
+        }
+    }
+
+
     void Crystals()
     {
         Instantiate(prefabCrystals, originInstantiate.position, Quaternion.LookRotation(originInstantiate.forward));
     }
+
+    //Funciones que se activan en las animaciones
+    #region active attacks
     void ActivePeckAttackActive()
     {
         activePeck = true;
@@ -113,6 +157,7 @@ public class BossAttackController_sc : MonoBehaviour
     {
         follow = true;
     }
+    #endregion
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
