@@ -6,6 +6,7 @@ public class PlayerHealth_sc : MonoBehaviour
 {
     HeartSystem_sc heartSystem;
     ProjectileThrow projectileThrow;
+    PlayerMovement_sc playerMovement;
     Animator animator;
     [SerializeField] float health;
     [SerializeField] float maxHealth;
@@ -15,6 +16,7 @@ public class PlayerHealth_sc : MonoBehaviour
 
     void Start()
     {
+        playerMovement = GetComponent<PlayerMovement_sc>();
         heartSystem = FindObjectOfType<HeartSystem_sc>();
         projectileThrow = FindObjectOfType<ProjectileThrow>();
         animator=GetComponent<Animator>();
@@ -29,6 +31,7 @@ public class PlayerHealth_sc : MonoBehaviour
         if(projectileThrow!=null)projectileThrow.WhileThrowing();
         if (Health <= 0)
         {
+            gameObject.tag = "wa";
             StartCoroutine(CorroutineDeath());
         }
         else
@@ -40,9 +43,15 @@ public class PlayerHealth_sc : MonoBehaviour
     {
         Health -= damage;
         heartSystem.DrawHearts();
+
+        if (playerMovement.SlideLoop || playerMovement.IsSliding && playerMovement.SlideAttackTimer <= 0) 
+            playerMovement.SlideAttackTimer = 10;
+
         if (projectileThrow != null) projectileThrow.WhileThrowing();
+        
         if (Health <= 0)
         {
+            gameObject.tag = "wa";
             StartCoroutine(CorroutineDeath());
         }
         else

@@ -172,7 +172,7 @@ public class PlayerMovement_sc : MonoBehaviour
     private void OnCollisionStay(Collision other)
     {
 
-        if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve")) CancelSlide();
+        if (other.gameObject.tag == ("Wall") || other.gameObject.tag == ("Dissolve") || other.gameObject.tag == ("Reload")) CancelSlide();
 
     }
     private void OnTriggerStay(Collider other)
