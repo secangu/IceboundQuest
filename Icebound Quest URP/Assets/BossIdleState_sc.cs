@@ -15,6 +15,7 @@ public class BossIdleState_sc : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        timer = 0;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,7 +24,6 @@ public class BossIdleState_sc : StateMachineBehaviour
 
         if (timer > timerIdle)
         {
-            timer = 0;
             animator.SetBool("Chasing", true);
         }
 

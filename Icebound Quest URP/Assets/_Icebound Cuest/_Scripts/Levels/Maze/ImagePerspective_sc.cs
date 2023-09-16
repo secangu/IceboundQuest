@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ImagePerspective_sc : MonoBehaviour
@@ -47,13 +45,13 @@ public class ImagePerspective_sc : MonoBehaviour
                 cameraButtonScan.DisabledSprites();
                 cameraButtonScan.SliderValue(time);
 
-                if (time <= 0&& !shouldPlaySound)
+                if (time <= 0 && !shouldPlaySound)
                 {
                     shouldPlaySound = true;
                     alignImageSound.Play();
                     cameraButtonScan.ActiveSprites();
                     cameraMove.enabled = false;
-                    StartCoroutine(ChangeScene());                    
+                    StartCoroutine(ChangeScene());
                 }
             }
             else
@@ -90,7 +88,7 @@ public class ImagePerspective_sc : MonoBehaviour
             if (arrived)
             {
                 targetEmissionColor = new Color(0.75f, 0.61f, 0.0f); // Si arrived es verdadero, el color de emisión es amarillo
-                                                                     
+
                 if (imageRay.checkImage)
                 {
                     targetEmissionColor = new Color(0.0f, 0.75f, 0.004f); // si alinea la vista, el color de emisión es verde

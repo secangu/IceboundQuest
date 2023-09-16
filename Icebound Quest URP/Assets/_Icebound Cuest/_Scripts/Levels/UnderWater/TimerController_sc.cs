@@ -7,7 +7,8 @@ public class TimerController_sc : MonoBehaviour
 {
     [SerializeField] float time;
     [SerializeField] GameObject SucessMenu;
-    [SerializeField] TextMeshProUGUI counter; 
+    [SerializeField] TextMeshProUGUI counter;
+    [SerializeField] int num;
     void Start()
     {
         
@@ -20,6 +21,7 @@ public class TimerController_sc : MonoBehaviour
 
         if(time <= 0)
         {
+            if (num > PlayerPrefs.GetInt("idLevel")) PlayerPrefs.SetInt("idLevel", num);
             SucessMenu.SetActive(true);
             Time.timeScale = 0;
         }

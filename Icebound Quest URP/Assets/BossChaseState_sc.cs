@@ -11,6 +11,7 @@ public class BossChaseState_sc : StateMachineBehaviour
     [SerializeField] float timer;
     [SerializeField] float timerChasing;
     bool hasAttacked;
+
     [Header("Distances")]
     [SerializeField] float distance; // distancia a la que esta del jugador
     [SerializeField] float attackDistance; // distancia atacar al player
@@ -18,6 +19,7 @@ public class BossChaseState_sc : StateMachineBehaviour
     {
         agent = animator.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        timer = 0;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -27,7 +29,6 @@ public class BossChaseState_sc : StateMachineBehaviour
 
         if (timer > timerChasing)
         {
-            timer = 0;
             animator.SetBool("Chasing", false);
         }
 
@@ -39,7 +40,6 @@ public class BossChaseState_sc : StateMachineBehaviour
 
         if (distance <= attackDistance && !hasAttacked)
         {
-            animator.SetBool("Chasing", false);
             animator.SetTrigger("Attack");
             hasAttacked = true;
         }
