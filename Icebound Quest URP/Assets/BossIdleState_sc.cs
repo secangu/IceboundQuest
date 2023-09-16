@@ -14,7 +14,6 @@ public class BossIdleState_sc : StateMachineBehaviour
     [SerializeField] float attackDistance; // distancia minima para detectar al player
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timer = 0;
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
     }
 
@@ -24,6 +23,7 @@ public class BossIdleState_sc : StateMachineBehaviour
 
         if (timer > timerIdle)
         {
+            timer = 0;
             animator.SetBool("Chasing", true);
         }
 
@@ -44,10 +44,11 @@ public class BossIdleState_sc : StateMachineBehaviour
         do
         {
             random = Random.Range(0, 3);
-        } while (random == previousRandom);
+        } while (random == previousRandom && hasAttacked);
 
         previousRandom = random;
-        animator.SetInteger("IdAttack", random);        
+
+        animator.SetInteger("IdAttack", random);
         hasAttacked = false;
     }
 }

@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossAttackController_sc : MonoBehaviour
 {
     Transform player;
+    NavMeshAgent agent;
+    float distance;
     [SerializeField] bool lookPlayer;
 
     [Header("PeckAttack")]
@@ -17,12 +20,15 @@ public class BossAttackController_sc : MonoBehaviour
 
     [Header("JumpAttack")]
     [SerializeField] bool activeJump;
+    [SerializeField] bool follow = false;
     [SerializeField] Transform jumpAttack;
     [SerializeField] float radiusJumpAttack;
     [SerializeField] int damageJumpAttack;
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        follow = false;
     }
 
     void Update()
@@ -38,6 +44,15 @@ public class BossAttackController_sc : MonoBehaviour
 
         if (activePeck) PeckAttack();
         if (activeJump) JumpAttack();
+
+        if (follow)
+        {
+            if (player != null)
+            {
+                agent.SetDestination(player.position);
+                distance = Vector3.Distance(player.position, transform.position);
+            }
+        }
     }
     private void PeckAttack()
     {
@@ -69,28 +84,35 @@ public class BossAttackController_sc : MonoBehaviour
         }
     }
 
-    public void Crystals()
+    void Crystals()
     {
         Instantiate(prefabCrystals, originInstantiate.position, Quaternion.LookRotation(originInstantiate.forward));
     }
-
-    public void ActivePeckAttackActive()
+    void ActivePeckAttackActive()
     {
         activePeck = true;
     }
-    public void ActiveJumpAttackActive()
+    void ActiveJumpAttackActive()
     {
         activeJump = true;
     }
-    public void DisabledPeckAttackActive()
+    void DisabledPeckAttackActive()
     {
         activePeck = false;
     }
-    public void DisabledJumpAttackActive()
+    void DisabledJumpAttackActive()
     {
         activeJump = false;
     }
-
+    void StopFollow()
+    {
+        follow = false;
+        agent.SetDestination(transform.position);
+    }
+    void Follow()
+    {
+        follow = true;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;

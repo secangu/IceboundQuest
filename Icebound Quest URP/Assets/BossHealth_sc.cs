@@ -26,7 +26,7 @@ public class BossHealth_sc : MonoBehaviour
     {
         Health -= damage;
         bossHeartSystem.DrawHearts();
-        if (Health <= 15)
+        if (Health <= 4)
         {
             agent.acceleration = 0;
             StartCoroutine(CorroutinePhase2());
