@@ -14,6 +14,12 @@ public class AudioController_sc : MonoBehaviour
     float _masterVolume;
     float _melodyVolume;
     float _effectsVolume;
+
+    [SerializeField] AudioSource[] allAudioSources; // Una matriz que contiene todos tus AudioSource
+    [SerializeField] AudioSource soundPause; // Una matriz que contiene los sonidos que deseas reproducir
+    [SerializeField] bool boolSoundPause; // Una matriz que contiene los sonidos que deseas reproducir
+    AudioSource[] pausedSounds;
+
     private void Start()
     {
         if (PlayerPrefs.HasKey("MasterVolume") == false) PlayerPrefs.SetFloat("MasterVolume", 1.5f);
@@ -33,6 +39,56 @@ public class AudioController_sc : MonoBehaviour
         ChangeMasterVolume(_masterVolume);
         ChangeMelodyVolume(_melodyVolume);
         ChangeEffectsVolume(_effectsVolume);
+    }
+
+    // Función para reproducir solo los sonidos especificados
+    public void PlaySelectedSounds()
+    {
+        allAudioSources = FindObjectsOfType<AudioSource>();
+
+        // Pausar todos los sonidos primero y guardar los AudioSource pausados.
+        pausedSounds = new AudioSource[allAudioSources.Length];
+        for (int i = 0; i < allAudioSources.Length; i++)
+        {
+            if (allAudioSources[i].isPlaying)
+            {
+                pausedSounds[i] = allAudioSources[i];
+                allAudioSources[i].Pause();
+            }
+        }
+        if (!boolSoundPause)
+        {
+            soundPause.Play();
+            boolSoundPause = true;
+        }
+        else soundPause.UnPause();
+    }
+    public void StopSounds()
+    {
+        allAudioSources = FindObjectsOfType<AudioSource>();
+
+        // Pausar todos los sonidos primero y guardar los AudioSource pausados.
+        pausedSounds = new AudioSource[allAudioSources.Length];
+        for (int i = 0; i < allAudioSources.Length; i++)
+        {
+            allAudioSources[i].Stop();
+        }
+    }
+
+    // Función para reanudar los sonidos pausados
+    public void ResumePausedSounds()
+    {
+        if (pausedSounds != null)
+        {
+            foreach (var audioSource in pausedSounds)
+            {
+                if (audioSource != null)
+                {
+                    audioSource.UnPause();
+                }
+            }
+            soundPause.Pause();
+        }
     }
     public void ChangeMasterVolume(float volume)
     {

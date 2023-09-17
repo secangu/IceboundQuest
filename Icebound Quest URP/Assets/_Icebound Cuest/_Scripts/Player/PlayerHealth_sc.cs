@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerHealth_sc : MonoBehaviour
 {
+    AudioController_sc audioController;
+
     HeartSystem_sc heartSystem;
     ProjectileThrow projectileThrow;
     PlayerMovement_sc playerMovement;
@@ -16,6 +18,7 @@ public class PlayerHealth_sc : MonoBehaviour
 
     void Start()
     {
+        audioController = FindObjectOfType<AudioController_sc>();
         playerMovement = GetComponent<PlayerMovement_sc>();
         heartSystem = FindObjectOfType<HeartSystem_sc>();
         projectileThrow = FindObjectOfType<ProjectileThrow>();
@@ -62,6 +65,7 @@ public class PlayerHealth_sc : MonoBehaviour
     IEnumerator CorroutineDeath() 
     {
         animator.SetTrigger("Die");
+        audioController.StopSounds();
         yield return new WaitForSeconds(2.5f);
         Time.timeScale = 0;
         _death.SetActive(true);

@@ -17,12 +17,13 @@ public class InterfaceController_sc : MonoBehaviour
     PlayerMovement_sc playerMovement;
     PlayerMovementSea_sc playerMovementSea;
     SceneLoadManager_sc sceneLoadManager;
-
+    AudioController_sc audioController;
     public bool Turorial { get => turorial; set => turorial = value; }
 
     void Start()
     {
         mouseLock = FindObjectOfType<MouseLock_sc>();
+        audioController = FindObjectOfType<AudioController_sc>();
         playerMovement = FindObjectOfType<PlayerMovement_sc>();
         playerMovementSea = FindObjectOfType<PlayerMovementSea_sc>();
         sceneLoadManager = FindObjectOfType<SceneLoadManager_sc>();
@@ -32,7 +33,16 @@ public class InterfaceController_sc : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape) && !_isMenu && !Turorial)
         {
-            if (_isPaused) { Resume(); CloseInterfaces(); } else { Pause(); PauseInterface(); }
+            if (_isPaused) 
+            { 
+                Resume(); 
+                CloseInterfaces(); 
+            } 
+            else 
+            { 
+                Pause(); 
+                PauseInterface(); 
+            }
 
         }
     }
@@ -44,6 +54,8 @@ public class InterfaceController_sc : MonoBehaviour
 
     public void Pause()
     {
+        audioController.PlaySelectedSounds();
+
         _isPaused = true;
         if(playerMovement!=null)playerMovement.JumpForce = 0;
         if(playerMovementSea!=null)playerMovementSea.BoostForce = 0;
@@ -57,6 +69,8 @@ public class InterfaceController_sc : MonoBehaviour
     }
     public void Resume()
     {
+        audioController.ResumePausedSounds();
+
         _isPaused = false;
         if (playerMovement != null) playerMovement.JumpForce = 3;
         if (playerMovementSea != null) playerMovementSea.BoostForce = 7;
