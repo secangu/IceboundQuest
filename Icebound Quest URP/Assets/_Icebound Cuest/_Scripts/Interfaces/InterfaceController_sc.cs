@@ -1,11 +1,14 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class InterfaceController_sc : MonoBehaviour
 {
     MouseLock_sc mouseLock;
     bool _isPaused;
     bool turorial;
+    int _language;
     [SerializeField] bool _isMenu;
     [SerializeField] GameObject _pauseInterface;
     [SerializeField] GameObject _settingsInterface;
@@ -28,6 +31,8 @@ public class InterfaceController_sc : MonoBehaviour
         playerMovementSea = FindObjectOfType<PlayerMovementSea_sc>();
         sceneLoadManager = FindObjectOfType<SceneLoadManager_sc>();
         Time.timeScale = 1;
+        LoadData();
+        Invoke(nameof(LocalSave), 0.1f);
     }
     private void Update()
     {
@@ -137,5 +142,23 @@ public class InterfaceController_sc : MonoBehaviour
     public void DeleteData()
     {
         PlayerPrefs.DeleteAll();
+    }
+    public void ChangeLanguage(int languageNum)
+    {
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[languageNum];
+        _language=languageNum;
+        SaveData();
+    }
+    private void LocalSave()
+    {
+        LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[_language];
+    }
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt("language",_language);
+    }
+    private void LoadData()
+    {
+        _language=PlayerPrefs.GetInt("language");
     }
 }
