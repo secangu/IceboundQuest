@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSounds_sc : MonoBehaviour
 {
-    [SerializeField] AudioSource hurt, die, punch, walk;
+    [SerializeField] AudioSource hurt, die, punch, walk, boost, stunned;
     public void HurtSound()
     {
         hurt.Play();
@@ -20,5 +20,13 @@ public class PlayerSounds_sc : MonoBehaviour
     public void WalkSound()
     {
         walk.Play();
+    }
+    public void BoostSound()
+    {
+        boost.Play();
+    }
+    public void StunnedSound()
+    {
+        stunned.Play();
     }
 }
