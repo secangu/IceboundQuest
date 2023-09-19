@@ -6,26 +6,25 @@ public class EnemySpawner_sc : MonoBehaviour
 {
     [SerializeField] GameObject enemyPrefab;
     GameObject activeEnemy;
-    PlayerHealth_sc playerHealth;
     List<Transform> spawnPoints = new List<Transform>();
-    [SerializeField] GameObject patrollPoints;//pasa el patrullaje al enemigo
 
     int defeatCount;
     [SerializeField] int numEnemy;
     [SerializeField] Collider colliderDissolve;
-    [SerializeField] GameObject gameObjectText;
     float timer = 3;
     bool wall;
     bool spawn;
     [Header("GUI")]
-    [SerializeField] TextMeshProUGUI text;
+    [SerializeField] GameObject advices;
+    [SerializeField] TextMeshProUGUI text1;
+    [SerializeField] GameObject gameObjectText2;
+
 
     private void Start()
     {
         foreach (Transform t in this.transform) spawnPoints.Add(t); // recorre los elementos hijos del objeto
         SpawnEnemy(true);
         colliderDissolve.enabled = true;
-        playerHealth = FindObjectOfType<PlayerHealth_sc>();
         spawn = true;
     }
 
@@ -33,19 +32,22 @@ public class EnemySpawner_sc : MonoBehaviour
     {
         if (timer > 0 && spawn)
         {            
-            gameObjectText.SetActive(true);
-            text.text = "Enemies left: " + (numEnemy - defeatCount).ToString();
+            advices.SetActive(true);
+
+            int enemigosRestantes = numEnemy - defeatCount;
+            text1.text = "Enemigos restantes: " + enemigosRestantes.ToString();
+
             timer -= Time.deltaTime;
             if (timer <= 0) spawn = false;
         }
         else if (wall)
         {
-            text.text = "Now you can go to the shiny wall you can melt pressing (Q)";
-            gameObjectText.SetActive(true);
+            text1.gameObject.SetActive(false);
+            gameObjectText2.SetActive(true);
         }
         else
         {
-            gameObjectText.SetActive(false);
+            advices.SetActive(false);
         }
 
 
@@ -70,7 +72,6 @@ public class EnemySpawner_sc : MonoBehaviour
         if (spawn)
         {
             activeEnemy = Instantiate(enemyPrefab, GetRandomSpawnPoint(), Quaternion.identity);
-            activeEnemy.GetComponent<EnemyPatrollGameObjects_sc>().Go = patrollPoints;
             activeEnemy.transform.SetParent(transform);
         }
     }
