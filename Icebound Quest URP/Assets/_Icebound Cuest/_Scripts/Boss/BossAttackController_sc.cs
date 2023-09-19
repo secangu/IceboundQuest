@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -93,6 +93,7 @@ public class BossAttackController_sc : MonoBehaviour
 
     private void SummonEnemies()
     {
+        Debug.Log("invoca");
         int numberOfEnemiesToSummon = Random.Range(1, 3); // Entre 1 y 2 enemigos
         List<int> availableEntryPoints = new List<int>(entryPoints.Length);
 
@@ -108,17 +109,19 @@ public class BossAttackController_sc : MonoBehaviour
                 int randomIndex = Random.Range(0, availableEntryPoints.Count);
                 int entryPointIndex = availableEntryPoints[randomIndex];
                 Vector3 spawnPosition = entryPoints[entryPointIndex].position;
-
+                
                 // Crear el enemigo en la posición de la entrada seleccionada
                 if (entryPointIndex == 0)
                 {
-                    Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(0, -90, 0));
+                    GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(0, -90, 0));
+                    enemy.transform.parent = entryPoints[entryPointIndex];
+
                 }
                 else if (entryPointIndex == 1)
                 {
-                    Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(0, 90, 0));
+                    GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.Euler(0, 90, 0));
+                    enemy.transform.parent = entryPoints[entryPointIndex];
                 }
-
                 availableEntryPoints.RemoveAt(randomIndex);
             }
         }

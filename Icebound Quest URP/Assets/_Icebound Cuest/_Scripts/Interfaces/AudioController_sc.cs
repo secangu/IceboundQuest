@@ -71,7 +71,10 @@ public class AudioController_sc : MonoBehaviour
         pausedSounds = new AudioSource[allAudioSources.Length];
         for (int i = 0; i < allAudioSources.Length; i++)
         {
-            allAudioSources[i].Stop();
+            if (allAudioSources[i].isPlaying)
+            {
+                allAudioSources[i].Pause();
+            }
         }
     }
 

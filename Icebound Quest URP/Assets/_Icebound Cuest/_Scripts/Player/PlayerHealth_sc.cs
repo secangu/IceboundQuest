@@ -13,6 +13,7 @@ public class PlayerHealth_sc : MonoBehaviour
     [SerializeField] float health;
     [SerializeField] float maxHealth;
     [SerializeField] GameObject _death;
+    [SerializeField] GameObject _counterController;
     public float Health { get => health; set => health = value; }
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
 
@@ -64,6 +65,7 @@ public class PlayerHealth_sc : MonoBehaviour
     }
     IEnumerator CorroutineDeath() 
     {
+        if(_counterController!=null)_counterController.SetActive(false);
         animator.SetTrigger("Die");
         audioController.StopSounds();
         yield return new WaitForSeconds(2.5f);

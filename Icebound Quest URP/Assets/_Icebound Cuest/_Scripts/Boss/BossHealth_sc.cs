@@ -8,21 +8,20 @@ public class BossHealth_sc : MonoBehaviour
     [SerializeField] BossHeartSystem_sc bossHeartSystem;
     [SerializeField] float health;
     [SerializeField] float maxHealth;
+    [SerializeField] AnimationClip invocation;
     bool invocate;
     public float Health { get => health; set => health = value; }
     public float MaxHealth { get => maxHealth; set => maxHealth = value; }
 
     Animator animator;
-    NavMeshAgent agent;
     void Start()
     {
         animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>();
 
         health = maxHealth;
         bossHeartSystem.DrawHearts();
     }
-
+ 
     public void TakeDamage(float damage)
     {
         Health -= damage;
@@ -31,20 +30,25 @@ public class BossHealth_sc : MonoBehaviour
         if (Health <= 20&&!invocate)
         {
             animator.SetTrigger("Invocation");
+            animator.SetBool("BoolInvocation",true);
+            StartCoroutine(CacelBool());
             invocate= true;
+        }
+        else if (Health <= 10)
+        {
+            animator.Play("Final");
+            animator.SetBool("BoolFinal",true);
         }
         else
         {
             animator.SetTrigger("Damage");
         }
     }
-    IEnumerator CorroutinePhase2()
+    IEnumerator CacelBool()
     {
-        animator.SetTrigger("Die");
-        yield return new WaitForSeconds(2.5f);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(invocation.length);
+        animator.SetBool("BoolInvocation", false);
     }
-
     void ChageTag()
     {
         gameObject.tag = "wa";

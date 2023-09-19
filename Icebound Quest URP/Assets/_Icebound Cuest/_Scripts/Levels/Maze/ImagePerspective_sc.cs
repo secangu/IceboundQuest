@@ -23,12 +23,15 @@ public class ImagePerspective_sc : MonoBehaviour
     bool arrived; //Esta en la posicion correcta
     float time;
 
+    AudioController_sc audioController;
     CameraMovement_sc cameraMove;
     bool shouldPlaySound = false;
+    bool change = false;
 
     void Start()
     {
         cameraMove = GetComponent<CameraMovement_sc>();
+        audioController = FindObjectOfType<AudioController_sc>();
         time = timerScan;
     }
 
@@ -45,10 +48,10 @@ public class ImagePerspective_sc : MonoBehaviour
                 cameraButtonScan.DisabledSprites();
                 cameraButtonScan.SliderValue(time);
 
-                if (time <= 0 && !shouldPlaySound)
+                if (time <= 0 && !change)
                 {
-                    shouldPlaySound = true;
-                    alignImageSound.Play();
+                    change = true;
+                    audioController.StopSounds();
                     cameraButtonScan.ActiveSprites();
                     cameraMove.enabled = false;
                     StartCoroutine(ChangeScene());
@@ -108,7 +111,16 @@ public class ImagePerspective_sc : MonoBehaviour
     IEnumerator ChangeScene()
     {
         if (num > PlayerPrefs.GetInt("idLevel")) PlayerPrefs.SetInt("idLevel", num);
+
         yield return new WaitForSeconds(0.2f);
+
+        if (!shouldPlaySound)
+        {
+            shouldPlaySound = true;
+            alignImageSound.Play();
+        }
+        yield return new WaitForSeconds(3f);
+
         sucess.SetActive(true);
         Time.timeScale = 0;
     }
