@@ -14,6 +14,7 @@ public class EnemySpawner_sc : MonoBehaviour
     float timer = 3;
     bool wall;
     bool spawn;
+    bool text;
     [Header("GUI")]
     [SerializeField] GameObject advices;
     [SerializeField] TextMeshProUGUI text1;
@@ -30,12 +31,18 @@ public class EnemySpawner_sc : MonoBehaviour
 
     private void Update()
     {
+
         if (timer > 0 && spawn)
         {            
             advices.SetActive(true);
 
-            int enemigosRestantes = numEnemy - defeatCount;
-            text1.text = "Enemigos restantes: " + enemigosRestantes.ToString();
+            if (text)
+            {
+                text = false;
+                int enemigosRestantes = numEnemy - defeatCount;
+                text1.text = text1.text + enemigosRestantes.ToString();
+            }
+            
 
             timer -= Time.deltaTime;
             if (timer <= 0) spawn = false;
@@ -49,7 +56,6 @@ public class EnemySpawner_sc : MonoBehaviour
         {
             advices.SetActive(false);
         }
-
 
         if (defeatCount >= numEnemy)
         {
@@ -71,6 +77,7 @@ public class EnemySpawner_sc : MonoBehaviour
     {
         if (spawn)
         {
+            text = true;
             activeEnemy = Instantiate(enemyPrefab, GetRandomSpawnPoint(), Quaternion.identity);
             activeEnemy.transform.SetParent(transform);
         }
