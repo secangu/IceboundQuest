@@ -16,6 +16,7 @@ public class BossIdleState_sc : StateMachineBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         timer = 0;
+        hasAttacked = false;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

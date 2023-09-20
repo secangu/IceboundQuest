@@ -20,6 +20,7 @@ public class BossChaseState_sc : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
         timer = 0;
+        hasAttacked = false;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -41,6 +42,7 @@ public class BossChaseState_sc : StateMachineBehaviour
         if (distance <= attackDistance && !hasAttacked)
         {
             animator.SetTrigger("Attack");
+            animator.SetBool("Chasing", false);
             hasAttacked = true;
         }
     }

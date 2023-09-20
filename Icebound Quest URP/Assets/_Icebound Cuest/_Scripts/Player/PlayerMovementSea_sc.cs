@@ -124,7 +124,6 @@ public class PlayerMovementSea_sc : MonoBehaviour
         _rbPlayer.velocity = Vector3.zero;
         _rbPlayer.angularVelocity = Vector3.zero;
         canSwim = true;
-        Debug.Log("Cancelo");
         _animator.SetBool("Boost", false);
         if (speed)
         {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossSounds_sc : MonoBehaviour
 {
-    [SerializeField] AudioSource invocation, stomp, damage;
+    [SerializeField] AudioSource invocation, stomp, damage, tornado;
 
     public void DamageSound()
     {
@@ -17,5 +17,9 @@ public class BossSounds_sc : MonoBehaviour
     public void InvocationSound()
     {
         invocation.Play();
+    }
+    public void TornadoSound()
+    {
+        tornado.Play();
     }
 }

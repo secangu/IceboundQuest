@@ -721,6 +721,8 @@ MonoBehaviour:
   die: {fileID: 4123343979309617653}
   punch: {fileID: 5930566288070293410}
   walk: {fileID: 8071443482327693833}
+  boost: {fileID: 0}
+  stunned: {fileID: 0}
 --- !u!114 &2330275293892830096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,6 +769,7 @@ MonoBehaviour:
   health: 65
   maxHealth: 8
   _death: {fileID: 0}
+  _counterController: {fileID: 0}
 --- !u!114 &2330275293892830120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2374,7 +2377,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 1cdbcb9ecc0f06f43818235d61654c6b, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 0
   Mute: 0
