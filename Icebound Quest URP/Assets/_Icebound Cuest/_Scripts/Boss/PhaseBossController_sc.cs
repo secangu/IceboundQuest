@@ -43,7 +43,7 @@ public class PhaseBossController_sc : MonoBehaviour
         boss.transform.position =new Vector3(-60.01f,2.167f,-3.67f);
         boss.transform.rotation = Quaternion.Euler(0,0,0);
 
-        player.transform.position = new Vector3(-60.01f, 2.167f, 0.46f);
+        player.transform.position = new Vector3(-60.01f, 2.167f, -1f);
         player.transform.rotation = Quaternion.Euler(0,180,0);
         
         yield return new WaitForSeconds(3.0f);

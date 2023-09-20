@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WaterBossController_sc : MonoBehaviour
@@ -5,6 +6,7 @@ public class WaterBossController_sc : MonoBehaviour
     Transform player;
     Animator animator;
     Rigidbody _rb;
+    [SerializeField] GameObject _camera;
 
     [Header("statistics")]
     [SerializeField] float speed;
@@ -24,6 +26,7 @@ public class WaterBossController_sc : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         _rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
+        StartCoroutine(DisabledCamera());
     }
 
     void Update()
@@ -86,6 +89,11 @@ public class WaterBossController_sc : MonoBehaviour
     {
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
+    }
+    IEnumerator DisabledCamera()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _camera.SetActive(false);
     }
     private void OnDrawGizmos()
     {
