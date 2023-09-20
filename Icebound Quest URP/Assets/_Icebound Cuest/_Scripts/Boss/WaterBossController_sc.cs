@@ -62,7 +62,7 @@ public class WaterBossController_sc : MonoBehaviour
     }
     void Attack()
     {
-        if (timerDamage >= 1.5f)
+        if (timerDamage >= 1f)
         {
             Collider[] colliders = Physics.OverlapSphere(areaAttack.position, radiusAreaAttack);
             foreach (Collider collider in colliders)

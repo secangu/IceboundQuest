@@ -24,7 +24,15 @@ public class PlayerHealth_sc : MonoBehaviour
         heartSystem = FindObjectOfType<HeartSystem_sc>();
         projectileThrow = FindObjectOfType<ProjectileThrow>();
         animator = GetComponent<Animator>();
-        if (boss) health = PlayerPrefs.GetFloat("HealthPlayer"); else health = maxHealth;
+        if (boss)
+        {
+            health = PlayerPrefs.GetFloat("HealthPlayer");
+        }
+        else
+        {
+            health = maxHealth;
+            PlayerPrefs.SetFloat("HealthPlayer", Health);
+        }
         heartSystem.DrawHearts();
     }
 
