@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerHealth_sc : MonoBehaviour
@@ -10,6 +9,7 @@ public class PlayerHealth_sc : MonoBehaviour
     ProjectileThrow projectileThrow;
     PlayerMovement_sc playerMovement;
     Animator animator;
+    [SerializeField] bool boss;
     [SerializeField] float health;
     [SerializeField] float maxHealth;
     [SerializeField] GameObject _death;
@@ -23,16 +23,17 @@ public class PlayerHealth_sc : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement_sc>();
         heartSystem = FindObjectOfType<HeartSystem_sc>();
         projectileThrow = FindObjectOfType<ProjectileThrow>();
-        animator=GetComponent<Animator>();
-        health = maxHealth;
+        animator = GetComponent<Animator>();
+        if (boss) health = PlayerPrefs.GetFloat("HealthPlayer"); else health = maxHealth;
         heartSystem.DrawHearts();
     }
 
     public void TakeDamage(float damage)
     {
         Health -= damage;
+        PlayerPrefs.SetFloat("HealthPlayer", Health);
         heartSystem.DrawHearts();
-        if(projectileThrow!=null)projectileThrow.WhileThrowing();
+        if (projectileThrow != null) projectileThrow.WhileThrowing();
         if (Health <= 0)
         {
             gameObject.tag = "wa";
@@ -46,13 +47,14 @@ public class PlayerHealth_sc : MonoBehaviour
     public void StunningTakeDamage(float damage)
     {
         Health -= damage;
+        PlayerPrefs.SetFloat("HealthPlayer", Health);
         heartSystem.DrawHearts();
 
-        if (playerMovement.SlideLoop || playerMovement.IsSliding && playerMovement.SlideAttackTimer <= 0) 
+        if (playerMovement.SlideLoop || playerMovement.IsSliding && playerMovement.SlideAttackTimer <= 0)
             playerMovement.SlideAttackTimer = 10;
 
         if (projectileThrow != null) projectileThrow.WhileThrowing();
-        
+
         if (Health <= 0)
         {
             gameObject.tag = "wa";
@@ -63,9 +65,9 @@ public class PlayerHealth_sc : MonoBehaviour
             animator.SetTrigger("Stunning");
         }
     }
-    IEnumerator CorroutineDeath() 
+    IEnumerator CorroutineDeath()
     {
-        if(_counterController!=null)_counterController.SetActive(false);
+        if (_counterController != null) _counterController.SetActive(false);
         animator.SetTrigger("Die");
         audioController.StopSounds();
         yield return new WaitForSeconds(2.5f);

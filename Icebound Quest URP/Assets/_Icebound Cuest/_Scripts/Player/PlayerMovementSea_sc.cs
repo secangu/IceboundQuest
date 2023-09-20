@@ -118,11 +118,16 @@ public class PlayerMovementSea_sc : MonoBehaviour
         
     }
 
+    void CancelImpulse()
+    {
+        _rbPlayer.velocity = Vector3.zero;
+        _rbPlayer.angularVelocity = Vector3.zero;
+    }
+
     IEnumerator EnableSwimmingAfterDelay(float delay, bool speed)
     {
         yield return new WaitForSeconds(delay);
-        _rbPlayer.velocity = Vector3.zero;
-        _rbPlayer.angularVelocity = Vector3.zero;
+        CancelImpulse();
         canSwim = true;
         _animator.SetBool("Boost", false);
         if (speed)
